@@ -21,7 +21,9 @@ class Player extends Actor
 	private var playerNumber:Int;
 	public var bulletGroup:FlxGroup = new FlxGroup();
 	private var inputmanager:InputManager;
+	public var isShooting = false;
 	
+	//private var Input:InputManager;
 	public function new(X:Float=0, Y:Float=0,?PlayerNumber:Int,?GamePad:FlxGamepad) 
 	{
 		super(X, Y);
@@ -29,10 +31,11 @@ class Player extends Actor
 		speed = 200;
 		_gamePad = GamePad;
 		myMovementController = (PlayerNumber == null)? null : new MovementController(this.x, this.y, this);
-		myAnimationController = new AnimationController(x, y, this, AssetPaths.player__png);
+		myAnimationController = new AnimationController(x, y, this,AssetPaths.robot_sheet__png);
 		playerNumber = PlayerNumber;
 		inputmanager = new InputManager(this);
 		trace(playerNumber);
+		myAnimationController.setAnimations("bot", [0,1,2,3]);
 		
 		
 		

@@ -11,6 +11,7 @@ class AnimationController extends FlxSprite
 {
 	private var _owner:Actor;
 	public var spriteSheet:String;
+	public var botSprite:FlxSprite = new FlxSprite();
 	public var topSprite:FlxSprite = new FlxSprite();
 	public function new(X:Float=0, Y:Float=0,animationComponent:Actor,SpriteSheet:String) 
 	{
@@ -23,40 +24,52 @@ class AnimationController extends FlxSprite
 		else
 		trace("animationComponent is null");
 		trace(AssetPaths.robot_sheet__png);
+		
+		_owner.drag.x = _owner.drag.y = 1600;
+		
+		botSprite.loadGraphic(AssetPaths.robot_sheet__png, true, 32, 32);
+		botSprite.drag.x = _owner.drag.y = 1600;
+		botSprite.animation.add("lr", [3, 4, 3, 5], 6, false);
+		Reg.currentState.add(botSprite);
+		
 		topSprite.loadGraphic(AssetPaths.robot_sheet__png, true, 32, 32);
-		topSprite.angle = 100;
 		topSprite.drag.x = topSprite.drag.y = 1600;
 		topSprite.animation.add("lr", [4, 5], 12, false);
 		Reg.currentState.add(topSprite);
+		
 		spriteSheet = SpriteSheet;
-		topSprite.x = this.x;
-		topSprite.y = this.y;
-		_owner.facing = FlxObject.LEFT;
-		_owner.drag.x = _owner.drag.y = 1600;
-		_owner.loadGraphic(spriteSheet, true, 16, 16);
-		_owner.setFacingFlip(FlxObject.LEFT, false, false);
-		_owner.setFacingFlip(FlxObject.RIGHT, true, false);
-		_owner.animation.add("lr", [3, 4, 3, 5], 6, false);
-		_owner.animation.add("u", [6, 7, 6, 8], 6, false);
-		_owner.animation.add("d", [0, 1, 0, 2], 6, false);
+		
+		
 		
 	}
 	override public function update():Void
 	{
-		topSprite.y = _owner.y;
-		topSprite.x = _owner.x;
-		trace("idhgfldfjofk");
+		topSprite.y = _owner.y - (topSprite.frameHeight/2);
+		topSprite.x = _owner.x - (topSprite.frameWidth /2);
+		botSprite.y = _owner.y - (botSprite.frameHeight/2);
+		botSprite.x = _owner.x - (botSprite.frameWidth / 2);
+		Animate(_owner.moving);
 		super.update();
 		
 	}
+	public function rotate(angle:Float,top:Bool)
+	{
+		if (top)
+		topSprite.angle = angle - 90;
+		else
+		botSprite.angle = angle - 90;
+	}
+	
 	public function setAnimations(animationName:String,animationFrames:Array<Int>)
 	{
-	_owner.animation.add(animationName, animationFrames, 12);
+		topSprite.animation.add(animationName, animationFrames, 12);
 	}
-	public function Animate()
+	public function Animate(move:Bool = false)
 	{
+		/*
 		if ((_owner.velocity.x != 0 || _owner.velocity.y != 0) && _owner.touching == FlxObject.NONE) 
 		{
+			
 			switch(_owner.facing)
 			{
 			case FlxObject.LEFT, FlxObject.RIGHT:
@@ -67,7 +80,11 @@ class AnimationController extends FlxSprite
 			case FlxObject.DOWN:
 				_owner.animation.play("d");
 			}
-		}
+			*/
+			topSprite.animation.play("lr");
+			if (move)
+			botSprite.animation.play("bot");
+		//}
 	}
 	
 }

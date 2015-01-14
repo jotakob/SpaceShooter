@@ -4,6 +4,8 @@ import flixel.FlxObject;
 import flixel.FlxG;
 import flixel.input.gamepad.FlxGamepad;
 import flixel.input.gamepad.XboxButtonID;
+import haxe.Timer;
+
 /**
  * ...
  * @author ho
@@ -11,19 +13,20 @@ import flixel.input.gamepad.XboxButtonID;
 class InputManager extends FlxObject
 {
 	private var player:Player;
+	
 	private var deadZone:Float = 0.3;
-	var lA:Float = 0;
-	var rA:Float = 0;
-	var _up:Bool = false;
-	var _down:Bool = false;
-	var _left:Bool = false;
-	var _right:Bool = false;
-		
+	var leftAngle:Float = 0;
+	var rightAngle:Float = 0;
+	var lastLeftAngle:Float = 0;
+	var lastRightAngle:Float = 0;
+	var timer:Int = 100;
+	
 	var _LaxisX:Float;
 	var _LaxisY:Float;
 		
 	var _RaxisX:Float;
 	var _RaxisY:Float;
+	
 	
 	public function new(TempPlayer:Player) 
 	{
@@ -55,20 +58,87 @@ class InputManager extends FlxObject
 		_RaxisX = player._gamePad.getAxis(XboxButtonID.RIGHT_ANALOGUE_X);
 		_RaxisY = player._gamePad.getAxis(XboxButtonID.RIGHT_ANALOGUE_Y);
 		
-		if (_LaxisX > -deadZone && _LaxisX < deadZone)
-		_LaxisX = 0;
-		if (_LaxisY > -deadZone && _LaxisY < deadZone)
-		_LaxisY = 0;
 		
-		rA = Math.atan2(_RaxisY, _RaxisX);
-		rA = rA * (180 / Math.PI);
+		if (Math.sqrt(Math.pow(_LaxisX, 2) + Math.pow(_LaxisY, 2)) < deadZone)
+		{
+			_LaxisX = 0;
+			_LaxisY = 0;
+		}
+		if (Math.sqrt(Math.pow(_RaxisX, 2) + Math.pow(_RaxisY, 2)) < deadZone)
+		{
+			_RaxisX = 0;
+			_RaxisY = 0;
+		}
+		rightAngle = Math.atan2(_RaxisY, _RaxisX);
+		rightAngle = rightAngle * (180 / Math.PI);
+		if (_RaxisX == 0 && _RaxisY == 0)
+		rightAngle = -4000;
 		
-		lA = Math.atan2(_LaxisY, _LaxisX);
-		lA = lA * (180 / Math.PI);
+		leftAngle = Math.atan2(_LaxisY, _LaxisX);
+		leftAngle = leftAngle * (180 / Math.PI);
+		if (_LaxisX == 0 && _LaxisY == 0)
+		leftAngle = -4000;
 		
+		trace(player.isShooting);
 		if (_LaxisX != 0 || _LaxisY != 0)
 		{
-			if ((lA <= 45 && lA >= 0)|| (lA > -45 && lA <= 0))
+			lastLeftAngle = leftAngle;
+			player.myMovementController.Move(player.speed, leftAngle);
+			player.myAnimationController.rotate(lastLeftAngle, false);
+			player.moving = true;
+		}
+		else
+		{
+			player.moving = false;
+		}
+		trace(rightAngle);
+		if (rightAngle != -4000)
+		{	
+			lastRightAngle = rightAngle;
+			trace("sfjklfhasd");
+			player.isShooting = true;
+			timer = 100;
+			shoot();
+		}
+		else
+		{
+			trace(timer);
+			timer--;
+		}
+		if (timer <= 0)
+		{
+			player.isShooting = false;
+		}
+		if (player.isShooting)
+			player.myAnimationController.rotate(lastRightAngle, true);
+		else
+			player.myAnimationController.rotate(lastLeftAngle, true);
+	}
+	
+	private function shoot():Void
+	{
+		var tempBullet:Bullet = new Bullet(0,0,rightAngle);
+		tempBullet.x = player.x;
+		tempBullet.y = player.y;
+		Reg.currentState.add(tempBullet);
+		player.bulletGroup.add(tempBullet);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+if ((lA <= 45 && lA >= 0)|| (lA > -45 && lA <= 0))
 			{
 				_right = true;
 				_up = false;
@@ -98,51 +168,4 @@ class InputManager extends FlxObject
 				_left = false;
 				_right = false;
 			}
-			if (_up || _down || _left || _right)
-			{
-				if (_up)
-				{
-					player.facing = FlxObject.UP;
-					//lA = 270;	
-				}
-				else if (_down)
-				{
-					player.facing = FlxObject.DOWN;
-					//lA = 90;
-				}
-				else if (_left)
-				{
-					player.facing = FlxObject.LEFT;
-					//lA = 180;
-				}
-				else if (_right)
-				{
-					player.facing = FlxObject.RIGHT;
-					//lA = 0;
-				}
-				if (player.myAnimationController != null)
-				{
-					player.myMovementController.Move(player.speed, lA);
-					player.myAnimationController.Animate();
-				}
-			}
-		}
-		if (_RaxisX != 0 || _RaxisY != 0)
-		{
-				
-				rA = Math.atan2(_RaxisY, _RaxisX);
-				rA = rA * (180 / Math.PI);
-				trace(rA);
-				shoot();
-		}
-	}
-	
-	private function shoot():Void
-	{
-		var tempBullet:Bullet = new Bullet(0,0,rA);
-		tempBullet.x = player.x;
-		tempBullet.y = player.y;
-		Reg.currentState.add(tempBullet);
-		player.bulletGroup.add(tempBullet);
-	}
-}
+			*/

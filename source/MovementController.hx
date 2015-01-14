@@ -3,7 +3,6 @@ package ;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.util.FlxAngle;
-
 /**
  * ...
  * @author ...

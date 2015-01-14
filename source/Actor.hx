@@ -6,7 +6,7 @@ import flixel.FlxSprite;
  * ...
  * @author ho
  */
-class Actor extends FlxSprite
+class Actor extends FlxObject
 {
 	public var speed:Int = 200;
 	public var hp:Int;
@@ -14,6 +14,7 @@ class Actor extends FlxSprite
 	public var myMovementController:MovementController;
 	public var myAnimationController:AnimationController;
 	public var myStateManager:AiStateController;
+	public var moving = false;
 	
 
 	public function new(X:Float=0, Y:Float=0) 
@@ -21,6 +22,11 @@ class Actor extends FlxSprite
 		super(X, Y);
 		myStateManager = new AiStateController(this);
 		myMovementController = new MovementController(x, y, this);
+	}
+	public override function update():Void
+	{
+		myAnimationController.update();
+		super.update();
 	}
 	
 }

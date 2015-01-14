@@ -14,7 +14,7 @@ class Bullet extends FlxSprite
 	var An:Float;
 	private var timer:Float = 18;
 	
-	public function new(X:Float=0, Y:Float=0, angle:Float)
+	public function new(X:Float=0, Y:Float=0, angle:Float) 
 	{
 		super(X, Y);
 		

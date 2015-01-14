@@ -95,11 +95,10 @@ class InputManager extends FlxObject
 			lastRightAngle = rightAngle;
 			player.isShooting = true;
 			timer = 100;
-			shoot();
+			player.activeWeapon.tryShooting();
 		}
 		else
 		{
-			trace(timer);
 			timer--;
 		}
 		if (timer <= 0)
@@ -110,14 +109,5 @@ class InputManager extends FlxObject
 			player.myAnimationController.rotate(lastRightAngle, true);
 		else
 			player.myAnimationController.rotate(lastLeftAngle, true);
-	}
-	
-	private function shoot():Void
-	{
-		var tempBullet:Bullet = new Bullet(0,0,rightAngle);
-		tempBullet.x = player.x;
-		tempBullet.y = player.y;
-		Reg.currentState.add(tempBullet);
-		player.bulletGroup.add(tempBullet);
 	}
 }

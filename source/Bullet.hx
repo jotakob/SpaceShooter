@@ -10,17 +10,17 @@ import flixel.util.FlxPoint;
  */
 class Bullet extends FlxSprite
 {
+	private var timer:Float = 180;
+	private var speed:Int;
 	
-	var An:Float;
-	private var timer:Float = 18;
-	
-	public function new(X:Float=0, Y:Float=0, angle:Float) 
+	public function new(X:Float=0, Y:Float=0, Angle:Float, Speed:Int, bulletImage:String) 
 	{
 		super(X, Y);
+		//this.velocity = speed;
 		
-		
-		An = angle;
-		loadGraphic("assets/images/bullet.png");
+		speed = Speed;
+		angle = Angle;
+		loadGraphic(bulletImage);
 	}
 	public override function update()
 	{
@@ -28,9 +28,10 @@ class Bullet extends FlxSprite
 		
 		//x = x + directionX;
 		//y = y + directionY;
-		FlxAngle.rotatePoint(500, 0, 0, 0, An, velocity);
-		timer -= .1;
-		if (timer < .1)
+		trace (speed);
+		FlxAngle.rotatePoint(speed, 0, 0, 0, angle, velocity);
+		timer --;
+		if (timer < 1)
 		{
 			this.exists = false;
 		}

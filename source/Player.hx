@@ -51,10 +51,6 @@ class Player extends Actor
 			
 			this.kill();
 		}
-		try
-		{
-			activeWeapon.update();
-		}
 	}
 	
 	

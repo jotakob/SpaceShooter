@@ -22,6 +22,7 @@ class Player extends Actor
 	public var inputmanager:InputManager;
 	public var isShooting = false;
 	public var activeWeapon:Weapon;
+	private var weapons:Array<Weapon> = new Array<Weapon>();
 	
 	//private var Input:InputManager;
 	public function new(X:Float=0, Y:Float=0,?PlayerNumber:Int,?GamePad:FlxGamepad) 
@@ -36,10 +37,6 @@ class Player extends Actor
 		inputmanager = new InputManager(this);
 		trace(playerNumber);
 		myAnimationController.setAnimations("bot", [0,1,2,3]);
-		
-		
-		//debug
-		activeWeapon = new Weapon(this, 0.25, 500, AssetPaths.cursor__png , AssetPaths.bullet__png, 1);
 	}
 	
 	override public function update():Void 
@@ -61,5 +58,9 @@ class Player extends Actor
 		}
 	}
 	
-	
+	public function addWeapon(newWeapon:Weapon)
+	{
+		weapons.push(newWeapon);
+		activeWeapon = newWeapon;
+	}
 }

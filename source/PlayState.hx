@@ -48,6 +48,8 @@ class PlayState extends FlxState
 			tempEnemy = (new Enemy(300, 200));
 			add(tempEnemy);
 			Enemies.add(tempEnemy);
+			tempPlayer.addWeapon(new Weapon(this, 0.25, 500, AssetPaths.cursor__png , AssetPaths.bullet__png, 1));
+			add(new Enemy(300, 200));
 			add(tempPlayer);
 			Players.push(tempPlayer);
 			

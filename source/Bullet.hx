@@ -28,7 +28,6 @@ class Bullet extends FlxSprite
 		
 		//x = x + directionX;
 		//y = y + directionY;
-		trace (speed);
 		FlxAngle.rotatePoint(speed, 0, 0, 0, angle, velocity);
 		timer --;
 		if (timer < 1)

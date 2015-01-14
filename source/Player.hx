@@ -52,6 +52,7 @@ class Player extends Actor
 			
 			this.kill();
 		}
+<<<<<<< HEAD
 		try
 		{
 			activeWeapon.update();
@@ -60,6 +61,8 @@ class Player extends Actor
 		{
 			
 		}
+=======
+>>>>>>> 57ae27ac6cb0ae7329c00d9a41c67ab7bacb5376
 	}
 	
 	

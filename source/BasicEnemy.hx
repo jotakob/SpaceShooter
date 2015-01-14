@@ -23,10 +23,14 @@ class BasicEnemy extends State
 			angle = 180;
 			else if (angle == 180)
 			angle = 0;
+			
+			timer = 120;
 		}
 		
 		
 		owner.myMovementController.Move(owner.speed, angle);
+		owner.myAnimationController.rotate(angle, true);
+		owner.myAnimationController.rotate(angle, false);
 	}
 	public override function Exit(owner:Actor)
 	{

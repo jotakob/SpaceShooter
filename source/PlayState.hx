@@ -43,6 +43,7 @@ class PlayState extends FlxState
 			trace("add");
 			_gamePads.push(FlxG.gamepads.getActiveGamepads()[i]);
 			tempPlayer = (new Player(240, 160, i, FlxG.gamepads.getActiveGamepads()[i]));
+			tempPlayer.addWeapon(new Weapon(this, 0.25, 500, "assets/images/cursor.png" , "assets/images/bullet.png", 1));
 			add(new Enemy(300, 200));
 			add(tempPlayer);
 			Players.push(tempPlayer);

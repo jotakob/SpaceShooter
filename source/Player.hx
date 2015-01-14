@@ -20,8 +20,9 @@ class Player extends Actor
 	public var _gamePad:FlxGamepad;
 	private var playerNumber:Int;
 	public var bulletGroup:FlxGroup = new FlxGroup();
-	private var inputmanager:InputManager;
+	public var inputmanager:InputManager;
 	public var isShooting = false;
+	var activeWeapon:Weapon;
 	
 	//private var Input:InputManager;
 	public function new(X:Float=0, Y:Float=0,?PlayerNumber:Int,?GamePad:FlxGamepad) 
@@ -49,6 +50,10 @@ class Player extends Actor
 		{
 			
 			this.kill();
+		}
+		try
+		{
+			activeWeapon.update();
 		}
 	}
 	

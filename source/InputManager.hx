@@ -16,7 +16,7 @@ class InputManager extends FlxObject
 	
 	private var deadZone:Float = 0.3;
 	var leftAngle:Float = 0;
-	var rightAngle:Float = 0;
+	public var rightAngle:Float = 0;
 	var lastLeftAngle:Float = 0;
 	var lastRightAngle:Float = 0;
 	var timer:Int = 100;

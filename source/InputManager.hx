@@ -79,7 +79,6 @@ class InputManager extends FlxObject
 		if (_LaxisX == 0 && _LaxisY == 0)
 		leftAngle = -4000;
 		
-		trace(player.isShooting);
 		if (_LaxisX != 0 || _LaxisY != 0)
 		{
 			lastLeftAngle = leftAngle;
@@ -91,7 +90,6 @@ class InputManager extends FlxObject
 		{
 			player.moving = false;
 		}
-		trace(rightAngle);
 		if (rightAngle != -4000)
 		{	
 			lastRightAngle = rightAngle;

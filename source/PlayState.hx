@@ -69,10 +69,7 @@ class PlayState extends FlxState
 		
 		
 	}
-	private function clickPlay():Void
-	{
-		FlxG.switchState(new BatleState());
-	}
+	
 	private function dealDamage(bullets:FlxObject, player:FlxObject)
 	{
 		Players[index].hp -= 1;

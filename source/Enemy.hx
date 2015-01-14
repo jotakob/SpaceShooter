@@ -17,6 +17,7 @@ class Enemy extends Actor
 		super(X, Y);
 		isAI = true;
 		SetGameState();
+		hp = 200;
 		myAnimationController = new AnimationController(x, y, this, AssetPaths.player__png);
 		
 		

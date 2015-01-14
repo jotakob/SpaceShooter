@@ -19,7 +19,6 @@ class Player extends Actor
 {
 	public var _gamePad:FlxGamepad;
 	private var playerNumber:Int;
-	public var bulletGroup:FlxGroup = new FlxGroup();
 	public var inputmanager:InputManager;
 	public var isShooting = false;
 	public var activeWeapon:Weapon;
@@ -40,7 +39,7 @@ class Player extends Actor
 		
 		
 		//debug
-		activeWeapon = new Weapon(this, 0.25, 500, "assets/images/cursor.png" , "assets/images/bullet.png", 1);
+		activeWeapon = new Weapon(this, 0.25, 500, AssetPaths.cursor__png , AssetPaths.bullet__png, 1);
 	}
 	
 	override public function update():Void 
@@ -52,7 +51,6 @@ class Player extends Actor
 			
 			this.kill();
 		}
-<<<<<<< HEAD
 		try
 		{
 			activeWeapon.update();
@@ -61,8 +59,6 @@ class Player extends Actor
 		{
 			
 		}
-=======
->>>>>>> 57ae27ac6cb0ae7329c00d9a41c67ab7bacb5376
 	}
 	
 	

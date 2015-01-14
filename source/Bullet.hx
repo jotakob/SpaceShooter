@@ -12,12 +12,13 @@ class Bullet extends FlxSprite
 {
 	private var timer:Float = 180;
 	private var speed:Int;
+	public var damage:Int;
 	
-	public function new(X:Float=0, Y:Float=0, Angle:Float, Speed:Int, bulletImage:String) 
+	public function new(X:Float=0, Y:Float=0, Angle:Float, Speed:Int,Damage:Int, bulletImage:String) 
 	{
 		super(X, Y);
 		//this.velocity = speed;
-		
+		damage = Damage;
 		speed = Speed;
 		angle = Angle;
 		loadGraphic(bulletImage);

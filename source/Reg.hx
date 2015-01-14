@@ -40,4 +40,6 @@ class Reg
 	public static var bullets:Array<FlxGroup> = [];
 	
 	public static var currentState:FlxState;
+	
+	public static var bulletGroup:FlxGroup = new FlxGroup();
 }

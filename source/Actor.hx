@@ -20,6 +20,7 @@ class Actor extends FlxObject
 	public function new(X:Float=0, Y:Float=0) 
 	{
 		super(X, Y);
+		this.width = this.height = 32;
 		myStateManager = new AiStateController(this);
 		myMovementController = new MovementController(x, y, this);
 	}
@@ -27,6 +28,11 @@ class Actor extends FlxObject
 	{
 		myAnimationController.update();
 		super.update();
+	}
+	public function receiveDamage(damage:Int)
+	{
+		hp -= damage;
+		trace(damage);
 	}
 	
 }

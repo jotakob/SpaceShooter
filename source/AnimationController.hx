@@ -44,10 +44,10 @@ class AnimationController extends FlxSprite
 	}
 	override public function update():Void
 	{
-		topSprite.y = _owner.y - (topSprite.frameHeight/2);
-		topSprite.x = _owner.x - (topSprite.frameWidth /2);
-		botSprite.y = _owner.y - (botSprite.frameHeight/2);
-		botSprite.x = _owner.x - (botSprite.frameWidth / 2);
+		topSprite.y = _owner.y;
+		topSprite.x = _owner.x;
+		botSprite.y = _owner.y;
+		botSprite.x = _owner.x;
 		Animate(_owner.moving);
 		super.update();
 		

@@ -22,6 +22,7 @@ class PlayState extends FlxState
 	private var _btnPlay:FlxButton;
 	private var _gamePads:Array<FlxGamepad> = new Array();
 	private var Players:Array<Player> = new Array();
+	private var Enemies:FlxGroup = new FlxGroup();
 	
 	private var shootDirX:Float = 0;
 	private var shootDirY:Float = 0;
@@ -33,6 +34,7 @@ class PlayState extends FlxState
 	{
 		Reg.currentState = this;
 		var tempPlayer;
+		var tempEnemy;
 		for (i in 0...FlxG.gamepads.getActiveGamepads().length)
 		{
 			if (_gamePads.indexOf(FlxG.gamepads.getActiveGamepads()[i]) >= 0)
@@ -43,7 +45,9 @@ class PlayState extends FlxState
 			trace("add");
 			_gamePads.push(FlxG.gamepads.getActiveGamepads()[i]);
 			tempPlayer = (new Player(240, 160, i, FlxG.gamepads.getActiveGamepads()[i]));
-			add(new Enemy(300, 200));
+			tempEnemy = (new Enemy(300, 200));
+			add(tempEnemy);
+			Enemies.add(tempEnemy);
 			add(tempPlayer);
 			Players.push(tempPlayer);
 			
@@ -65,11 +69,23 @@ class PlayState extends FlxState
 	 */
 	override public function update():Void
 	{
+		FlxG.overlap(Reg.bulletGroup, Enemies, receiveDamage);	
+		
 		super.update();
 		
 		
 	}
-	
+	public function receiveDamage(obj1:FlxObject,obj2:FlxObject)
+	{
+		var bullet:Bullet = cast(obj1, Bullet);
+		var enemy:Enemy = cast(obj2, Enemy);
+		//var Obj1:Bullet = obj1; Obj1.damage
+		//var Obj2:Enemy = obj2;
+		enemy.receiveDamage(bullet.damage);
+		obj1.kill();
+	}
+			
+		
 	private function dealDamage(bullets:FlxObject, player:FlxObject)
 	{
 		Players[index].hp -= 1;
@@ -78,15 +94,4 @@ class PlayState extends FlxState
 }
 
 //collision example
-/*
- * for (i in 0...Players.length)
-		{
-			for (j in 0...Bullets.length)
-			{
-				if (j == i)
-				continue;
-				index = i;
-				FlxG.overlap(Bullets[j], Players[i],dealDamage);	
-			}
-		}
-*/
+

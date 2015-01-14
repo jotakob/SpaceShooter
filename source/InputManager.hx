@@ -93,7 +93,6 @@ class InputManager extends FlxObject
 		if (rightAngle != -4000)
 		{	
 			lastRightAngle = rightAngle;
-			trace("sfjklfhasd");
 			player.isShooting = true;
 			timer = 100;
 			shoot();

@@ -22,7 +22,7 @@ class Player extends Actor
 	public var inputmanager:InputManager;
 	public var isShooting = false;
 	public var activeWeapon:Weapon;
-	private var weapons:Array<Weapon> = new Array<Weapon>();
+	public var weapons:Array<Weapon> = new Array<Weapon>();
 	
 	//private var Input:InputManager;
 	public function new(X:Float=0, Y:Float=0,?PlayerNumber:Int,?GamePad:FlxGamepad) 

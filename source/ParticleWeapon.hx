@@ -35,16 +35,25 @@ class ParticleWeapon extends Weapon
 			emitter.add(particle);
 		}
 		Reg.currentState.add(emitter);
+		
 		emitter.start(false,1,0.001);
 		emitter.on = false;
 	}
 	
 	private override function shoot()
 	{
+		trace(Math.sin(owner.inputmanager.rightAngle * Math.PI / 180) * 100);
+		emitter.setXSpeed(0, Math.sin(owner.inputmanager.rightAngle * Math.PI / 180) * 100);
+		//trace(Math.cos(owner.inputmanager.rightAngle*Math.PI/180)*5);
 		if (emitter.on == false)
 		{
 			emitter.on = true;
-			trace("emitter is on");
 		}
+	}
+	public override function update()
+	{
+		framesUntilShooting--;
+		emitter.x = owner.x;
+		emitter.y = owner.y;
 	}
 }

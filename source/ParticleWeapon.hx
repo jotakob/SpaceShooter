@@ -36,14 +36,16 @@ class ParticleWeapon extends Weapon
 		}
 		Reg.currentState.add(emitter);
 		
-		emitter.start(false,1,0.001);
+		emitter.start(false,1,0.00001);
 		emitter.on = false;
 	}
 	
 	private override function shoot()
 	{
 		trace(Math.sin(owner.inputmanager.rightAngle * Math.PI / 180) * 100);
-		emitter.setXSpeed(0, Math.sin(owner.inputmanager.rightAngle * Math.PI / 180) * 100);
+		trace(Math.cos(owner.inputmanager.rightAngle * Math.PI / 180) * 100);
+		emitter.setYSpeed((Math.sin(owner.inputmanager.rightAngle * Math.PI / 180) * 100) -100, (Math.sin(owner.inputmanager.rightAngle * Math.PI / 180) * 100)+100);
+		emitter.setXSpeed((Math.cos(owner.inputmanager.rightAngle * Math.PI / 180) * 100)-100, (Math.cos(owner.inputmanager.rightAngle * Math.PI / 180) * 100)+100);
 		//trace(Math.cos(owner.inputmanager.rightAngle*Math.PI/180)*5);
 		if (emitter.on == false)
 		{

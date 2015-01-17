@@ -17,10 +17,11 @@ class ParticleWeapon extends Weapon
 		super(player, FiringRate, ProjectileSpeed, WeaponImage, BulletImage, Damage);
 		
 		emitter = new FlxEmitter(owner.x, owner.y);
+		emitter.clear();
 		for (i in 0...particles)
 		{
 			var particle:FlxParticle = new FlxParticle();
-			particle.makeGraphic(2, 2, 0xE30B21);
+			particle.makeGraphic(4, 4, 0xffe30b21);
 			particle.exists = false;
 			emitter.add(particle);
 		}
@@ -32,11 +33,8 @@ class ParticleWeapon extends Weapon
 	
 	private override function shoot()
 	{
-		trace(Math.sin(owner.inputmanager.rightAngle * Math.PI / 180) * 100);
-		trace(Math.cos(owner.inputmanager.rightAngle * Math.PI / 180) * 100);
 		emitter.setYSpeed((Math.sin(owner.inputmanager.rightAngle * Math.PI / 180) * 100) -50, (Math.sin(owner.inputmanager.rightAngle * Math.PI / 180) * 100)+50);
 		emitter.setXSpeed((Math.cos(owner.inputmanager.rightAngle * Math.PI / 180) * 100)-50, (Math.cos(owner.inputmanager.rightAngle * Math.PI / 180) * 100)+50);
-		//trace(Math.cos(owner.inputmanager.rightAngle*Math.PI/180)*5);
 		if (emitter.on == false)
 		{
 			emitter.on = true;

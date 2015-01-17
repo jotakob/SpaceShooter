@@ -14,6 +14,9 @@ import flixel.input.gamepad.XboxButtonID;
 import flixel.group.FlxGroup;
 import openfl.utils.Object;
 
+import openfl.Assets;
+import flixel.tile.FlxTilemap;
+
 /**
  * A FlxState which can be used for the actual gameplay.
  */
@@ -29,10 +32,19 @@ class PlayState extends FlxState
 	
 	private var index:Int;
 	
+	private var level1:Level_Group1;
+	private var map:FlxTilemap;
 	
 	override public function create():Void
 	{
-		Reg.currentState = this;
+		Reg.currentState = this;		
+		
+		level1 = new Level_Group1(true);
+		map = new FlxTilemap();
+		trace (Assets.getText(AssetPaths.mapCSV_Group1_Map3__csv));
+		map.loadMap(Assets.getText(AssetPaths.mapCSV_Group1_Map3__csv), AssetPaths.terrain__png, 32, 32, FlxTilemap.OFF, 0, 1, 200);
+		add(map);
+		
 		var tempPlayer;
 		var tempEnemy;
 		for (i in 0...FlxG.gamepads.getActiveGamepads().length)
@@ -49,11 +61,10 @@ class PlayState extends FlxState
 			add(tempEnemy);
 			Enemies.add(tempEnemy);
 			tempPlayer.addWeapon(new ParticleWeapon(tempPlayer, 0.25, 500, AssetPaths.cursor__png , AssetPaths.fire_particle__png, 1));
-			add(new Enemy(300, 200));
 			add(tempPlayer);
 			Players.push(tempPlayer);
-			
 		}
+		
 		super.create();
 	}
 	
@@ -72,6 +83,8 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		FlxG.overlap(Reg.bulletGroup, Enemies, receiveDamage);	
+		//Code for level collision
+		FlxG.collide(Players[0], level1.hitTilemaps);
 		
 		super.update();
 		

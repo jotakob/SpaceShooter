@@ -10,7 +10,7 @@ class ParticleWeapon extends Weapon
 {
 	
 	public var emitter:FlxEmitter;
-	private var particles:Int = 5;
+	private var particles:Int = 1;
 	
 	public function new(player:Player, FiringRate:Float, ProjectileSpeed:Int, WeaponImage:String, BulletImage:String, Damage:Int) 
 	{
@@ -26,7 +26,7 @@ class ParticleWeapon extends Weapon
 		}
 		Reg.currentState.add(emitter);
 		
-		emitter.start(false,1,0.00001);
+		emitter.start(false,0.5,0.05);
 		emitter.on = false;
 	}
 	
@@ -34,8 +34,8 @@ class ParticleWeapon extends Weapon
 	{
 		trace(Math.sin(owner.inputmanager.rightAngle * Math.PI / 180) * 100);
 		trace(Math.cos(owner.inputmanager.rightAngle * Math.PI / 180) * 100);
-		emitter.setYSpeed((Math.sin(owner.inputmanager.rightAngle * Math.PI / 180) * 100) -100, (Math.sin(owner.inputmanager.rightAngle * Math.PI / 180) * 100)+100);
-		emitter.setXSpeed((Math.cos(owner.inputmanager.rightAngle * Math.PI / 180) * 100)-100, (Math.cos(owner.inputmanager.rightAngle * Math.PI / 180) * 100)+100);
+		emitter.setYSpeed((Math.sin(owner.inputmanager.rightAngle * Math.PI / 180) * 100) -50, (Math.sin(owner.inputmanager.rightAngle * Math.PI / 180) * 100)+50);
+		emitter.setXSpeed((Math.cos(owner.inputmanager.rightAngle * Math.PI / 180) * 100)-50, (Math.cos(owner.inputmanager.rightAngle * Math.PI / 180) * 100)+50);
 		//trace(Math.cos(owner.inputmanager.rightAngle*Math.PI/180)*5);
 		if (emitter.on == false)
 		{

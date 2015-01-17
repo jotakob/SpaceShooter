@@ -16,16 +16,6 @@ class ParticleWeapon extends Weapon
 	{
 		super(player, FiringRate, ProjectileSpeed, WeaponImage, BulletImage, Damage);
 		
-		owner = player;
-		firingRate = FiringRate;
-		firingFrames = Math.round(1 / FiringRate);
-		if (firingFrames < 1)
-			firingFrames = 1;
-		projectileSpeed = ProjectileSpeed;
-		weaponImage = WeaponImage;
-		bulletImage = BulletImage;
-		damage = Damage;
-		
 		emitter = new FlxEmitter(owner.x, owner.y);
 		for (i in 0...particles)
 		{

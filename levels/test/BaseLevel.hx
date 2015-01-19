@@ -47,10 +47,29 @@ class BaseLevel extends FlxGroup
 	// Expects callback function to be callback(newobj:Dynamic,layer:FlxGroup,level:BaseLevel,properties:Array)
 	public function createObjects(onAddCallback:Dynamic = null, parentObject:Dynamic = null):Void { }
 
-	public function addTilemap( mapClass:Dynamic, imageClass:Class<Dynamic>, xpos:Float, ypos:Float, tileWidth:UInt, tileHeight:UInt, scrollX:Float, scrollY:Float, hits:Bool, collideIdx:UInt, drawIdx:UInt, properties:Array<Dynamic>, onAddCallback:Dynamic = null ):FlxTilemap
+	public function addTilemap( mapClass:String, imageClass:Class<Dynamic>, xpos:Float, ypos:Float, tileWidth:UInt, tileHeight:UInt, scrollX:Float, scrollY:Float, hits:Bool, collideIdx:UInt, drawIdx:UInt, properties:Array<Dynamic>, onAddCallback:Dynamic = null ):FlxTilemap
 	{
 		var map:FlxTilemap = new FlxTilemap();
-		map.loadMap( mapClass, imageClass, tileWidth, tileHeight, FlxTilemap.OFF, 0, drawIdx, collideIdx);
+		
+		//converting the csv to an array and setting width and height of the tilemap since loading csv's doesn't work
+		var tmpmap:Array<Int> = new Array<Int>();
+		var rows = mapClass.split("\n");
+		var tiles = new Array<String>();
+		map.heightInTiles = rows.length;
+		for (row in rows)
+		{
+			tiles = row.split(",");
+			for (tile in tiles)
+			{
+				tmpmap.push(Std.parseInt(tile));
+			}
+		}
+		map.widthInTiles = tiles.length;
+		tmpmap.pop(); //somehow there is a null element at the end of the array
+		
+		map.widthInTiles = 16;
+		map.heightInTiles = 16;
+		map.loadMap( tmpmap, imageClass, tileWidth, tileHeight, FlxTilemap.OFF, 0, drawIdx, collideIdx);
 		map.x = xpos;
 		map.y = ypos;
 		map.scrollFactor.x = scrollX;

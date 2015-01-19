@@ -39,12 +39,7 @@ class PlayState extends FlxState
 	{
 		Reg.currentState = this;		
 		
-		level1 = new Level_Group1(true);
-		
-		map = new FlxTilemap();
-		trace (Assets.getText(AssetPaths.mapCSV_Group1_Map3__csv));
-		map.loadMap(Assets.getText(AssetPaths.mapCSV_Group1_Map3__csv), AssetPaths.terrain__png, 32, 32, FlxTilemap.OFF, 0, 1, 200);
-		add(map);
+		level1 = new Level_Group1(true, null, this);
 		
 		var tempPlayer;
 		var tempEnemy;
@@ -86,6 +81,7 @@ class PlayState extends FlxState
 		FlxG.overlap(Reg.bulletGroup, Enemies, receiveDamage);	
 		//Code for level collision
 		FlxG.collide(Players[0], level1.hitTilemaps);
+		FlxG.collide(Players[0], level1.Layer1Group);
 		
 		super.update();
 		

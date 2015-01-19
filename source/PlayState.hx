@@ -38,9 +38,10 @@ class PlayState extends FlxState
 	private var level1:Level_Group1;
 	private var map:FlxTilemap;
 	
+	private var camera:FlxCamera;
 	private var cameraObj:FlxObject;
 	
-	private var music:FlxSound;
+	//private var music:FlxSound;
 	
 	
 	override public function create():Void
@@ -75,6 +76,7 @@ class PlayState extends FlxState
 		}
 		cameraObj = new FlxObject();
 		add(cameraObj);
+		camera = new FlxCamera(0, 0, 0, 0, 3);
 		FlxG.camera.follow(cameraObj, FlxCamera.STYLE_TOPDOWN, null, 1);
 		
 		

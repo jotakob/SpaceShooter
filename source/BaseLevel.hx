@@ -1,6 +1,6 @@
 //Code generated with DAME and DeVZoO. http://www.dambots.com http://www.dev-zoo.net
 
-package;
+package  ;
 
 import flixel.group.FlxGroup;
 import flixel.FlxSprite;
@@ -63,12 +63,11 @@ class BaseLevel extends FlxGroup
 			{
 				tmpmap.push(Std.parseInt(tile));
 			}
+			map.widthInTiles = tiles.length;
 		}
-		map.widthInTiles = tiles.length;
+		map.widthInTiles = 32;
 		tmpmap.pop(); //somehow there is a null element at the end of the array
 		
-		map.widthInTiles = 16;
-		map.heightInTiles = 16;
 		map.loadMap( tmpmap, imageClass, tileWidth, tileHeight, FlxTilemap.OFF, 0, drawIdx, collideIdx);
 		map.x = xpos;
 		map.y = ypos;

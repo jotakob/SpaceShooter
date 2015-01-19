@@ -83,7 +83,7 @@ class PlayState extends FlxState
 		FlxG.overlap(Reg.bulletGroup, Enemies, receiveDamage);	
 		//Code for level collision
 		FlxG.collide(Players[0], level1.hitTilemaps);
-		FlxG.collide(Players[0], level1.Layer1Group);
+		FlxG.collide(Players[0], level1.LevelCollisionGroup);
 		
 		super.update();
 		

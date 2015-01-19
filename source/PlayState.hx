@@ -81,7 +81,7 @@ class PlayState extends FlxState
 		trace("Music here");
 		
 		music = new FlxSound();
-		music.loadStream("assets/music/ambient.wav", true, false);
+		music.loadStream("assets/music/drums.ogg", true, false);
 		music.volume = 1;
 		music.play();
 		

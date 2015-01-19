@@ -49,7 +49,7 @@ package;
 		mapString = ('assets/levels/mapCSV_Group1_CollisionMap.csv').toString();
 		image = ('assets/levels/terrain.png');
 		properties = generateProperties( [null] );
-		layerCollisionMap = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, false, 1, 1, properties, onAddCallback );
+		layerCollisionMap = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, true, 1, 1, properties, onAddCallback );
 
 
 			//Add layers to the master group in correct order.

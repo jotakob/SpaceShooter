@@ -5,6 +5,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.FlxObject;
+import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
@@ -38,6 +39,9 @@ class PlayState extends FlxState
 	private var map:FlxTilemap;
 	
 	private var cameraObj:FlxObject;
+	
+	private var music:FlxSound;
+	
 	
 	override public function create():Void
 	{
@@ -73,6 +77,14 @@ class PlayState extends FlxState
 		add(cameraObj);
 		FlxG.camera.follow(cameraObj, FlxCamera.STYLE_TOPDOWN, null, 1);
 		
+		
+		trace("Music here");
+		
+		music = new FlxSound();
+		music.loadStream("assets/music/ambient.wav", true, false);
+		music.volume = 1;
+		music.play();
+		
 		super.create();
 	}
 	
@@ -106,7 +118,6 @@ class PlayState extends FlxState
 		FlxG.overlap(Reg.bulletGroup, Enemies, receiveDamage);	
 		//Code for level collision
 		FlxG.collide(Players[0], level1.hitTilemaps);
-		FlxG.collide(Players[0], level1.Layer1Group);
 		
 		super.update();
 		

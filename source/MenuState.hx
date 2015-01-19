@@ -3,6 +3,7 @@ package;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
@@ -23,7 +24,10 @@ class MenuState extends FlxState
 	{
 		_btnPlay = new FlxButton(0, 0, "Play", clickPlay);
 		_btnPlay.screenCenter();
+		_btnPlay.onDown.sound = FlxG.sound.load("assets/sounds/click.wav");
+		_btnPlay.onUp.sound = FlxG.sound.load("assets/sounds/click.wav");
 		add(_btnPlay);
+		
 		super.create();
 	}
 	

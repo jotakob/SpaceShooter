@@ -25,12 +25,18 @@ class ParticleWeapon extends Weapon
 			var particle:FlxParticle = new FlxParticle();
 			particle.makeGraphic(5, 5, 0xffffb300);
 			particle.exists = false;
+			particle.useColoring = true;
+			particle.startRed = 0;
+			particle.rangeRed = 240;
 			emitter.add(particle);
+			
+			
 		}
 		Reg.currentState.add(emitter);
-		
 		emitter.start(false,0.05,0.003,0.5);
 		emitter.on = false;
+	
+		
 	}
 	
 	private override function shoot()
@@ -44,6 +50,7 @@ class ParticleWeapon extends Weapon
 	}
 	public override function update()
 	{
+		
 		framesUntilShooting--;
 		emitter.x = owner.x + owner.width/2;
 		emitter.y = owner.y + owner.height/2;

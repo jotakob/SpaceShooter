@@ -49,14 +49,14 @@ class ParticleWeapon extends Weapon
 				case 8:
 					particle.makeGraphic(5, 5, 0xffff4800);
 				case 9:
-					particle.makeGraphic(5, 5, 0xffffffff);
+					particle.makeGraphic(5, 5, 0xffffbb00);
 			}
 			particle.exists = false;
 			emitter.add(particle);
 			
 		}
 		Reg.currentState.add(emitter);
-		emitter.start(false,0.05,0.003,0.5);
+		emitter.start(false,0.2,0.003,0.3);
 		emitter.on = false;
 	
 		

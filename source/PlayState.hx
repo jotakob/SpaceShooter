@@ -82,7 +82,7 @@ class PlayState extends FlxState
 		
 		trace("Music here");
 		
-		Reg.music[0].play();
+		//Reg.music[0].play();
 		Reg.music[1].play();
 		
 		super.create();

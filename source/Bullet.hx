@@ -22,7 +22,6 @@ class Bullet extends FlxSprite
 		speed = Speed;
 		angle = Angle;
 		loadGraphic(bulletImage);
-		Reg.sounds[0].play(true);
 	}
 	public override function update()
 	{

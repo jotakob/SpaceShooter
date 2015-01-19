@@ -44,7 +44,8 @@ class Weapon
 		tempBullet.x = owner.x + 16;
 		tempBullet.y = owner.y + 16;
 		Reg.currentState.add(tempBullet);
-		Reg.bulletGroup.add(tempBullet);	
+		Reg.bulletGroup.add(tempBullet);
+		Reg.sounds[0].play(true);
 	}
 
 	public function update()

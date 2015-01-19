@@ -2,6 +2,7 @@ package ;
 
 import flixel.effects.particles.FlxEmitter;
 import flixel.effects.particles.FlxParticle;
+import Std;
 /**
  * ...
  * @author ho
@@ -13,6 +14,7 @@ class ParticleWeapon extends Weapon
 	private var particles:Int = 1000;
 	private var coneWidth:Float= 50;
 	private var range:Float = 500;
+	private var randomNumber:Int;
 	
 	public function new(player:Player, FiringRate:Float, ProjectileSpeed:Int, WeaponImage:String, BulletImage:String, Damage:Int) 
 	{
@@ -23,13 +25,34 @@ class ParticleWeapon extends Weapon
 		for (i in 0...particles)
 		{
 			var particle:FlxParticle = new FlxParticle();
-			particle.makeGraphic(5, 5, 0xffffb300);
-			particle.exists = false;
-			particle.useColoring = true;
-			particle.startRed = 0;
-			particle.rangeRed = 240;
-			emitter.add(particle);
 			
+			
+			randomNumber = Std.random(10);
+			switch (randomNumber)
+			{
+				case 0:
+					particle.makeGraphic(5, 5, 0xffffbb00);
+				case 1:
+					particle.makeGraphic(5, 5, 0xffffb300);
+				case 2:
+					particle.makeGraphic(5, 5, 0xffffb250);
+				case 3:
+					particle.makeGraphic(5, 5, 0xffffb350);
+				case 4:
+					particle.makeGraphic(5, 5, 0xffffb400);
+				case 5:
+					particle.makeGraphic(5, 5, 0xffffb200);
+				case 6:
+					particle.makeGraphic(5, 5, 0xffffb175);
+				case 7:
+					particle.makeGraphic(5, 5, 0xffffb425);
+				case 8:
+					particle.makeGraphic(5, 5, 0xffff4800);
+				case 9:
+					particle.makeGraphic(5, 5, 0xffffffff);
+			}
+			particle.exists = false;
+			emitter.add(particle);
 			
 		}
 		Reg.currentState.add(emitter);

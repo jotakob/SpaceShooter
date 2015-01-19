@@ -41,7 +41,7 @@ class PlayState extends FlxState
 	private var camera:FlxCamera;
 	private var cameraObj:FlxObject;
 	
-	private var music:Array<FlxSound> = new Array();
+	//private var music:Array<FlxSound> = new Array();
 	
 	
 	override public function create():Void
@@ -82,16 +82,8 @@ class PlayState extends FlxState
 		
 		trace("Music here");
 		
-		music[0] = new FlxSound();
-		music[0].loadStream("assets/music/ambient.ogg", true, false);
-		music[0].volume = 1;
-		
-		music[1] = new FlxSound();
-		music[1].loadStream("assets/music/drums.ogg", true, false);
-		music[1].volume = 1;
-		
-		music[0].play();
-		music[1].play();
+		Reg.music[0].play();
+		Reg.music[1].play();
 		
 		super.create();
 	}

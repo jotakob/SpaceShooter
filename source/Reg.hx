@@ -3,6 +3,7 @@ package;
 import flixel.util.FlxSave;
 import flixel.group.FlxGroup;
 import flixel.FlxState;
+import flixel.system.FlxSound;
 
 /**
  * Handy, pre-built Registry class that can be used to store 
@@ -42,4 +43,6 @@ class Reg
 	public static var currentState:FlxState;
 	
 	public static var bulletGroup:FlxGroup = new FlxGroup();
+	
+	public static var music:Array<FlxSound> = new Array();
 }

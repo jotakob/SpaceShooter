@@ -28,7 +28,19 @@ class MenuState extends FlxState
 		_btnPlay.onUp.sound = FlxG.sound.load("assets/sounds/click.ogg");
 		add(_btnPlay);
 		
+		loadMusic();
+		
 		super.create();
+	}
+	
+	private function loadMusic() {
+		Reg.music[0] = new FlxSound();
+		Reg.music[0].loadStream("assets/music/ambient.ogg", true, false);
+		Reg.music[0].volume = 1;
+		
+		Reg.music[1] = new FlxSound();
+		Reg.music[1].loadStream("assets/music/drums.ogg", true, false);
+		Reg.music[1].volume = 1;
 	}
 	
 	/**

@@ -5,6 +5,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.FlxObject;
+import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
@@ -36,6 +37,8 @@ class PlayState extends FlxState
 	private var level1:Level_Group1;
 	private var map:FlxTilemap;
 	
+	private var music:FlxSound;
+	
 	override public function create():Void
 	{
 		Reg.currentState = this;		
@@ -62,6 +65,14 @@ class PlayState extends FlxState
 			Players.push(tempPlayer);
 		}
 		FlxG.camera.follow(Players[0], FlxCamera.STYLE_TOPDOWN, null, 1);
+		
+		
+		trace("Music here");
+		
+		music = new FlxSound();
+		music.loadStream("assets/music/ambient.wav", true, false);
+		music.volume = 1;
+		music.play();
 		
 		super.create();
 	}

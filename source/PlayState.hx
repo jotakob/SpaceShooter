@@ -31,10 +31,13 @@ class PlayState extends FlxState
 	private var shootDirX:Float = 0;
 	private var shootDirY:Float = 0;
 	
+	
 	private var index:Int;
 	
 	private var level1:Level_Group1;
 	private var map:FlxTilemap;
+	
+	private var cameraObj:FlxObject;
 	
 	override public function create():Void
 	{
@@ -43,6 +46,7 @@ class PlayState extends FlxState
 		level1 = new Level_Group1(true, null, this);
 		
 		var tempPlayer;
+		var tempPlayer2;
 		var tempEnemy;
 		for (i in 0...FlxG.gamepads.getActiveGamepads().length)
 		{
@@ -54,14 +58,20 @@ class PlayState extends FlxState
 			trace("add");
 			_gamePads.push(FlxG.gamepads.getActiveGamepads()[i]);
 			tempPlayer = (new Player(240, 160, i, FlxG.gamepads.getActiveGamepads()[i]));
+			tempPlayer2 = (new Player(20, 80, i, FlxG.gamepads.getActiveGamepads()[i]));
 			tempEnemy = (new Enemy(300, 200));
 			add(tempEnemy);
 			Enemies.add(tempEnemy);
+			tempPlayer2.addWeapon(new ParticleWeapon(tempPlayer, 0.25, 500, AssetPaths.cursor__png , AssetPaths.fire_particle__png, 1));
 			tempPlayer.addWeapon(new ParticleWeapon(tempPlayer, 0.25, 500, AssetPaths.cursor__png , AssetPaths.fire_particle__png, 1));
 			add(tempPlayer);
+			add(tempPlayer2);
+			Players.push(tempPlayer2);
 			Players.push(tempPlayer);
 		}
-		FlxG.camera.follow(Players[0], FlxCamera.STYLE_TOPDOWN, null, 1);
+		cameraObj = new FlxObject();
+		add(cameraObj);
+		FlxG.camera.follow(cameraObj, FlxCamera.STYLE_TOPDOWN, null, 1);
 		
 		super.create();
 	}
@@ -80,6 +90,19 @@ class PlayState extends FlxState
 	 */
 	override public function update():Void
 	{
+		var tempX:Float = 0;
+		var tempY:Float = 0;
+		
+		for (i in 0...Players.length)
+		{
+			tempX += Players[i].x;
+			tempY += Players[i].y;
+		}
+		tempX = tempX / Players.length;
+		tempY = tempY / Players.length;
+		cameraObj.x = tempX;
+		cameraObj.y = tempY;
+		
 		FlxG.overlap(Reg.bulletGroup, Enemies, receiveDamage);	
 		//Code for level collision
 		FlxG.collide(Players[0], level1.hitTilemaps);

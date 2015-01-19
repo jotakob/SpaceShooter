@@ -10,13 +10,13 @@ class ParticleWeapon extends Weapon
 {
 	
 	public var emitter:FlxEmitter;
-	private var particles:Int = 1;
+	private var particles:Int = 100;
 	
 	public function new(player:Player, FiringRate:Float, ProjectileSpeed:Int, WeaponImage:String, BulletImage:String, Damage:Int) 
 	{
 		super(player, FiringRate, ProjectileSpeed, WeaponImage, BulletImage, Damage);
 		
-		emitter = new FlxEmitter(owner.x, owner.y);
+		emitter = new FlxEmitter(owner.x + owner.width/2, owner.y + owner.height/2);
 		emitter.clear();
 		for (i in 0...particles)
 		{
@@ -43,7 +43,7 @@ class ParticleWeapon extends Weapon
 	public override function update()
 	{
 		framesUntilShooting--;
-		emitter.x = owner.x;
-		emitter.y = owner.y;
+		emitter.x = owner.x + owner.width/2;
+		emitter.y = owner.y + owner.height/2;
 	}
 }

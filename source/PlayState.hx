@@ -70,8 +70,8 @@ class PlayState extends FlxState
 			tempPlayer2.addWeapon(new ParticleWeapon(tempPlayer, 0.25, 500, AssetPaths.cursor__png , AssetPaths.fire_particle__png, 1));
 			tempPlayer.addWeapon(new ParticleWeapon(tempPlayer, 0.25, 500, AssetPaths.cursor__png , AssetPaths.fire_particle__png, 1));
 			add(tempPlayer);
-			add(tempPlayer2);
-			Players.push(tempPlayer2);
+			//add(tempPlayer2);
+			//Players.push(tempPlayer2);
 			Players.push(tempPlayer);
 		}
 		cameraObj = new FlxObject();

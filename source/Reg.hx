@@ -45,4 +45,6 @@ class Reg
 	public static var bulletGroup:FlxGroup = new FlxGroup();
 	
 	public static var music:Array<FlxSound> = new Array();
+	
+	public static var sounds:Array<FlxSound> = new Array();
 }

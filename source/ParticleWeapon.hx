@@ -69,13 +69,20 @@ class ParticleWeapon extends Weapon
 		if (emitter.on == false)
 		{
 			emitter.on = true;
+			Reg.sounds[2].play(true);
 		}
 	}
+	
+	public function stopEmitter() {
+		emitter.on = false;
+		Reg.sounds[2].stop();
+	}
+	
 	public override function update()
 	{
 		
 		framesUntilShooting--;
 		emitter.x = owner.x + owner.width/2;
-		emitter.y = owner.y + owner.height/2;
+		emitter.y = owner.y + owner.height / 2;
 	}
 }

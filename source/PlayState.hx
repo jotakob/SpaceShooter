@@ -13,6 +13,7 @@ import flixel.input.gamepad.FlxGamepad;
 import flixel.input.gamepad.XboxButtonID;
 import flixel.group.FlxGroup;
 import openfl.utils.Object;
+import flixel.FlxCamera;
 
 import openfl.Assets;
 import flixel.tile.FlxTilemap;
@@ -60,6 +61,7 @@ class PlayState extends FlxState
 			add(tempPlayer);
 			Players.push(tempPlayer);
 		}
+		FlxG.camera.follow(Players[0], FlxCamera.STYLE_TOPDOWN, null, 1);
 		
 		super.create();
 	}

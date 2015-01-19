@@ -40,6 +40,7 @@ class PlayState extends FlxState
 		Reg.currentState = this;		
 		
 		level1 = new Level_Group1(true);
+		
 		map = new FlxTilemap();
 		trace (Assets.getText(AssetPaths.mapCSV_Group1_Map3__csv));
 		map.loadMap(Assets.getText(AssetPaths.mapCSV_Group1_Map3__csv), AssetPaths.terrain__png, 32, 32, FlxTilemap.OFF, 0, 1, 200);

@@ -11,7 +11,7 @@ class ParticleWeapon extends Weapon
 {
 	
 	public var emitter:FlxEmitter;
-	private var particles:Int = 1000;
+	private var particles:Int = 150;
 	private var coneWidth:Float= 50;
 	private var range:Float = 500;
 	private var randomNumber:Int;
@@ -52,6 +52,7 @@ class ParticleWeapon extends Weapon
 					particle.makeGraphic(5, 5, 0xffffffff);
 			}
 			particle.exists = false;
+			Reg.bulletGroup.add(particle);
 			emitter.add(particle);
 			
 		}

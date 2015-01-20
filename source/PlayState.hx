@@ -132,14 +132,6 @@ class PlayState extends FlxState
 		enemy.receiveDamage(bullet.damage);
 		obj1.kill();
 	}
-			
-		
-	private function dealDamage(bullets:FlxObject, player:FlxObject)
-	{
-		Players[index].hp -= 1;
-		bullets.kill();
-	}
+	
 }
-
-//collision example
 

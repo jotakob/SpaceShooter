@@ -27,18 +27,18 @@ package;
 		//Properties
 
 
-		public function new(addToStage:Bool = true, onAddCallback:Dynamic = null, parentObject:Dynamic = null)
-		{
+	public function new(addToStage:Bool = true, onAddCallback:Dynamic = null, parentObject:Dynamic = null)
+	{
 		super();
 		var mapString:String;
 		var image:Dynamic;
-	//Shapes
+		//Shapes
 		SpritesGroup= new FlxGroup();
 
 		//Paths
 		LevelCollisionGroup = new FlxGroup();
 
-			// Generate maps.
+		// Generate maps.
 		var properties:Array<Dynamic> = new Array<Dynamic>();
 
 		mapString = ('assets/levels/mapCSV_Group1_LevelBase.csv').toString();
@@ -68,50 +68,50 @@ package;
 			boundsMin = new FlxPoint(0, 0);
 			boundsMax = new FlxPoint(1024, 512);
 			bgColor = 0xff777777;
-		}
+	}
 
-		override public function createObjects(onAddCallback:Dynamic = null, parentObject:Dynamic = null):Void
-		{
-			addPathsForLayerLevelCollision(onAddCallback);
-			addShapesForLayerSprites(onAddCallback);
-			generateObjectLinks(onAddCallback);
-			if ( parentObject != null )
-				parentObject.add(masterLayer);
-			else
-				FlxG.state.add(masterLayer);
-		}
+	override public function createObjects(onAddCallback:Dynamic = null, parentObject:Dynamic = null):Void
+	{
+		addPathsForLayerLevelCollision(onAddCallback);
+		addShapesForLayerSprites(onAddCallback);
+		generateObjectLinks(onAddCallback);
+		if ( parentObject != null )
+			parentObject.add(masterLayer);
+		else
+			FlxG.state.add(masterLayer);
+	}
 
-		public function addPathsForLayerLevelCollision(onAddCallback:Dynamic = null):Void
-		{
-			var pathobj:PathData;
+	public function addPathsForLayerLevelCollision(onAddCallback:Dynamic = null):Void
+	{
+		var pathobj:PathData;
 
-			pathobj = new PathData( [ new FlxPoint(1028.000, 514.000),
-				new FlxPoint(1030.000, 99.000),
-				new FlxPoint(450.000, 95.000),
-				new FlxPoint(452.000, 128.000),
-				new FlxPoint(386.000, 351.000),
-				new FlxPoint(356.000, 415.000),
-				new FlxPoint(256.000, 516.000) 
-			], true, false, LevelCollisionGroup );
-			paths.push(pathobj);
-			callbackNewData( pathobj, onAddCallback, LevelCollisionGroup, generateProperties( [null] ), 1, 1 );
+		pathobj = new PathData( [ new FlxPoint(1028.000, 514.000),
+			new FlxPoint(1030.000, 99.000),
+			new FlxPoint(450.000, 95.000),
+			new FlxPoint(452.000, 128.000),
+			new FlxPoint(386.000, 351.000),
+			new FlxPoint(356.000, 415.000),
+			new FlxPoint(256.000, 516.000) 
+		], true, false, LevelCollisionGroup );
+		paths.push(pathobj);
+		callbackNewData( pathobj, onAddCallback, LevelCollisionGroup, generateProperties( [null] ), 1, 1 );
 
-			pathobj = new PathData( [ { pos:new FlxPoint(59.090, 140.877), tan1:new FlxPoint(-73.450, 243.700), tan2:new FlxPoint(-(22.000), -(-73.000)) },
-				{ pos:new FlxPoint(129.090, 220.867), tan1:new FlxPoint(27.000, -61.000), tan2:new FlxPoint(-(-12.140), -(27.430)) } 
-			], true, false, LevelCollisionGroup );
-			paths.push(pathobj);
-			callbackNewData( pathobj, onAddCallback, LevelCollisionGroup, generateProperties( [null] ), 1, 1 );
-
-		}
-
-		public function addShapesForLayerSprites(onAddCallback:Dynamic = null):Void
-		{
-			var obj:Dynamic;
-
-		}
-
-		public function generateObjectLinks(onAddCallback:Dynamic = null):Void
-		{
-		}
+		pathobj = new PathData( [ { pos:new FlxPoint(59.090, 140.877), tan1:new FlxPoint(-73.450, 243.700), tan2:new FlxPoint(-(22.000), -(-73.000)) },
+			{ pos:new FlxPoint(129.090, 220.867), tan1:new FlxPoint(27.000, -61.000), tan2:new FlxPoint(-(-12.140), -(27.430)) } 
+		], true, false, LevelCollisionGroup );
+		paths.push(pathobj);
+		callbackNewData( pathobj, onAddCallback, LevelCollisionGroup, generateProperties( [null] ), 1, 1 );
 
 	}
+
+	public function addShapesForLayerSprites(onAddCallback:Dynamic = null):Void
+	{
+		var obj:Dynamic;
+
+	}
+
+	public function generateObjectLinks(onAddCallback:Dynamic = null):Void
+	{
+	}
+
+}

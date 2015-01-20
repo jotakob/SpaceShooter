@@ -155,7 +155,7 @@ end
 ------------------------
 if exportOnlyCSV == false then	
 	baseFileText = "//Code generated with DAME and DeVZoO. http://www.dambots.com http://www.dev-zoo.net\n\n"
-	baseFileText = baseFileText.."package"..GamePackage..";\n"
+	baseFileText = baseFileText.."package"..GamePackage..";\n\n"
 	
 	baseFileText = baseFileText..tab1.."import "..flixelPackage..".group.FlxGroup;\n"
 	baseFileText = baseFileText..tab1.."import "..flixelPackage..".FlxSprite;\n"
@@ -378,31 +378,31 @@ for groupIndex = 0,groupCount do
 	
 	-- This is the file for the map group class.
 	fileText = "//Code generated with DAME and DeVZoO. http://www.dambots.com http://www.dev-zoo.net\n\n"
-	fileText = fileText.."package; "..GamePackage.."\n"
+	fileText = fileText.."package; "..GamePackage.."\n\n"
 	
-	fileText = fileText..tab1.."import "..flixelPackage..".FlxG;\n"
+	fileText = fileText.."import "..flixelPackage..".FlxG;\n"
 	
-	fileText = fileText..tab1.."import "..flixelPackage..".group.FlxGroup;\n"
-	fileText = fileText..tab1.."import "..flixelPackage..".FlxSprite;\n"
-	fileText = fileText..tab1.."import "..flixelPackage..".FlxObject;\n"
-	fileText = fileText..tab1.."import "..flixelPackage..".text.FlxText;\n"
-    fileText = fileText..tab1.."import "..flixelPackage..".util.FlxPoint;\n"
-    fileText = fileText..tab1.."import "..flixelPackage..".tile.FlxTilemap;\n"
-	fileText = fileText..tab1.."import openfl.Assets;\n"
-	fileText = fileText..tab1.."import flash.utils.Dictionary;\n"
+	fileText = fileText.."import "..flixelPackage..".group.FlxGroup;\n"
+	fileText = fileText.."import "..flixelPackage..".FlxSprite;\n"
+	fileText = fileText.."import "..flixelPackage..".FlxObject;\n"
+	fileText = fileText.."import "..flixelPackage..".text.FlxText;\n"
+    fileText = fileText.."import "..flixelPackage..".util.FlxPoint;\n"
+    fileText = fileText.."import "..flixelPackage..".tile.FlxTilemap;\n"
+	fileText = fileText.."import openfl.Assets;\n"
+	fileText = fileText.."import flash.utils.Dictionary;\n\n"
 	
 	if # importsText > 0 then
-		fileText = fileText..tab1.."// Custom imports:\n"..importsText.."\n"
+		fileText = fileText.."// Custom imports:\n"..importsText.."\n\n"
 	end
-	fileText = fileText..tab1.."class Level_"..groupName.." extends "
+	fileText = fileText.."class Level_"..groupName.." extends "
 	if # IntermediateClass > 0 then
 		fileText = fileText..IntermediateClass.."\n"
 	else
 		fileText = fileText..baseClassName.."\n"
 	end
 	
-	fileText = fileText..tab1.."{\n"
-	fileText = fileText..tab2.."//Embedded media...\n"
+	fileText = fileText.."{\n"
+	fileText = fileText..tab1.."//Embedded media...\n"
 	
 	-- Go through each layer and store some tables for the different layer types.
 	for layerIndex = 0,layerCount do
@@ -421,7 +421,7 @@ for groupIndex = 0,groupCount do
 				-- For maps just generate the Embeds needed at the top of the class.
 				--fileText = fileText..tab2.."[Embed(source=\""..as3.tolua(DAME.GetRelativePath(hxDir, csvDir.."/"..mapFileName)).."\", mimeType=\"application/octet-stream\")] public var CSV_"..layerName..":Class;\n"
 				--fileText = fileText..tab2.."[Embed(source=\""..as3.tolua(DAME.GetRelativePath(compiledir, layer.imageFile)).."\")] public var Img_"..layerName..":Class;\n"
-				masterLayerAddText = masterLayerAddText..tab3.."masterLayer.add(layer"..layerName..");\n"
+				masterLayerAddText = masterLayerAddText..tab1.."masterLayer.add(layer"..layerName..");\n"
 			end
 
 		elseif exportOnlyCSV == false then
@@ -429,7 +429,7 @@ for groupIndex = 0,groupCount do
 			if as3.tolua(layer.IsSpriteLayer()) == true then
 				table.insert( spriteLayers,{groupName,layer,layerName})
 				addGroup = true;
-				stageAddText = stageAddText..tab3.."addSpritesForLayer"..layerName.."(onAddCallback);\n"
+				stageAddText = stageAddText..tab2.."addSpritesForLayer"..layerName.."(onAddCallback);\n"
 			elseif as3.tolua(layer.IsShapeLayer()) == true then
 				table.insert(shapeLayers,{groupName,layer,layerName})
 				addGroup = true
@@ -439,7 +439,7 @@ for groupIndex = 0,groupCount do
 			end
 			
 			if addGroup == true then
-				masterLayerAddText = masterLayerAddText..tab3.."masterLayer.add("..layerName.."Group);\n"
+				masterLayerAddText = masterLayerAddText..tab1.."masterLayer.add("..layerName.."Group);\n"
 				
 					--masterLayerAddText = masterLayerAddText..tab3..layerName.."Group.scrollFactor.x = "..string.format("%.4f",as3.tolua(layer.xScroll))..";\n"
 					--masterLayerAddText = masterLayerAddText..tab3..layerName.."Group.scrollFactor.y = "..string.format("%.4f",as3.tolua(layer.yScroll))..";\n"
@@ -458,45 +458,45 @@ for groupIndex = 0,groupCount do
 		fileText = fileText.."\n"
 		
 		if # maps > 0 then
-			fileText = fileText..tab2.."//Tilemaps\n"
+			fileText = fileText..tab1.."//Tilemaps\n"
 			for i,v in ipairs(maps) do
-				fileText = fileText..tab2.."public var layer"..maps[i][2]..":"..tileMapClass..";\n"
+				fileText = fileText..tab1.."public var layer"..maps[i][2]..":"..tileMapClass..";\n"
 			end
 			fileText = fileText.."\n"
 		end
 		
 		if # spriteLayers > 0 then
-			fileText = fileText..tab2.."//Sprites\n"
+			fileText = fileText..tab1.."//Sprites\n"
 			for i,v in ipairs(spriteLayers) do
-				fileText = fileText..tab2.."public var "..spriteLayers[i][3].."Group:FlxGroup;\n"
+				fileText = fileText..tab1.."public var "..spriteLayers[i][3].."Group:FlxGroup;\n"
 			end
 			fileText = fileText.."\n"
 		end
 		
 		if # shapeLayers > 0 then
-			fileText = fileText..tab2.."//Shapes\n"
+			fileText = fileText..tab1.."//Shapes\n"
 			for i,v in ipairs(shapeLayers) do
-				fileText = fileText..tab2.."public var "..shapeLayers[i][3].."Group:FlxGroup;\n"
+				fileText = fileText..tab1.."public var "..shapeLayers[i][3].."Group:FlxGroup;\n"
 			end
 			fileText = fileText.."\n"
 		end
 		
 		if # pathLayers > 0 then
-			fileText = fileText..tab2.."//Paths\n"
+			fileText = fileText..tab1.."//Paths\n"
 			for i,v in ipairs(pathLayers) do
-				fileText = fileText..tab2.."public var "..pathLayers[i][3].."Group:FlxGroup;\n"
+				fileText = fileText..tab1.."public var "..pathLayers[i][3].."Group:FlxGroup;\n"
 			end
 			fileText = fileText.."\n"
 		end
 		
 		groupPropertiesString = "%%proploop%%"..tab2.."public var %propnamefriendly%:%proptype% = %propvaluestring%;\n%%proploopend%%"
 		
-		fileText = fileText..tab2.."//Properties\n"
+		fileText = fileText..tab1.."//Properties\n"
 		fileText = fileText..as3.tolua(DAME.GetTextForProperties( groupPropertiesString, group.properties, groupPropTypes )).."\n"
 		
 		fileText = fileText.."\n"
-		fileText = fileText..tab2.."public function new(addToStage:Bool = true, onAddCallback:Dynamic = null, parentObject:Dynamic = null)\n"
-		fileText = fileText..tab2.."{\n"
+		fileText = fileText..tab1.."public function new(addToStage:Bool = true, onAddCallback:Dynamic = null, parentObject:Dynamic = null)\n"
+		fileText = fileText..tab1.."{\n"
 		fileText = fileText..tab2.."super();\n"
 		fileText = fileText..tab2.."var mapString:String;\n"
 		fileText = fileText..tab2.."var image:Dynamic;\n"
@@ -504,15 +504,15 @@ for groupIndex = 0,groupCount do
 		if # spriteLayers > 0 then
 			fileText = fileText..tab2.."//Sprites\n"
 			for i,v in ipairs(spriteLayers) do
-				fileText = fileText..tab2..spriteLayers[i][3].."Group = new FlxGroup();\n"
+				fileText = fileText..tab1..spriteLayers[i][3].."Group = new FlxGroup();\n"
 			end
 			fileText = fileText.."\n"
 		end
 
 		if # shapeLayers > 0 then
-			fileText = fileText..tab1.."//Shapes\n"
+			fileText = fileText..tab2.."//Shapes\n"
 			for i,v in ipairs(shapeLayers) do
-				fileText = fileText..tab2..shapeLayers[i][3].."Group= new FlxGroup();\n"
+				fileText = fileText..tab1..shapeLayers[i][3].."Group= new FlxGroup();\n"
 			end
 			fileText = fileText.."\n"
 		end
@@ -526,7 +526,7 @@ for groupIndex = 0,groupCount do
 		end
 
 		
-		fileText = fileText..tab3.."// Generate maps.\n"
+		fileText = fileText..tab2.."// Generate maps.\n"
 		
 		fileText = fileText..tab2.."var properties:Array<Dynamic> = new Array<Dynamic>();\n\n"
 		--fileText = fileText..tab3.."var tileProperties:Dictionary = new Dictionary;\n\n"
@@ -582,45 +582,45 @@ for groupIndex = 0,groupCount do
 		-- MASTER GROUP.
 		------------------
 		
-		fileText = fileText.."\n"..tab3.."//Add layers to the master group in correct order.\n"
+		fileText = fileText.."\n"..tab2.."//Add layers to the master group in correct order.\n"
 		fileText = fileText..masterLayerAddText.."\n";
 		
-		fileText = fileText..tab3.."if ( addToStage )\n"
-		fileText = fileText..tab4.."createObjects(onAddCallback, parentObject);\n\n"
+		fileText = fileText..tab2.."if ( addToStage )\n"
+		fileText = fileText..tab3.."createObjects(onAddCallback, parentObject);\n\n"
 		
-		fileText = fileText..tab3.."boundsMinX = "..minx..";\n"
-		fileText = fileText..tab3.."boundsMinY = "..miny..";\n"
-		fileText = fileText..tab3.."boundsMaxX = "..maxx..";\n"
-		fileText = fileText..tab3.."boundsMaxY = "..maxy..";\n"
+		fileText = fileText..tab2.."boundsMinX = "..minx..";\n"
+		fileText = fileText..tab2.."boundsMinY = "..miny..";\n"
+		fileText = fileText..tab2.."boundsMaxX = "..maxx..";\n"
+		fileText = fileText..tab2.."boundsMaxY = "..maxy..";\n"
 		
-		fileText = fileText..tab3.."boundsMin = new FlxPoint("..minx..", "..miny..");\n"
-		fileText = fileText..tab3.."boundsMax = new FlxPoint("..maxx..", "..maxy..");\n"
+		fileText = fileText..tab2.."boundsMin = new FlxPoint("..minx..", "..miny..");\n"
+		fileText = fileText..tab2.."boundsMax = new FlxPoint("..maxx..", "..maxy..");\n"
 		
-		fileText = fileText..tab3.."bgColor = "..as3.tolua(DAME.GetBackgroundColor())..";\n"
+		fileText = fileText..tab2.."bgColor = "..as3.tolua(DAME.GetBackgroundColor())..";\n"
 		
-		fileText = fileText..tab2.."}\n\n"	-- end constructor
+		fileText = fileText..tab1.."}\n\n"	-- end constructor
 		
 		---------------
 		-- OBJECTS
 		---------------
 		-- One function for each layer.
 		
-		fileText = fileText..tab2.."override public function createObjects(onAddCallback:Dynamic = null, parentObject:Dynamic = null):Void\n"
-		fileText = fileText..tab2.."{\n"
+		fileText = fileText..tab1.."override public function createObjects(onAddCallback:Dynamic = null, parentObject:Dynamic = null):Void\n"
+		fileText = fileText..tab1.."{\n"
 		-- Must add the paths before the sprites as the sprites index into the paths array.
 		for i,v in ipairs(pathLayers) do
-			fileText = fileText..tab3.."addPathsForLayer"..pathLayers[i][3].."(onAddCallback);\n"
+			fileText = fileText..tab2.."addPathsForLayer"..pathLayers[i][3].."(onAddCallback);\n"
 		end
 		for i,v in ipairs(shapeLayers) do
-			fileText = fileText..tab3.."addShapesForLayer"..shapeLayers[i][3].."(onAddCallback);\n"
+			fileText = fileText..tab2.."addShapesForLayer"..shapeLayers[i][3].."(onAddCallback);\n"
 		end
 		fileText = fileText..stageAddText
-		fileText = fileText..tab3.."generateObjectLinks(onAddCallback);\n"
-		fileText = fileText..tab3.."if ( parentObject != null )\n"
-		fileText = fileText..tab4.."parentObject.add(masterLayer);\n"
-		fileText = fileText..tab3.."else\n"
-		fileText = fileText..tab4.."FlxG.state.add(masterLayer);\n"
-		fileText = fileText..tab2.."}\n\n"
+		fileText = fileText..tab2.."generateObjectLinks(onAddCallback);\n"
+		fileText = fileText..tab2.."if ( parentObject != null )\n"
+		fileText = fileText..tab3.."parentObject.add(masterLayer);\n"
+		fileText = fileText..tab2.."else\n"
+		fileText = fileText..tab3.."FlxG.state.add(masterLayer);\n"
+		fileText = fileText..tab1.."}\n\n"
 		
 		-- Create the paths first so that sprites can reference them if any are attached.
 		
@@ -631,7 +631,7 @@ for groupIndex = 0,groupCount do
 		
 		for i,v in ipairs(spriteLayers) do
 			layer = spriteLayers[i][2]
-			creationText = tab3..linkAssignText
+			creationText = tab2..linkAssignText
 			creationText = creationText.."%%if parent%%"
 				creationText = creationText.."%getparent%.childSprite = "
 			creationText = creationText.."%%endifparent%%"
@@ -639,24 +639,24 @@ for groupIndex = 0,groupCount do
 				creationText = creationText.."addSpriteToLayer(%constructor:null%, %class%, "..spriteLayers[i][3].."Group , %xpos%, %ypos%, %degrees%, "..as3.tolua(layer.xScroll)..", "..as3.tolua(layer.xScroll)..", %flipped%, %scalex%, %scaley%, "..propertiesString..", onAddCallback );//%name%\n" 
 			
 			creationText = creationText.."%%if parent%%"
-				creationText = creationText..tab3.."%getparent%.childAttachNode = %attachedsegment%;\n"
-				creationText = creationText..tab3.."%getparent%.childAttachT = %attachedsegment_t%;\n"
+				creationText = creationText..tab2.."%getparent%.childAttachNode = %attachedsegment%;\n"
+				creationText = creationText..tab2.."%getparent%.childAttachT = %attachedsegment_t%;\n"
 			creationText = creationText.."%%endifparent%%"
 			
-			fileText = fileText..tab2.."public function addSpritesForLayer"..spriteLayers[i][3].."(onAddCallback:Dynamic = null):Void\n"
-			fileText = fileText..tab2.."{\n"
+			fileText = fileText..tab1.."public function addSpritesForLayer"..spriteLayers[i][3].."(onAddCallback:Dynamic = null):Void\n"
+			fileText = fileText..tab1.."{\n"
 		
 			fileText = fileText..as3.tolua(DAME.CreateTextForSprites(layer,creationText,"Avatar"))
-			fileText = fileText..tab2.."}\n\n"
+			fileText = fileText..tab1.."}\n\n"
 		end
 		
 		-- Create the links between objects.
 		
-		fileText = fileText..tab2.."public function generateObjectLinks(onAddCallback:Dynamic = null):Void\n"
-		fileText = fileText..tab2.."{\n"
-		linkText = tab3.."createLink(linkedObjectDictionary[%linkfromid%], linkedObjectDictionary[%linktoid%], onAddCallback, "..propertiesString.." );\n"
+		fileText = fileText..tab1.."public function generateObjectLinks(onAddCallback:Dynamic = null):Void\n"
+		fileText = fileText..tab1.."{\n"
+		linkText = tab2.."createLink(linkedObjectDictionary[%linkfromid%], linkedObjectDictionary[%linktoid%], onAddCallback, "..propertiesString.." );\n"
 		fileText = fileText..as3.tolua(DAME.GetTextForLinks(linkText,group))
-		fileText = fileText..tab2.."}\n"
+		fileText = fileText..tab1.."}\n"
 		
 		fileText = fileText.."\n"
 		fileText = fileText..tab1.."}\n"	-- end class
@@ -682,9 +682,9 @@ if exportOnlyCSV == false then
 	--end package
 	DAME.WriteFile(hxDir.."/"..baseClassName..".hx", baseFileText )
 
-	spriteAnimString = "%%spriteanimloop%%"..tab3.."spriteData.animData.push( new AnimData( \"%animname%\",[%%animframeloop%%%tileid%%separator:,%%%animframeloopend%%], %fps%, %looped% ) );\n%%spriteanimloopend%%"
-	spriteShapeString = "%%spriteframeloop%%"..tab3.."spriteData.shapeList[%frame%] = ( [%%shapeloop%%new AnimFrameShapeData(\"%shapename%\", AnimFrameShapeData.SHAPE_%TYPE%, %xpos%, %ypos%, %radius%, %wid%, %ht%)%separator:,\n"..tab5..tab5.."%%%shapeloopend%% ]);\n%%spriteframeloopend%%"
-	spriteText = "%%if spriteanimsorshapes%%"..tab3.."spriteData = new SpriteData(\"%class%\", \"%name%\");\n"..spriteShapeString..spriteAnimString..tab3.."spriteList.push( spriteData );\n\n%%endif spriteanimsorshapes%%";
+	spriteAnimString = "%%spriteanimloop%%"..tab2.."spriteData.animData.push( new AnimData( \"%animname%\",[%%animframeloop%%%tileid%%separator:,%%%animframeloopend%%], %fps%, %looped% ) );\n%%spriteanimloopend%%"
+	spriteShapeString = "%%spriteframeloop%%"..tab2.."spriteData.shapeList[%frame%] = ( [%%shapeloop%%new AnimFrameShapeData(\"%shapename%\", AnimFrameShapeData.SHAPE_%TYPE%, %xpos%, %ypos%, %radius%, %wid%, %ht%)%separator:,\n"..tab5..tab5.."%%%shapeloopend%% ]);\n%%spriteframeloopend%%"
+	spriteText = "%%if spriteanimsorshapes%%"..tab2.."spriteData = new SpriteData(\"%class%\", \"%name%\");\n"..spriteShapeString..spriteAnimString..tab2.."spriteList.push( spriteData );\n\n%%endif spriteanimsorshapes%%";
 
 	spriteText = as3.tolua( DAME.CreateTextForSpriteClasses( spriteText, "", "", "", "", "" ) )
 
@@ -696,12 +696,12 @@ if exportOnlyCSV == false then
 		fileText = headerText
 		fileText = fileText..tab1.."class SpriteInfo\n"
 		fileText = fileText..tab1.."{\n"
-		fileText = fileText..tab2.."var spriteList:Array = [];\n"
-		fileText = fileText..tab2.."public function new():Void\n"
-		fileText = fileText..tab2.."{\n"
-		fileText = fileText..tab3.."var spriteData:SpriteData;\n\n"
+		fileText = fileText..tab1.."var spriteList:Array = [];\n"
+		fileText = fileText..tab1.."public function new():Void\n"
+		fileText = fileText..tab1.."{\n"
+		fileText = fileText..tab2.."var spriteData:SpriteData;\n\n"
 		fileText = fileText..spriteText
-		fileText = fileText..tab2.."}\n"
+		fileText = fileText..tab1.."}\n"
 		fileText = fileText..tab1.."}\n"
 		DAME.WriteFile(hxDir.."\\DAME_Export\\SpriteInfo.hx", fileText )
 		
@@ -710,41 +710,41 @@ if exportOnlyCSV == false then
 		fileText = fileText..tab1.."import flash.utils.Dictionary;\n"
 		fileText = fileText..tab1.."class SpriteData\n"
 		fileText = fileText..tab1.."{\n"
-		fileText = fileText..tab2.."var animData:Array = [];	// AnimData\n"
-		fileText = fileText..tab2.."var shapeList:Dictionary = new Dictionary;	// frame index => array of AnimFrameShapeList\n"
-		fileText = fileText..tab2.."var className:String;\n"
-		fileText = fileText..tab2.."var name:String;\n"
-		fileText = fileText..tab2.."public function new( ClassName:String, Name:String ):Void\n"
-		fileText = fileText..tab2.."{\n"
-		fileText = fileText..tab3.."className = ClassName;\n"
-		fileText = fileText..tab3.."name = Name;\n"
-		fileText = fileText..tab2.."}\n"
+		fileText = fileText..tab1.."var animData:Array = [];	// AnimData\n"
+		fileText = fileText..tab1.."var shapeList:Dictionary = new Dictionary;	// frame index => array of AnimFrameShapeList\n"
+		fileText = fileText..tab1.."var className:String;\n"
+		fileText = fileText..tab1.."var name:String;\n"
+		fileText = fileText..tab1.."public function new( ClassName:String, Name:String ):Void\n"
+		fileText = fileText..tab1.."{\n"
+		fileText = fileText..tab2.."className = ClassName;\n"
+		fileText = fileText..tab2.."name = Name;\n"
+		fileText = fileText..tab1.."}\n"
 		fileText = fileText..tab1.."}\n"
 		DAME.WriteFile(hxDir.."\\DAME_Export\\SpriteData.hx", fileText )
 		
 		fileText = headerText
 		fileText = fileText..tab1.."class AnimFrameShapeData\n"
 		fileText = fileText..tab1.."{\n"
-		fileText = fileText..tab2.."public var name:String;\n"
-		fileText = fileText..tab2.."public var x:Int;\n"
-		fileText = fileText..tab2.."public var y:Int;\n"
-		fileText = fileText..tab2.."public var type:Int;\n"
-		fileText = fileText..tab2.."public var width:Int = 0;\n"
-		fileText = fileText..tab2.."public var height:Int = 0;\n"
-		fileText = fileText..tab2.."public var radius:Int = 0;\n"
-		fileText = fileText..tab2.."public static const SHAPE_POINT:UInt = 0;\n"
-		fileText = fileText..tab2.."public static const SHAPE_BOX:UInt = 1;\n"
-		fileText = fileText..tab2.."public static const SHAPE_CIRCLE:UInt = 2;\n"
-		fileText = fileText..tab2.."public function new( Name:String, Type:Int, X:Int, Y:Int, Radius:Int, Wid:Int, Ht:Int ):Void\n"
-		fileText = fileText..tab2.."{\n"
-		fileText = fileText..tab3.."name = Name;\n"
-		fileText = fileText..tab3.."type = Type;\n"
-		fileText = fileText..tab3.."x = X;\n"
-		fileText = fileText..tab3.."y = Y;\n"
-		fileText = fileText..tab3.."radius = Radius;\n"
-		fileText = fileText..tab3.."width = Wid;\n"
-		fileText = fileText..tab3.."Ht = Ht;\n"
-		fileText = fileText..tab2.."}\n"
+		fileText = fileText..tab1.."public var name:String;\n"
+		fileText = fileText..tab1.."public var x:Int;\n"
+		fileText = fileText..tab1.."public var y:Int;\n"
+		fileText = fileText..tab1.."public var type:Int;\n"
+		fileText = fileText..tab1.."public var width:Int = 0;\n"
+		fileText = fileText..tab1.."public var height:Int = 0;\n"
+		fileText = fileText..tab1.."public var radius:Int = 0;\n"
+		fileText = fileText..tab1.."public static const SHAPE_POINT:UInt = 0;\n"
+		fileText = fileText..tab1.."public static const SHAPE_BOX:UInt = 1;\n"
+		fileText = fileText..tab1.."public static const SHAPE_CIRCLE:UInt = 2;\n"
+		fileText = fileText..tab1.."public function new( Name:String, Type:Int, X:Int, Y:Int, Radius:Int, Wid:Int, Ht:Int ):Void\n"
+		fileText = fileText..tab1.."{\n"
+		fileText = fileText..tab2.."name = Name;\n"
+		fileText = fileText..tab2.."type = Type;\n"
+		fileText = fileText..tab2.."x = X;\n"
+		fileText = fileText..tab2.."y = Y;\n"
+		fileText = fileText..tab2.."radius = Radius;\n"
+		fileText = fileText..tab2.."width = Wid;\n"
+		fileText = fileText..tab2.."Ht = Ht;\n"
+		fileText = fileText..tab1.."}\n"
 		fileText = fileText..tab1.."}\n"
 		fileText = fileText.."}\n"
 		DAME.WriteFile(hxDir.."\\DAME_Export\\AnimFrameShapeData.hx", fileText )
@@ -752,17 +752,17 @@ if exportOnlyCSV == false then
 		fileText = headerText
 		fileText = fileText..tab1.."class AnimData\n"
 		fileText = fileText..tab1.."{\n"
-		fileText = fileText..tab2.."public var name:String;\n"
-		fileText = fileText..tab2.."public var frames:Array;\n"
-		fileText = fileText..tab2.."public var fps:Float;\n"
-		fileText = fileText..tab2.."public var looped:Bool;\n"
-		fileText = fileText..tab2.."public function new( Name:String, Frames:Array, Fps:Float, Looped:Bool):Void\n"
-		fileText = fileText..tab2.."{\n"
-		fileText = fileText..tab3.."name = Name;\n"
-		fileText = fileText..tab3.."frames = Frames;\n"
-		fileText = fileText..tab3.."fps = Fps;\n"
-		fileText = fileText..tab3.."looped = Looped;\n"
-		fileText = fileText..tab2.."}\n"
+		fileText = fileText..tab1.."public var name:String;\n"
+		fileText = fileText..tab1.."public var frames:Array;\n"
+		fileText = fileText..tab1.."public var fps:Float;\n"
+		fileText = fileText..tab1.."public var looped:Bool;\n"
+		fileText = fileText..tab1.."public function new( Name:String, Frames:Array, Fps:Float, Looped:Bool):Void\n"
+		fileText = fileText..tab1.."{\n"
+		fileText = fileText..tab2.."name = Name;\n"
+		fileText = fileText..tab2.."frames = Frames;\n"
+		fileText = fileText..tab2.."fps = Fps;\n"
+		fileText = fileText..tab2.."looped = Looped;\n"
+		fileText = fileText..tab1.."}\n"
 		fileText = fileText..tab1.."}\n"
 		fileText = fileText.."}\n"
 		DAME.WriteFile(hxDir.."\\DAME_Export\\AnimData.hx", fileText )
@@ -773,29 +773,29 @@ if exportOnlyCSV == false then
 		textfile = "package "..GamePackage..";\n"
 		textfile = textfile..tab1.."class TextData\n"
 		textfile = textfile..tab1.."{\n"
-		textfile = textfile..tab2.."public var x:Float;\n"
-		textfile = textfile..tab2.."public var y:Float;\n"
-		textfile = textfile..tab2.."public var width:UInt;\n"
-		textfile = textfile..tab2.."public var height:UInt;\n"
-		textfile = textfile..tab2.."public var angle:Float;\n"
-		textfile = textfile..tab2.."public var text:String;\n"
-		textfile = textfile..tab2.."public var fontName:String;\n"
-		textfile = textfile..tab2.."public var size:UInt;\n"
-		textfile = textfile..tab2.."public var color:UInt;\n"
-		textfile = textfile..tab2.."public var alignment:String;\n\n"
-		textfile = textfile..tab2.."public function new( X:Float, Y:Float, Width:UInt, Height:UInt, Angle:Float, Text:String, FontName:String, Size:UInt, Color:UInt, Alignment:String )\n"
-		textfile = textfile..tab2.."{\n"
-		textfile = textfile..tab3.."x = X;\n"
-		textfile = textfile..tab3.."y = Y;\n"
-		textfile = textfile..tab3.."width = Width;\n"
-		textfile = textfile..tab3.."height = Height;\n"
-		textfile = textfile..tab3.."angle = Angle;\n"
-		textfile = textfile..tab3.."text = Text;\n"
-		textfile = textfile..tab3.."fontName = FontName;\n"
-		textfile = textfile..tab3.."size = Size;\n"
-		textfile = textfile..tab3.."color = Color;\n"
-		textfile = textfile..tab3.."alignment = Alignment;\n"
-		textfile = textfile..tab2.."}\n"
+		textfile = textfile..tab1.."public var x:Float;\n"
+		textfile = textfile..tab1.."public var y:Float;\n"
+		textfile = textfile..tab1.."public var width:UInt;\n"
+		textfile = textfile..tab1.."public var height:UInt;\n"
+		textfile = textfile..tab1.."public var angle:Float;\n"
+		textfile = textfile..tab1.."public var text:String;\n"
+		textfile = textfile..tab1.."public var fontName:String;\n"
+		textfile = textfile..tab1.."public var size:UInt;\n"
+		textfile = textfile..tab1.."public var color:UInt;\n"
+		textfile = textfile..tab1.."public var alignment:String;\n\n"
+		textfile = textfile..tab1.."public function new( X:Float, Y:Float, Width:UInt, Height:UInt, Angle:Float, Text:String, FontName:String, Size:UInt, Color:UInt, Alignment:String )\n"
+		textfile = textfile..tab1.."{\n"
+		textfile = textfile..tab2.."x = X;\n"
+		textfile = textfile..tab2.."y = Y;\n"
+		textfile = textfile..tab2.."width = Width;\n"
+		textfile = textfile..tab2.."height = Height;\n"
+		textfile = textfile..tab2.."angle = Angle;\n"
+		textfile = textfile..tab2.."text = Text;\n"
+		textfile = textfile..tab2.."fontName = FontName;\n"
+		textfile = textfile..tab2.."size = Size;\n"
+		textfile = textfile..tab2.."color = Color;\n"
+		textfile = textfile..tab2.."alignment = Alignment;\n"
+		textfile = textfile..tab1.."}\n"
 		textfile = textfile..tab1.."}\n"
 		
 		DAME.WriteFile(hxDir.."/TextData.hx", textfile )
@@ -807,27 +807,27 @@ if exportOnlyCSV == false then
 		textfile = textfile..tab1.."import "..flixelPackage..".FlxSprite;\n\n"
 		textfile = textfile..tab1.."class PathData\n"
 		textfile = textfile..tab1.."{\n"
-		textfile = textfile..tab2.."public var nodes:Array;\n"
-		textfile = textfile..tab2.."public var isClosed:Bool;\n"
-		textfile = textfile..tab2.."public var isSpline:Bool;\n"
-		textfile = textfile..tab2.."public var layer:FlxGroup;\n\n"
-		textfile = textfile..tab2.."// These values are only set if there is an attachment.\n"
-		textfile = textfile..tab2.."public var childSprite:FlxSprite = null;\n"
-		textfile = textfile..tab2.."public var childAttachNode:Int = 0;\n"
-		textfile = textfile..tab2.."public var childAttachT:Float = 0;\t// position of child between attachNode and next node.(0-1)\n\n"
-		textfile = textfile..tab2.."public function new( Nodes:Array, Closed:Bool, Spline:Bool, Layer:FlxGroup )\n"
-		textfile = textfile..tab2.."{\n"
-		textfile = textfile..tab3.."nodes = Nodes;\n"
-		textfile = textfile..tab3.."isClosed = Closed;\n"
-		textfile = textfile..tab3.."isSpline = Spline;\n"
-		textfile = textfile..tab3.."layer = Layer;\n"
-		textfile = textfile..tab2.."}\n\n"
-		textfile = textfile..tab2.."public function destroy():Void\n"
-		textfile = textfile..tab2.."{\n"
-		textfile = textfile..tab3.."layer = null;\n"
-		textfile = textfile..tab3.."childSprite = null;\n"
-		textfile = textfile..tab3.."nodes = null;\n"
-		textfile = textfile..tab2.."}\n"
+		textfile = textfile..tab1.."public var nodes:Array;\n"
+		textfile = textfile..tab1.."public var isClosed:Bool;\n"
+		textfile = textfile..tab1.."public var isSpline:Bool;\n"
+		textfile = textfile..tab1.."public var layer:FlxGroup;\n\n"
+		textfile = textfile..tab1.."// These values are only set if there is an attachment.\n"
+		textfile = textfile..tab1.."public var childSprite:FlxSprite = null;\n"
+		textfile = textfile..tab1.."public var childAttachNode:Int = 0;\n"
+		textfile = textfile..tab1.."public var childAttachT:Float = 0;\t// position of child between attachNode and next node.(0-1)\n\n"
+		textfile = textfile..tab1.."public function new( Nodes:Array, Closed:Bool, Spline:Bool, Layer:FlxGroup )\n"
+		textfile = textfile..tab1.."{\n"
+		textfile = textfile..tab2.."nodes = Nodes;\n"
+		textfile = textfile..tab2.."isClosed = Closed;\n"
+		textfile = textfile..tab2.."isSpline = Spline;\n"
+		textfile = textfile..tab2.."layer = Layer;\n"
+		textfile = textfile..tab1.."}\n\n"
+		textfile = textfile..tab1.."public function destroy():Void\n"
+		textfile = textfile..tab1.."{\n"
+		textfile = textfile..tab2.."layer = null;\n"
+		textfile = textfile..tab2.."childSprite = null;\n"
+		textfile = textfile..tab2.."nodes = null;\n"
+		textfile = textfile..tab1.."}\n"
 		textfile = textfile..tab1.."}\n"
 		
 		DAME.WriteFile(hxDir.."/PathData.hx", textfile )
@@ -839,19 +839,19 @@ if exportOnlyCSV == false then
 		textfile = textfile..tab1.."import "..flixelPackage..".group.FlxGroup;\n\n"
 		textfile = textfile..tab1.."class ShapeData\n"
 		textfile = textfile..tab1.."{\n"
-		textfile = textfile..tab2.."public var x:Float;\n"
-		textfile = textfile..tab2.."public var y:Float;\n"
-		textfile = textfile..tab2.."public var group:FlxGroup;\n\n"
-		textfile = textfile..tab2.."public function new(X:Float, Y:Float, Group:FlxGroup )\n"
-		textfile = textfile..tab2.."{\n"
-		textfile = textfile..tab3.."x = X;\n"
-		textfile = textfile..tab3.."y = Y;\n"
-		textfile = textfile..tab3.."group = Group;\n"
-		textfile = textfile..tab2.."}\n\n"
-		textfile = textfile..tab2.."public function destroy():Void\n"
-		textfile = textfile..tab2.."{\n"
-		textfile = textfile..tab3.."group = null;\n"
-		textfile = textfile..tab2.."}\n"
+		textfile = textfile..tab1.."public var x:Float;\n"
+		textfile = textfile..tab1.."public var y:Float;\n"
+		textfile = textfile..tab1.."public var group:FlxGroup;\n\n"
+		textfile = textfile..tab1.."public function new(X:Float, Y:Float, Group:FlxGroup )\n"
+		textfile = textfile..tab1.."{\n"
+		textfile = textfile..tab2.."x = X;\n"
+		textfile = textfile..tab2.."y = Y;\n"
+		textfile = textfile..tab2.."group = Group;\n"
+		textfile = textfile..tab1.."}\n\n"
+		textfile = textfile..tab1.."public function destroy():Void\n"
+		textfile = textfile..tab1.."{\n"
+		textfile = textfile..tab2.."group = null;\n"
+		textfile = textfile..tab1.."}\n"
 		textfile = textfile..tab1.."}\n"
 		
 		DAME.WriteFile(hxDir.."/ShapeData.hx", textfile )
@@ -862,16 +862,16 @@ if exportOnlyCSV == false then
 		textfile = textfile..tab1.."import "..flixelPackage..".group.FlxGroup;\n\n"
 		textfile = textfile..tab1.."class BoxData extends ShapeData\n"
 		textfile = textfile..tab1.."{\n"
-		textfile = textfile..tab2.."public var angle:Float;\n"
-		textfile = textfile..tab2.."public var width:UInt;\n"
-		textfile = textfile..tab2.."public var height:UInt;\n\n"
-		textfile = textfile..tab2.."public function new( X:Float, Y:Float, Angle:Float, Width:Float, Height:Float, Group:FlxGroup ) \n"
-		textfile = textfile..tab2.."{\n"
-		textfile = textfile..tab3.."super(X, Y, Group);\n"
-		textfile = textfile..tab3.."angle = Angle;\n"
-		textfile = textfile..tab3.."width = Std.int(Width); //rounding Float to Int\n"
-		textfile = textfile..tab3.."height = Std.int(Height); //rounding Float to Int\n"
-		textfile = textfile..tab2.."}\n"
+		textfile = textfile..tab1.."public var angle:Float;\n"
+		textfile = textfile..tab1.."public var width:UInt;\n"
+		textfile = textfile..tab1.."public var height:UInt;\n\n"
+		textfile = textfile..tab1.."public function new( X:Float, Y:Float, Angle:Float, Width:Float, Height:Float, Group:FlxGroup ) \n"
+		textfile = textfile..tab1.."{\n"
+		textfile = textfile..tab2.."super(X, Y, Group);\n"
+		textfile = textfile..tab2.."angle = Angle;\n"
+		textfile = textfile..tab2.."width = Std.int(Width); //rounding Float to Int\n"
+		textfile = textfile..tab2.."height = Std.int(Height); //rounding Float to Int\n"
+		textfile = textfile..tab1.."}\n"
 		textfile = textfile..tab1.."}\n"
 		
 		DAME.WriteFile(hxDir.."/BoxData.hx", textfile )
@@ -882,12 +882,12 @@ if exportOnlyCSV == false then
 		textfile = textfile..tab1.."import "..flixelPackage..".group.FlxGroup;\n\n"
 		textfile = textfile..tab1.."class CircleData extends ShapeData\n"
 		textfile = textfile..tab1.."{\n"
-		textfile = textfile..tab2.."public var radius:Float;\n\n"
-		textfile = textfile..tab2.."public function new( X:Float, Y:Float, Radius:Float, Group:FlxGroup )\n"
-		textfile = textfile..tab2.."{\n"
-		textfile = textfile..tab3.."super(X, Y, Group);\n"
-		textfile = textfile..tab3.."radius = Radius;\n"
-		textfile = textfile..tab2.."}\n"
+		textfile = textfile..tab1.."public var radius:Float;\n\n"
+		textfile = textfile..tab1.."public function new( X:Float, Y:Float, Radius:Float, Group:FlxGroup )\n"
+		textfile = textfile..tab1.."{\n"
+		textfile = textfile..tab2.."super(X, Y, Group);\n"
+		textfile = textfile..tab2.."radius = Radius;\n"
+		textfile = textfile..tab1.."}\n"
 		textfile = textfile..tab1.."}\n"
 		
 		DAME.WriteFile(hxDir.."/CircleData.hx", textfile )
@@ -896,19 +896,19 @@ if exportOnlyCSV == false then
 	textfile = "package "..GamePackage..";\n"
 	textfile = textfile..tab1.."class ObjectLink\n"
 	textfile = textfile..tab1.."{\n"
-	textfile = textfile..tab2.."public var fromObject:Dynamic;\n"
-	textfile = textfile..tab2.."public var toObject:Dynamic;\n"
-	textfile = textfile..tab2.."public function new(from:Dynamic, to:Dynamic)\n"
-	textfile = textfile..tab2.."{\n"
-	textfile = textfile..tab3.."fromObject = from;\n"
-	textfile = textfile..tab3.."toObject = to;\n"
-	textfile = textfile..tab2.."}\n\n"
-	textfile = textfile..tab2.."public function destroy():Void\n"
-	textfile = textfile..tab2.."{\n"
-	textfile = textfile..tab3.."fromObject = null;\n"
-	textfile = textfile..tab3.."toObject = null;\n"
-	textfile = textfile..tab2.."}\n"
+	textfile = textfile..tab1.."public var fromObject:Dynamic;\n"
+	textfile = textfile..tab1.."public var toObject:Dynamic;\n"
+	textfile = textfile..tab1.."public function new(from:Dynamic, to:Dynamic)\n"
+	textfile = textfile..tab1.."{\n"
+	textfile = textfile..tab2.."fromObject = from;\n"
+	textfile = textfile..tab2.."toObject = to;\n"
+	textfile = textfile..tab1.."}\n\n"
+	textfile = textfile..tab1.."public function destroy():Void\n"
+	textfile = textfile..tab1.."{\n"
+	textfile = textfile..tab2.."fromObject = null;\n"
+	textfile = textfile..tab2.."toObject = null;\n"
 	textfile = textfile..tab1.."}\n"
+	textfile = textfile.."}\n"
 	
 	DAME.WriteFile(hxDir.."/ObjectLink.hx", textfile )
 end

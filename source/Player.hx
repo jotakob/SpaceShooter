@@ -39,7 +39,11 @@ class Player extends Actor
 			case 0:
 				myAnimationController = new AnimationController(x, y, this);
 			case 1:
-				//myAnimationController = 			
+				//myAnimationController = new InfiltratorAnimationController(x, y, this);
+			//case 3:
+				//myAnimationController = new EngineerAnimationController(x, y, this);
+			//case 4:
+				//myAnimationController = new SoldierAnimationController(x, y, this);
 			default:
 				myAnimationController = new AnimationController(x, y, this);
 				trace("using default animations");

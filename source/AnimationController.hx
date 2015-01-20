@@ -24,21 +24,36 @@ class AnimationController extends FlxSprite
 		else
 		trace("animationComponent is null");
 		trace(AssetPaths.robot_sheet__png);
-		
+	
 		_owner.drag.x = _owner.drag.y = 1600;
 		
 		botSprite.loadGraphic(AssetPaths.robot_sheet__png, true, 32, 32);
 		botSprite.drag.x = _owner.drag.y = 1600;
-		botSprite.animation.add("lr", [3, 4, 3, 5], 6, false);
+		botSprite.animation.add("lr",[1,2,1,0,3,4,3,0], 5, true);
 		Reg.currentState.add(botSprite);
 		
 		topSprite.loadGraphic(AssetPaths.robot_sheet__png, true, 32, 32);
 		topSprite.drag.x = topSprite.drag.y = 1600;
-		topSprite.animation.add("lr", [4, 5], 12, false);
+		topSprite.animation.add("lr", [4,5], 12, false);
 		Reg.currentState.add(topSprite);
 		
 		spriteSheet = SpriteSheet;
 		
+		//CODEBLOCK FOR INFILTRATOR ANIMATION!
+		
+		/*trace(AssetPaths.robot_sheet__png);
+	
+		_owner.drag.x = _owner.drag.y = 1600;
+		
+		botSprite.loadGraphic(AssetPaths.infiltrator_spritesheet__png, true, 32, 32);
+		botSprite.drag.x = _owner.drag.y = 1600;
+		botSprite.animation.add("lr",[1,2,1,0,3,4,3,0], 5, true);
+		Reg.currentState.add(botSprite);
+		
+		topSprite.loadGraphic(AssetPaths.infiltrator_spritesheet__png, true, 32, 32);
+		topSprite.drag.x = topSprite.drag.y = 1600;
+		topSprite.animation.add("lr", [4], 12, false);
+		Reg.currentState.add(topSprite);*/
 		
 		
 	}

@@ -28,12 +28,23 @@ class Player extends Actor
 	public function new(X:Float=0, Y:Float=0,?PlayerNumber:Int,?GamePad:FlxGamepad) 
 	{
 		super(X, Y);
+		playerNumber = PlayerNumber;
 		hp = 50;
 		speed = 200;
 		_gamePad = GamePad;
 		myMovementController = (PlayerNumber == null)? null : new MovementController(this.x, this.y, this);
-		myAnimationController = new AnimationController(x, y, this,AssetPaths.robot_sheet__png);
-		playerNumber = PlayerNumber;
+		
+		switch(playerNumber)
+		{
+			case 0:
+				myAnimationController = new RobotAnimationController(x, y, this);
+			case 1:
+				//myAnimationController = 			
+			default:
+				myAnimationController = new AnimationController(x, y, this);
+				trace("using default animations");
+		}
+		
 		inputmanager = new InputManager(this);
 		trace(playerNumber);
 		myAnimationController.setAnimations("bot", [0,1,2,3]);

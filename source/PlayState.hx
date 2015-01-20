@@ -5,6 +5,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.FlxObject;
+import flixel.group.FlxTypedGroup;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
@@ -26,7 +27,7 @@ class PlayState extends FlxState
 {
 	private var _btnPlay:FlxButton;
 	private var _gamePads:Array<FlxGamepad> = new Array();
-	private var Players:Array<Player> = new Array();
+	private var Players:FlxGroup = new FlxGroup();
 	private var Enemies:FlxGroup = new FlxGroup();
 	
 	private var shootDirX:Float = 0;
@@ -73,7 +74,7 @@ class PlayState extends FlxState
 			add(tempPlayer);
 			//add(tempPlayer2);
 			//Players.push(tempPlayer2);
-			Players.push(tempPlayer);
+			Players.add(tempPlayer);
 		}
 		cameraObj = new FlxObject();
 		add(cameraObj);
@@ -106,10 +107,11 @@ class PlayState extends FlxState
 		var tempX:Float = 0;
 		var tempY:Float = 0;
 		
-		for (i in 0...Players.length)
+		for (i in Players.iterator())
 		{
-			tempX += Players[i].x;
-			tempY += Players[i].y;
+			var tmp:Player = cast(i, Player);
+			tempX += tmp.x;
+			tempY += tmp.y;
 		}
 		tempX = tempX / Players.length;
 		tempY = tempY / Players.length;
@@ -122,8 +124,8 @@ class PlayState extends FlxState
 		FlxG.overlap(Reg.bulletGroup, currentLevel.hitTilemaps, collideWall);
 		
 		//Code for level collision
-		FlxG.collide(Players[0], level1.hitTilemaps);
-		FlxG.collide(Players[0], ScreenCollision);
+		FlxG.collide(Players, level1.hitTilemaps);
+		FlxG.collide(Players, ScreenCollision);
 		
 		super.update();
 		

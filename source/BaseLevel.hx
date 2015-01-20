@@ -9,6 +9,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxPoint;
 import flixel.tile.FlxTilemap;
 import flash.utils.Dictionary;
+import openfl.Assets;
 
 class BaseLevel extends FlxGroup
 {
@@ -53,9 +54,12 @@ class BaseLevel extends FlxGroup
 		
 		//converting the csv to an array and setting width and height of the tilemap since loading csv's doesn't work
 		var tmpmap:Array<Int> = new Array<Int>();
-		var rows = mapClass.split("\n");
-		var tiles = new Array<String>();
+		var rows:Array<String> = mapClass.split("\n");
+		if (rows[rows.length - 1] == null)
+			rows.pop();
+		var tiles:Array<String> = new Array<String>();
 		map.heightInTiles = rows.length;
+		map.widthInTiles = rows[0].split(",").length;
 		for (row in rows)
 		{
 			tiles = row.split(",");
@@ -63,10 +67,7 @@ class BaseLevel extends FlxGroup
 			{
 				tmpmap.push(Std.parseInt(tile));
 			}
-			map.widthInTiles = tiles.length;
 		}
-		map.widthInTiles = 32;
-		tmpmap.pop(); //somehow there is a null element at the end of the array
 		
 		map.loadMap( tmpmap, imageClass, tileWidth, tileHeight, FlxTilemap.OFF, 0, drawIdx, collideIdx);
 		map.x = xpos;

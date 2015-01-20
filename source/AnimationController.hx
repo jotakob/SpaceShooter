@@ -13,11 +13,10 @@ class AnimationController extends FlxSprite
 	public var spriteSheet:String;
 	public var botSprite:FlxSprite = new FlxSprite();
 	public var topSprite:FlxSprite = new FlxSprite();
-	public function new(X:Float=0, Y:Float=0,animationComponent:Actor,AnimationID:String) 
+	public function new(X:Float=0, Y:Float=0,animationComponent:Actor) 
 	{
 		super(X, Y);
 		
-		botSprite.loadGraphic(Reg.characterAnimations[AnimationID][0]);
 		
 		if (animationComponent != null)		
 		{

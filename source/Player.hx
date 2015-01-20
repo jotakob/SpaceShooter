@@ -37,7 +37,7 @@ class Player extends Actor
 		switch(playerNumber)
 		{
 			case 0:
-				myAnimationController = new RobotAnimationController(x, y, this);
+				myAnimationController = new AnimationController(x, y, this);
 			case 1:
 				//myAnimationController = 			
 			default:

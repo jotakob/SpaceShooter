@@ -5,7 +5,6 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.FlxObject;
-import flixel.group.FlxTypedGroup;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
@@ -38,10 +37,8 @@ class PlayState extends FlxState
 	
 	private var level1:Level_Group1;
 	private var currentLevel:BaseLevel;
-	private var map:FlxTilemap;
 	
 	private var camera:FlxCamera;
-	private var ScreenCollision:FlxSprite  = new FlxSprite();
 	private var cameraObj:FlxObject;
 	
 	//private var music:Array<FlxSound> = new Array();
@@ -53,8 +50,6 @@ class PlayState extends FlxState
 		
 		level1 = new Level_Group1(true, null, this);
 		currentLevel = level1;
-		ScreenCollision.loadGraphic(AssetPaths.ScreenCollision__png);
-		add(ScreenCollision);
 		var tempPlayer;
 		var tempEnemy;
 		for (i in 0...FlxG.gamepads.getActiveGamepads().length)
@@ -72,8 +67,6 @@ class PlayState extends FlxState
 			Enemies.add(tempEnemy);
 			tempPlayer.addWeapon(new ParticleWeapon(tempPlayer, 0.25, 500, AssetPaths.cursor__png , AssetPaths.fire_particle__png, 1));
 			add(tempPlayer);
-			//add(tempPlayer2);
-			//Players.push(tempPlayer2);
 			Players.add(tempPlayer);
 		}
 		cameraObj = new FlxObject();
@@ -117,15 +110,12 @@ class PlayState extends FlxState
 		tempY = tempY / Players.length;
 		cameraObj.x = tempX;
 		cameraObj.y = tempY;
-		ScreenCollision.x = FlxG.camera.x;
-		ScreenCollision.y = FlxG.camera.y;
 		
 		FlxG.overlap(Reg.bulletGroup, Enemies, receiveDamage);	
-		FlxG.overlap(Reg.bulletGroup, currentLevel.hitTilemaps, collideWall);
+		FlxG.collide(Reg.bulletGroup, currentLevel.hitTilemaps, collideWall);
 		
 		//Code for level collision
-		FlxG.collide(Players, level1.hitTilemaps);
-		FlxG.collide(Players, ScreenCollision);
+		FlxG.collide(Players, currentLevel.hitTilemaps);
 		
 		super.update();
 		

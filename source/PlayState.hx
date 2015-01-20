@@ -40,7 +40,6 @@ class PlayState extends FlxState
 	private var map:FlxTilemap;
 	
 	private var camera:FlxCamera;
-	private var ScreenCollision:FlxSprite  = new FlxSprite();
 	private var cameraObj:FlxObject;
 	
 	//private var music:Array<FlxSound> = new Array();
@@ -52,9 +51,8 @@ class PlayState extends FlxState
 		
 		level1 = new Level_Group1(true, null, this);
 		currentLevel = level1;
-		ScreenCollision.loadGraphic(AssetPaths.ScreenCollision__png);
-		add(ScreenCollision);
 		var tempPlayer;
+		var tempPlayer2;
 		var tempEnemy;
 		for (i in 0...FlxG.gamepads.getActiveGamepads().length)
 		{
@@ -66,13 +64,14 @@ class PlayState extends FlxState
 			trace("add");
 			_gamePads.push(FlxG.gamepads.getActiveGamepads()[i]);
 			tempPlayer = (new Player(240, 160, i, FlxG.gamepads.getActiveGamepads()[i]));
+			tempPlayer2 = (new Player(100, 160, i, FlxG.gamepads.getActiveGamepads()[i]));
 			tempEnemy = (new Enemy(300, 200));
 			add(tempEnemy);
 			Enemies.add(tempEnemy);
 			tempPlayer.addWeapon(new ParticleWeapon(tempPlayer, 0.25, 500, AssetPaths.cursor__png , AssetPaths.fire_particle__png, 1));
 			add(tempPlayer);
-			//add(tempPlayer2);
-			//Players.push(tempPlayer2);
+			add(tempPlayer2);
+			Players.push(tempPlayer2);
 			Players.push(tempPlayer);
 		}
 		cameraObj = new FlxObject();
@@ -115,15 +114,12 @@ class PlayState extends FlxState
 		tempY = tempY / Players.length;
 		cameraObj.x = tempX;
 		cameraObj.y = tempY;
-		ScreenCollision.x = FlxG.camera.x;
-		ScreenCollision.y = FlxG.camera.y;
 		
 		FlxG.overlap(Reg.bulletGroup, Enemies, receiveDamage);	
-		FlxG.overlap(Reg.bulletGroup, currentLevel.hitTilemaps, collideWall);
+		//FlxG.overlap(Reg.bulletGroup, currentLevel.hitTilemaps, collideWall);
 		
 		//Code for level collision
 		FlxG.collide(Players[0], level1.hitTilemaps);
-		FlxG.collide(Players[0], ScreenCollision);
 		
 		super.update();
 		

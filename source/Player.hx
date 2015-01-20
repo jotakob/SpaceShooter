@@ -67,6 +67,18 @@ class Player extends Actor
 		{
 			
 		}
+		if (this.x < FlxG.camera.scroll.x)
+			this.x = FlxG.camera.scroll.x;
+		if (this.x + this.width > FlxG.camera.scroll.x + FlxG.camera.width)
+		{
+			this.x  = FlxG.camera.scroll.x + FlxG.camera.width - this.width;
+		}
+		if (this.y < FlxG.camera.scroll.y)
+			this.y = FlxG.camera.scroll.y;
+		if (this.y + this.height > FlxG.camera.scroll.y + FlxG.camera.height)
+		{
+			this.y  = FlxG.camera.scroll.y + FlxG.camera.height - this.height;
+		}
 	}
 	
 	public function addWeapon(newWeapon:Weapon)

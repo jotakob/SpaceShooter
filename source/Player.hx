@@ -54,11 +54,7 @@ class Player extends Actor
 	{
 		super.update();
 		inputmanager.update();
-		if (hp < 1)
-		{
-			
-			this.kill();
-		}
+		
 		try
 		{
 			activeWeapon.update();

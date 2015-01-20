@@ -5,6 +5,7 @@ import flixel.FlxObject;
  * ...
  * @author Luuk
  */
+/*
 class RobotAnimationController extends AnimationController
 
 {
@@ -42,9 +43,10 @@ class RobotAnimationController extends AnimationController
 		topSprite.loadGraphic(AssetPaths.infiltrator_spritesheet__png, true, 32, 32);
 		topSprite.drag.x = topSprite.drag.y = 1600;
 		topSprite.animation.add("lr", [4], 12, false);
-		Reg.currentState.add(topSprite);*/
+		Reg.currentState.add(topSprite);
 		
 		
 	}
 	
 }
+*/

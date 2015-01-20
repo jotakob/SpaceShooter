@@ -27,6 +27,11 @@ class Actor extends FlxObject
 	public override function update():Void
 	{
 		myAnimationController.update();
+		if (hp < 1)
+		{
+			this.kill();
+		}
+		
 		super.update();
 	}
 	public function receiveDamage(damage:Int)

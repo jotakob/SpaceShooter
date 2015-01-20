@@ -13,9 +13,11 @@ class AnimationController extends FlxSprite
 	public var spriteSheet:String;
 	public var botSprite:FlxSprite = new FlxSprite();
 	public var topSprite:FlxSprite = new FlxSprite();
-	public function new(X:Float=0, Y:Float=0,animationComponent:Actor) 
+	public function new(X:Float=0, Y:Float=0,animationComponent:Actor,AnimationID:String) 
 	{
 		super(X, Y);
+		
+		botSprite.loadGraphic(Reg.characterAnimations[AnimationID][0]);
 		
 		if (animationComponent != null)		
 		{
@@ -23,7 +25,6 @@ class AnimationController extends FlxSprite
 		}
 		else
 		trace("animationComponent is null");
-		trace(AssetPaths.robot_sheet__png);
 	
 		_owner.drag.x = _owner.drag.y = 1600;
 		

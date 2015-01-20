@@ -105,10 +105,13 @@ class InputManager extends FlxObject
 		else
 		{
 			timer--;
-			if (cast(player.activeWeapon, ParticleWeapon).emitter != null && cast(player.activeWeapon, ParticleWeapon).emitter.on != false)
+			
+			if (Type.getClass(player.activeWeapon) == ParticleWeapon)
 			{
-				trace("emitter is off");
-				cast(player.activeWeapon, ParticleWeapon).stopEmitter();
+				if (cast(player.activeWeapon, ParticleWeapon).emitter.on)
+				{
+					cast(player.activeWeapon, ParticleWeapon).stopEmitter();
+				}
 			}
 		}
 		if (timer <= 0)

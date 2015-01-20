@@ -36,9 +36,11 @@ class PlayState extends FlxState
 	private var index:Int;
 	
 	private var level1:Level_Group1;
+	private var currentLevel:BaseLevel;
 	private var map:FlxTilemap;
 	
 	private var camera:FlxCamera;
+	private var ScreenCollision:FlxSprite  = new FlxSprite();
 	private var cameraObj:FlxObject;
 	
 	//private var music:Array<FlxSound> = new Array();
@@ -49,9 +51,10 @@ class PlayState extends FlxState
 		Reg.currentState = this;		
 		
 		level1 = new Level_Group1(true, null, this);
-		
+		currentLevel = level1;
+		ScreenCollision.loadGraphic(AssetPaths.ScreenCollision__png);
+		add(ScreenCollision);
 		var tempPlayer;
-		var tempPlayer2;
 		var tempEnemy;
 		for (i in 0...FlxG.gamepads.getActiveGamepads().length)
 		{
@@ -63,11 +66,9 @@ class PlayState extends FlxState
 			trace("add");
 			_gamePads.push(FlxG.gamepads.getActiveGamepads()[i]);
 			tempPlayer = (new Player(240, 160, i, FlxG.gamepads.getActiveGamepads()[i]));
-			tempPlayer2 = (new Player(20, 80, i, FlxG.gamepads.getActiveGamepads()[i]));
 			tempEnemy = (new Enemy(300, 200));
 			add(tempEnemy);
 			Enemies.add(tempEnemy);
-			tempPlayer2.addWeapon(new ParticleWeapon(tempPlayer, 0.25, 500, AssetPaths.cursor__png , AssetPaths.fire_particle__png, 1));
 			tempPlayer.addWeapon(new ParticleWeapon(tempPlayer, 0.25, 500, AssetPaths.cursor__png , AssetPaths.fire_particle__png, 1));
 			add(tempPlayer);
 			//add(tempPlayer2);
@@ -114,10 +115,15 @@ class PlayState extends FlxState
 		tempY = tempY / Players.length;
 		cameraObj.x = tempX;
 		cameraObj.y = tempY;
+		ScreenCollision.x = FlxG.camera.x;
+		ScreenCollision.y = FlxG.camera.y;
 		
 		FlxG.overlap(Reg.bulletGroup, Enemies, receiveDamage);	
+		FlxG.overlap(Reg.bulletGroup, currentLevel.hitTilemaps, collideWall);
+		
 		//Code for level collision
 		FlxG.collide(Players[0], level1.hitTilemaps);
+		FlxG.collide(Players[0], ScreenCollision);
 		
 		super.update();
 		
@@ -125,11 +131,22 @@ class PlayState extends FlxState
 	}
 	public function receiveDamage(obj1:FlxObject,obj2:FlxObject)
 	{
-		var bullet:Bullet = cast(obj1, Bullet);
 		var enemy:Enemy = cast(obj2, Enemy);
-		//var Obj1:Bullet = obj1; Obj1.damage
-		//var Obj2:Enemy = obj2;
-		enemy.receiveDamage(bullet.damage);
+		if (Type.getClass(obj1) == Bullet)
+		{
+			var bullet:Bullet  = cast(obj1, Bullet);
+			enemy.receiveDamage(bullet.damage);
+		}
+		else if (Type.getClass(obj1) == ParticleBullet)
+		{
+			var bullet:ParticleBullet = cast(obj1, ParticleBullet);
+			enemy.receiveDamage(bullet.damage);
+		}
+		
+		obj1.kill();
+	}
+	public function collideWall(obj1:FlxObject, obj2:FlxObject)
+	{
 		obj1.kill();
 	}
 	

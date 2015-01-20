@@ -32,7 +32,7 @@ class Actor extends FlxObject
 	public function receiveDamage(damage:Int)
 	{
 		hp -= damage;
-		trace(damage);
+		trace(hp);
 	}
 	
 }

@@ -1,5 +1,6 @@
 package ;
 
+import flixel.effects.particles.FlxParticle;
 import flixel.FlxSprite;
 import flixel.FlxObject;
 import flixel.util.FlxAngle;
@@ -16,7 +17,9 @@ class Bullet extends FlxSprite
 	
 	public function new(X:Float=0, Y:Float=0, Angle:Float, Speed:Int,Damage:Int, bulletImage:String) 
 	{
-		super(X, Y);
+		super();
+		this.x = X;
+		this.y = Y;
 		//this.velocity = speed;
 		damage = Damage;
 		speed = Speed;

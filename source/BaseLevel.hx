@@ -78,7 +78,7 @@ class BaseLevel extends FlxGroup
 		map.y = ypos;
 		map.scrollFactor.x = scrollX;
 		map.scrollFactor.y = scrollY;
-		map.tileScaleHack = 1.1;
+		map.tileScaleHack = 1.0;
 		
 		
 		if (FlxG.worldBounds.width < map.width)

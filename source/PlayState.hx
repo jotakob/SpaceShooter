@@ -112,6 +112,7 @@ class PlayState extends FlxState
 		
 		FlxG.overlap(Reg.bulletGroup, Enemies, receiveDamage);	
 		FlxG.collide(Reg.bulletGroup, currentLevel.hitTilemaps, collideWall);
+		FlxG.collide(Players, Enemies, enemyCollision);
 		
 		//Code for level collision
 		FlxG.collide(Players, currentLevel.hitTilemaps);
@@ -119,6 +120,11 @@ class PlayState extends FlxState
 		super.update();
 		
 		
+	}
+	
+	public function enemyCollision(obj1:FlxObject, obj2:FlxObject)
+	{
+		cast(obj1, Player).receiveDamage(5);
 	}
 	
 	public function receiveDamage(obj1:FlxObject,obj2:FlxObject)
@@ -137,6 +143,7 @@ class PlayState extends FlxState
 		
 		obj1.kill();
 	}
+	
 	public function collideWall(obj1:FlxObject, obj2:FlxObject)
 	{
 		obj1.kill();

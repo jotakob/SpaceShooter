@@ -9,6 +9,7 @@ import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 import flixel.util.FlxDestroyUtil;
 using flixel.util.FlxSpriteUtil;
+import openfl.Assets;
 
 /**
  * A FlxState which can be used for the game's menu.
@@ -28,12 +29,29 @@ class MenuState extends FlxState
 		_btnPlay.onUp.sound = FlxG.sound.load("assets/sounds/click.ogg");
 		add(_btnPlay);
 		
+		loadAnimations();
 		loadMusic();
 		
 		super.create();
 	}
 	
-	private function loadMusic() {
+	private function loadAnimations()
+	{
+		trace(Assets.getText(AssetPaths.characterAnimations__csv));
+		for (row in Assets.getText(AssetPaths.characterAnimations__csv).split("\r\n"))
+		{
+			var animation:Array<String> = row.split(",");
+			animation.reverse();
+			var title:String = animation.pop();
+			animation.reverse();
+			trace(title);
+			trace(animation);
+			Reg.characterAnimations.set(title, animation);
+		}
+	}
+	
+	private function loadMusic() 
+	{
 		Reg.music[0] = new FlxSound();
 		Reg.music[0].loadStream("assets/music/ambient.ogg", true, false);
 		Reg.music[0].volume = 1;

@@ -28,7 +28,7 @@ class ParticleWeapon extends Weapon
 			emitter.add(particle);
 		}
 		Reg.currentState.add(emitter);
-		emitter.start(false,0.01,0.003,0.46);
+		emitter.start(false,0.01,0.003,0.40);
 		emitter.on = false;
 	
 		

@@ -40,7 +40,8 @@ class Weapon
 	
 	private function shoot()
 	{
-		var tempBullet:Bullet = new Bullet(0, 0, owner.inputmanager.rightAngle, projectileSpeed, damage, bulletImage);
+		trace(owner.inputmanager.lastRightAngle);
+		var tempBullet:Bullet = new Bullet(0, 0, owner.inputmanager.lastRightAngle, projectileSpeed, damage, bulletImage);
 		tempBullet.x = owner.x + 16;
 		tempBullet.y = owner.y + 16;
 		Reg.currentState.add(tempBullet);

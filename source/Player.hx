@@ -20,7 +20,7 @@ class Player extends Actor
 	public var _gamePad:FlxGamepad;
 	private var playerNumber:Int;
 	public var inputmanager:InputManager;
-	public var isShooting = false;
+	public var isAiming = false;
 	public var activeWeapon:Weapon;
 	public var weapons:Array<Weapon> = new Array<Weapon>();
 	
@@ -38,7 +38,7 @@ class Player extends Actor
 		{
 			case 0:
 				myAnimationController = new RobotAnimationController (x, y, this);
-			case 1:
+			//case 1:
 				//myAnimationController = new InfiltratorAnimationController(x, y, this);
 			//case 3:
 				//myAnimationController = new EngineerAnimationController(x, y, this);

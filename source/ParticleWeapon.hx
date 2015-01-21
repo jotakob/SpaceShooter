@@ -36,10 +36,13 @@ class ParticleWeapon extends Weapon
 	
 	private override function shoot()
 	{
-		emitter.setYSpeed((Math.sin(owner.inputmanager.rightAngle * Math.PI / 180) * range) -coneWidth, (Math.sin(owner.inputmanager.rightAngle * Math.PI / 180) * range)+coneWidth);
-		emitter.setXSpeed((Math.cos(owner.inputmanager.rightAngle * Math.PI / 180) * range) -coneWidth, (Math.cos(owner.inputmanager.rightAngle * Math.PI / 180) * range)+coneWidth);
+		trace(owner.inputmanager.lastRightAngle);
+		emitter.setYSpeed((Math.sin(owner.inputmanager.lastRightAngle * Math.PI / 180) * range) -coneWidth, (Math.sin(owner.inputmanager.lastRightAngle * Math.PI / 180) * range)+coneWidth);
+		emitter.setXSpeed((Math.cos(owner.inputmanager.lastRightAngle * Math.PI / 180) * range) -coneWidth, (Math.cos(owner.inputmanager.lastRightAngle * Math.PI / 180) * range)+coneWidth);
 		if (emitter.on == false)
 		{
+			
+			trace("shooting");
 			emitter.on = true;
 			Reg.sounds[2].play(true);
 		}

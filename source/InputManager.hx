@@ -18,7 +18,7 @@ class InputManager extends FlxObject
 	var leftAngle:Float = 0;
 	public var rightAngle:Float = 0;
 	var lastLeftAngle:Float = 0;
-	var lastRightAngle:Float = 0;
+	public var lastRightAngle:Float = 0;
 	var timer:Int = 100;
 	
 	var _LaxisX:Float;
@@ -26,6 +26,8 @@ class InputManager extends FlxObject
 		
 	var _RaxisX:Float;
 	var _RaxisY:Float;
+	
+	var _RTrigger:Float;
 	
 	
 	public function new(TempPlayer:Player) 
@@ -55,6 +57,7 @@ class InputManager extends FlxObject
 		_LaxisX = player._gamePad.getXAxis(XboxButtonID.LEFT_ANALOGUE_X);
 		_LaxisY = player._gamePad.getYAxis(XboxButtonID.LEFT_ANALOGUE_Y);
 		
+		_RTrigger = player._gamePad.getAxis(XboxButtonID.RIGHT_TRIGGER);
 		
 		// XXXX Currently broken! see fix below
 		_RaxisX = player._gamePad.getXAxis(XboxButtonID.RIGHT_ANALOGUE_X);
@@ -95,11 +98,9 @@ class InputManager extends FlxObject
 		{
 			player.moving = false;
 		}
-		if (rightAngle != -4000)
-		{	
-			lastRightAngle = rightAngle;
-			player.isShooting = true;
-			timer = 100;
+		if (_RTrigger > 0.1)
+		{
+			player.isAiming = true;
 			player.activeWeapon.tryShooting();
 		}
 		else
@@ -114,13 +115,25 @@ class InputManager extends FlxObject
 				}
 			}
 		}
+		if (rightAngle != -4000)
+		{	
+			player.isAiming = true;
+			lastRightAngle = rightAngle;
+			timer = 100;
+		}
+		
 		if (timer <= 0)
 		{
-			player.isShooting = false;
+			player.isAiming = false;
 		}
-		if (player.isShooting)
+		if (player.isAiming || rightAngle != -4000)
+		{
 			player.myAnimationController.rotate(lastRightAngle, true);
+		}
 		else
+		{
 			player.myAnimationController.rotate(lastLeftAngle, true);
+			lastRightAngle = leftAngle;
+		}
 	}
 }

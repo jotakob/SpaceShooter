@@ -24,5 +24,5 @@ class Reg
 	
 	public static var sounds:Array<FlxSound> = new Array();
 	
-	public static var characterAnimations:Map<String,Array<String>>;
+	public static var characterAnimations:Map<String,Array<String>> = new Map<String,Array<String>>();
 }

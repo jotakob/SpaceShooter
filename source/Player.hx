@@ -29,7 +29,7 @@ class Player extends Actor
 	{
 		super(X, Y);
 		playerNumber = PlayerNumber;
-		hp = 50;
+		hp = 500;
 		speed = 200;
 		_gamePad = GamePad;
 		myMovementController = (PlayerNumber == null)? null : new MovementController(this.x, this.y, this);

@@ -14,6 +14,7 @@ class AnimationController extends FlxSprite
 	public var botSprite:FlxSprite = new FlxSprite();
 	public var topSprite:FlxSprite = new FlxSprite();
 	private var animationData:Array<String>;
+	private var hitboxOffset:Int;
 	
 	public function new(X:Float=0, Y:Float=0,animationComponent:Actor,AnimationID:String) 
 	{
@@ -53,13 +54,15 @@ class AnimationController extends FlxSprite
 		topSprite.animation.add("lr", topanimation, 5, false);
 		
 		Reg.currentState.add(topSprite);
+		
+		hitboxOffset = Math.floor((32 - _owner.width) /2);
 	}
 	override public function update():Void
 	{
-		topSprite.y = _owner.y;
-		topSprite.x = _owner.x;
-		botSprite.y = _owner.y;
-		botSprite.x = _owner.x;
+		topSprite.y = _owner.y - hitboxOffset;
+		topSprite.x = _owner.x - hitboxOffset;
+		botSprite.y = _owner.y - hitboxOffset;
+		botSprite.x = _owner.x - hitboxOffset;
 		Animate(_owner.moving);
 		super.update();
 		
@@ -100,17 +103,3 @@ class AnimationController extends FlxSprite
 	}
 	
 }
-
-		/*trace(AssetPaths.robot_sheet__png);
-	
-		_owner.drag.x = _owner.drag.y = 1600;
-		
-		botSprite.loadGraphic(AssetPaths.infiltrator_spritesheet__png, true, 32, 32);
-		botSprite.drag.x = _owner.drag.y = 1600;
-		botSprite.animation.add("lr",[1,2,1,0,3,4,3,0], 5, true);
-		Reg.currentState.add(botSprite);
-		
-		topSprite.loadGraphic(AssetPaths.infiltrator_spritesheet__png, true, 32, 32);
-		topSprite.drag.x = topSprite.drag.y = 1600;
-		topSprite.animation.add("lr", [4], 12, false);
-		Reg.currentState.add(topSprite);*/

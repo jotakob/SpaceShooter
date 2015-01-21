@@ -20,7 +20,7 @@ class Actor extends FlxObject
 	public function new(X:Float=0, Y:Float=0) 
 	{
 		super(X, Y);
-		this.width = this.height = 28;
+		this.width = this.height = 24;
 		myStateManager = new AiStateController(this);
 		myMovementController = new MovementController(x, y, this);
 	}

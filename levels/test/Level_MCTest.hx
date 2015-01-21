@@ -41,7 +41,7 @@ class Level_MCTest extends BaseLevel
 		LevelCollisionGroup = new FlxGroup();
 
 		// Generate maps.
-		var properties:Array<Dynamic> = new Array<Dynamic>();
+		var properties:Map<String,String> = new Map<String,String>();
 
 		mapString = ('assets/levels/mapCSV_MCTest_LevelBase.csv').toString();
 		image = ('assets/levels/terrain.png');

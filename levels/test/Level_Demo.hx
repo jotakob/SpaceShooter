@@ -36,7 +36,7 @@ class Level_Demo extends BaseLevel
 		Layer5Group= new FlxGroup();
 
 		// Generate maps.
-		var properties:Array<Dynamic> = new Array<Dynamic>();
+		var properties:Map<String,String> = new Map<String,String>();
 
 		mapString = ('assets/levels/mapCSV_Demo_Floor.csv').toString();
 		image = ('assets/levels/tiles.png');

@@ -528,7 +528,7 @@ for groupIndex = 0,groupCount do
 		
 		fileText = fileText..tab2.."// Generate maps.\n"
 		
-		fileText = fileText..tab2.."var properties:Array<Dynamic> = new Array<Dynamic>();\n\n"
+		fileText = fileText..tab2.."var properties:Map<String,String> = new Map<String,String>();\n\n"
 		--fileText = fileText..tab3.."var tileProperties:Dictionary = new Dictionary;\n\n"
 		
 		minx = 9999999

@@ -49,7 +49,7 @@ class BaseLevel extends FlxGroup
 	// Expects callback function to be callback(newobj:Dynamic,layer:FlxGroup,level:BaseLevel,properties:Array)
 	public function createObjects(onAddCallback:Dynamic = null, parentObject:Dynamic = null):Void { }
 
-	public function addTilemap( mapClass:String, imageClass:Class<Dynamic>, xpos:Float, ypos:Float, tileWidth:UInt, tileHeight:UInt, scrollX:Float, scrollY:Float, hits:Bool, collideIdx:UInt, drawIdx:UInt, properties:Array<Dynamic>, onAddCallback:Dynamic = null ):FlxTilemap
+	public function addTilemap( mapClass:String, imageClass:Class<Dynamic>, xpos:Float, ypos:Float, tileWidth:UInt, tileHeight:UInt, scrollX:Float, scrollY:Float, hits:Bool, collideIdx:UInt, drawIdx:UInt, properties:Map<String,String>, onAddCallback:Dynamic = null ):FlxTilemap
 	{
 		var map:FlxTilemap = new FlxTilemap();
 		
@@ -58,7 +58,6 @@ class BaseLevel extends FlxGroup
 		var rows:Array<String> = mapClass.split("\n");
 		if (rows[rows.length - 1] == "")
 		{
-			trace("popping row...");
 			rows.pop();
 		}
 		var tiles:Array<String> = new Array<String>();
@@ -96,7 +95,7 @@ class BaseLevel extends FlxGroup
 		return map;
 	}
 
-	public function addSpriteToLayer(obj:FlxSprite, type:Dynamic, layer:FlxGroup, xpos:Float, ypos:Float, angle:Float, scrollX:Float, scrollY:Float, flipped:Bool = false, scaleX:Float = 1, scaleY:Float = 1, properties:Array<Dynamic> = null, onAddCallback:Dynamic = null):FlxSprite
+	public function addSpriteToLayer(obj:FlxSprite, type:Dynamic, layer:FlxGroup, xpos:Float, ypos:Float, angle:Float, scrollX:Float, scrollY:Float, flipped:Bool = false, scaleX:Float = 1, scaleY:Float = 1, properties:Map<String,String> = null, onAddCallback:Dynamic = null):FlxSprite
 	{
 		if( obj == null ) {
 			obj = Type.createInstance(type, [xpos,ypos]);
@@ -127,7 +126,7 @@ class BaseLevel extends FlxGroup
 		return obj;
 	}
 
-	public function addTextToLayer(textdata:TextData, layer:FlxGroup, scrollX:Float, scrollY:Float, embed:Bool, properties:Array<Dynamic>, onAddCallback:Dynamic ):FlxText
+	public function addTextToLayer(textdata:TextData, layer:FlxGroup, scrollX:Float, scrollY:Float, embed:Bool, properties:Map<String,String>, onAddCallback:Dynamic ):FlxText
 	{
 		var textobj:FlxText = new FlxText(textdata.x, textdata.y, textdata.width, textdata.text, embed);
 		textobj.setFormat(textdata.fontName, textdata.size, textdata.color, textdata.alignment);
@@ -138,7 +137,7 @@ class BaseLevel extends FlxGroup
 		return textobj;
 	}
 
-	private function callbackNewData(data:Dynamic, onAddCallback:Dynamic, layer:FlxGroup, properties:Array<Dynamic>, scrollX:Float, scrollY:Float, needsReturnData:Bool = false):Dynamic
+	private function callbackNewData(data:Dynamic, onAddCallback:Dynamic, layer:FlxGroup, properties:Map<String,String>, scrollX:Float, scrollY:Float, needsReturnData:Bool = false):Dynamic
 	{
 		if(onAddCallback != null)
 		{
@@ -155,21 +154,22 @@ class BaseLevel extends FlxGroup
 	 * Removes the null value that is at the end of the argument array
 	 * @param	args An array of properties	fromatted like { name:'foo', value:'foo'}
 	*/
-	private function generateProperties( args:Array<Dynamic> ):Array<Dynamic>
+	private function generateProperties( args:Array<Dynamic> ):Map<String,String>
 	{
-		var properties = new Array<Dynamic>();
+		var properties = new Map<String,String>();
 		if (args != null && args.length != 0)
 		{
 			var i:Int = args.length - 1;
 			while(i-- != 0)
 			{
-				properties.push( args[i] );
+				properties.set(Reflect.field(args[i], "name"), Reflect.field(args[i], "value"));
 			}
 		}
+		trace(properties);
 		return properties;
 	}
 
-	public function createLink( objectFrom:Dynamic, target:Dynamic, onAddCallback:Dynamic, properties:Array<Dynamic> ):Void
+	public function createLink( objectFrom:Dynamic, target:Dynamic, onAddCallback:Dynamic, properties:Map<String,String> ):Void
 	{
 		var link:ObjectLink = new ObjectLink( objectFrom, target );
 		callbackNewData(link, onAddCallback, null, properties, objectFrom.scrollFactor.x, objectFrom.scrollFactor.y);

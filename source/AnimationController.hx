@@ -13,12 +13,11 @@ class AnimationController extends FlxSprite
 	public var spriteSheet:String;
 	public var botSprite:FlxSprite = new FlxSprite();
 	public var topSprite:FlxSprite = new FlxSprite();
-	private var animationData:Array<String>;
 	public function new(X:Float=0, Y:Float=0,animationComponent:Actor,AnimationID:String) 
 	{
 		super(X, Y);
-		animationData = Reg.characterAnimations[AnimationID];
-		trace(animationData);
+		
+		botSprite.loadGraphic(Reg.characterAnimations[AnimationID][0]);
 		
 		if (animationComponent != null)		
 		{
@@ -29,24 +28,14 @@ class AnimationController extends FlxSprite
 	
 		_owner.drag.x = _owner.drag.y = 1600;
 		
-		botSprite.loadGraphic("assets/images/" + animationData[0], true, 32, 32);
+		botSprite.loadGraphic(AssetPaths.enemy_spritesheet__png, true, 32, 32);
 		botSprite.drag.x = _owner.drag.y = 1600;
-		var botanimation:Array<Int> = new Array<Int>();
-		for (i in 0...animationData[1].length)
-		{
-			botanimation.push(Std.parseInt(animationData[1].charAt(i)));
-		}
-		botSprite.animation.add("lr",botanimation, 5, true);
+		botSprite.animation.add("lr",[1,2,1,0,3,4,3,0], 5, true);
 		Reg.currentState.add(botSprite);
 		
-		topSprite.loadGraphic("assets/images/" + animationData[0], true, 32, 32);
+		topSprite.loadGraphic(AssetPaths.enemy_spritesheet__png, true, 32, 32);
 		topSprite.drag.x = topSprite.drag.y = 1600;
-		var topanimation:Array<Int> = new Array<Int>();
-		for (i in 0...animationData[2].length)
-		{
-			topanimation.push(Std.parseInt(animationData[2].charAt(i)));
-		}
-		topSprite.animation.add("lr", topanimation, 12, false);
+		topSprite.animation.add("lr", [4,5], 12, false);
 		Reg.currentState.add(topSprite);
 		
 		//CODEBLOCK FOR INFILTRATOR ANIMATION!

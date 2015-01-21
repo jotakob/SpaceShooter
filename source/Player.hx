@@ -32,6 +32,7 @@ class Player extends Actor
 		hp = 500;
 		speed = 200;
 		_gamePad = GamePad;
+		_gamePad.deadZone = 0.3;
 		myMovementController = (PlayerNumber == null)? null : new MovementController(this.x, this.y, this);
 		
 		switch(playerNumber)
@@ -39,7 +40,9 @@ class Player extends Actor
 			case 0:
 				myAnimationController = new AnimationController(x, y, this, "robot");
 			case 1:
-				//myAnimationController =
+				myAnimationController = new AnimationController(x, y, this, "infiltrator");
+			case 2:
+				myAnimationController = new AnimationController(x, y, this, "soldier");
 			default:
 				myAnimationController = new AnimationController(x, y, this, "enemy");
 				trace("using default animations");

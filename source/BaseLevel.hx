@@ -2,6 +2,7 @@
 
 package  ;
 
+import flixel.FlxG;
 import flixel.group.FlxGroup;
 import flixel.FlxSprite;
 import flixel.FlxObject;
@@ -55,8 +56,11 @@ class BaseLevel extends FlxGroup
 		//converting the csv to an array and setting width and height of the tilemap since loading csv's doesn't work
 		var tmpmap:Array<Int> = new Array<Int>();
 		var rows:Array<String> = mapClass.split("\n");
-		if (rows[rows.length - 1] == null)
+		if (rows[rows.length - 1] == "")
+		{
+			trace("popping row...");
 			rows.pop();
+		}
 		var tiles:Array<String> = new Array<String>();
 		map.heightInTiles = rows.length;
 		map.widthInTiles = rows[0].split(",").length;
@@ -74,8 +78,17 @@ class BaseLevel extends FlxGroup
 		map.y = ypos;
 		map.scrollFactor.x = scrollX;
 		map.scrollFactor.y = scrollY;
+		map.tileScaleHack = 1.1;
+		
+		
+		if (FlxG.worldBounds.width < map.width)
+			FlxG.worldBounds.width = map.width;
+		if (FlxG.worldBounds.height < map.height)
+			FlxG.worldBounds.height = map.height;
+		
+		
 		if ( hits )
-			hitTilemaps.add(map);
+			hitTilemaps.add(map);			
 		tilemaps.add(map);
 		//if(onAddCallback != null)
 			//onAddCallback(map, null, properties);
@@ -192,6 +205,6 @@ class BaseLevel extends FlxGroup
 	}
 
 	// List of null classes allows you to spawn levels dynamically from code using ClassReference.
-	private static var level_Group1:Level_Group1;
-	private static var level_Group2:Level_Group2;
+	private static var level_MCTest:Level_MCTest;
+	private static var level_Demo:Level_Demo;
 }

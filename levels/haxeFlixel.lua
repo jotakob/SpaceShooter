@@ -122,21 +122,21 @@ function generateShapes( )
 		
 		textboxText = tab3..linkAssignText.."callbackNewData(new TextData(%xpos%, %ypos%, %width%, %height%, %degrees%, \"%text%\",\"%font%\", %size%, 0x%color%, \"%align%\"), onAddCallback, "..groupname..", "..propertiesString..scrollText..needCallbackText.." ) ;\n"
 		
-		fileText = fileText..tab2.."public function addShapesForLayer"..shapeLayers[i][3].."(onAddCallback:Dynamic = null):Void\n"
-		fileText = fileText..tab2.."{\n"
-		fileText = fileText..tab3.."var obj:Dynamic;\n\n"
+		fileText = fileText..tab1.."public function addShapesForLayer"..shapeLayers[i][3].."(onAddCallback:Dynamic = null):Void\n"
+		fileText = fileText..tab1.."{\n"
+		fileText = fileText..tab2.."var obj:Dynamic;\n\n"
 		
-		boxText = tab3.."obj = new BoxData(%xpos%, %ypos%, %degrees%, %width%, %height%, "..groupname.." );\n"
-		boxText = boxText..tab3.."shapes.push(obj);\n"
-		boxText = boxText..tab3..linkAssignText.."callbackNewData( obj, onAddCallback, "..groupname..", "..propertiesString..scrollText..needCallbackText.." );\n"
+		boxText = tab2.."obj = new BoxData(%xpos%, %ypos%, %degrees%, %width%, %height%, "..groupname.." );\n"
+		boxText = boxText..tab2.."shapes.push(obj);\n"
+		boxText = boxText..tab2..linkAssignText.."callbackNewData( obj, onAddCallback, "..groupname..", "..propertiesString..scrollText..needCallbackText.." );\n"
 
-		circleText = tab3.."obj = new CircleData(%xpos%, %ypos%, %radius%, "..groupname.." );\n"
-		circleText = circleText..tab3.."shapes.push(obj);\n"
-		circleText = circleText..tab3..linkAssignText.."callbackNewData( obj, onAddCallback, "..groupname..", "..propertiesString..scrollText..needCallbackText..");\n"
+		circleText = tab2.."obj = new CircleData(%xpos%, %ypos%, %radius%, "..groupname.." );\n"
+		circleText = circleText..tab2.."shapes.push(obj);\n"
+		circleText = circleText..tab2..linkAssignText.."callbackNewData( obj, onAddCallback, "..groupname..", "..propertiesString..scrollText..needCallbackText..");\n"
 
 		shapeText = as3.tolua(DAME.CreateTextForShapes(shapeLayers[i][2], circleText, boxText, textboxText ))
 		fileText = fileText..shapeText
-		fileText = fileText..tab2.."}\n\n"
+		fileText = fileText..tab1.."}\n\n"
 		
 		if string.find(shapeText, "BoxData") ~= nil then
 			containsBoxData = true
@@ -512,7 +512,7 @@ for groupIndex = 0,groupCount do
 		if # shapeLayers > 0 then
 			fileText = fileText..tab2.."//Shapes\n"
 			for i,v in ipairs(shapeLayers) do
-				fileText = fileText..tab1..shapeLayers[i][3].."Group= new FlxGroup();\n"
+				fileText = fileText..tab2..shapeLayers[i][3].."Group= new FlxGroup();\n"
 			end
 			fileText = fileText.."\n"
 		end
@@ -659,7 +659,7 @@ for groupIndex = 0,groupCount do
 		fileText = fileText..tab1.."}\n"
 		
 		fileText = fileText.."\n"
-		fileText = fileText..tab1.."}\n"	-- end class
+		fileText = fileText.."}\n"	-- end class
 		--end package Base
 		
 		
@@ -796,7 +796,7 @@ if exportOnlyCSV == false then
 		textfile = textfile..tab2.."color = Color;\n"
 		textfile = textfile..tab2.."alignment = Alignment;\n"
 		textfile = textfile..tab1.."}\n"
-		textfile = textfile..tab1.."}\n"
+		textfile = textfile.."}\n"
 		
 		DAME.WriteFile(hxDir.."/TextData.hx", textfile )
 	--end
@@ -828,7 +828,7 @@ if exportOnlyCSV == false then
 		textfile = textfile..tab2.."childSprite = null;\n"
 		textfile = textfile..tab2.."nodes = null;\n"
 		textfile = textfile..tab1.."}\n"
-		textfile = textfile..tab1.."}\n"
+		textfile = textfile.."}\n"
 		
 		DAME.WriteFile(hxDir.."/PathData.hx", textfile )
 		
@@ -852,7 +852,7 @@ if exportOnlyCSV == false then
 		textfile = textfile..tab1.."{\n"
 		textfile = textfile..tab2.."group = null;\n"
 		textfile = textfile..tab1.."}\n"
-		textfile = textfile..tab1.."}\n"
+		textfile = textfile.."}\n"
 		
 		DAME.WriteFile(hxDir.."/ShapeData.hx", textfile )
 	end
@@ -872,7 +872,7 @@ if exportOnlyCSV == false then
 		textfile = textfile..tab2.."width = Std.int(Width); //rounding Float to Int\n"
 		textfile = textfile..tab2.."height = Std.int(Height); //rounding Float to Int\n"
 		textfile = textfile..tab1.."}\n"
-		textfile = textfile..tab1.."}\n"
+		textfile = textfile.."}\n"
 		
 		DAME.WriteFile(hxDir.."/BoxData.hx", textfile )
 	end
@@ -888,7 +888,7 @@ if exportOnlyCSV == false then
 		textfile = textfile..tab2.."super(X, Y, Group);\n"
 		textfile = textfile..tab2.."radius = Radius;\n"
 		textfile = textfile..tab1.."}\n"
-		textfile = textfile..tab1.."}\n"
+		textfile = textfile.."}\n"
 		
 		DAME.WriteFile(hxDir.."/CircleData.hx", textfile )
 	end

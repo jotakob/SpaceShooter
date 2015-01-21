@@ -35,7 +35,6 @@ class PlayState extends FlxState
 	
 	private var index:Int;
 	
-	private var level1:Level_Group1;
 	private var currentLevel:BaseLevel;
 	
 	private var camera:FlxCamera;
@@ -48,8 +47,8 @@ class PlayState extends FlxState
 	{
 		Reg.currentState = this;		
 		
-		level1 = new Level_Group1(true, null, this);
-		currentLevel = level1;
+		currentLevel = new Level_Demo(true, null, this);
+		
 		var tempPlayer;
 		var tempEnemy;
 		for (i in 0...FlxG.gamepads.getActiveGamepads().length)
@@ -61,14 +60,14 @@ class PlayState extends FlxState
 			}
 			trace("add");
 			_gamePads.push(FlxG.gamepads.getActiveGamepads()[i]);
-			tempPlayer = (new Player(240, 160, i, FlxG.gamepads.getActiveGamepads()[i]));
+			tempPlayer = (new Player(1700, 820, i, FlxG.gamepads.getActiveGamepads()[i]));
 			tempEnemy = (new Enemy(300, 200));
 			add(tempEnemy);
 			Enemies.add(tempEnemy);
 			tempPlayer.addWeapon(new ParticleWeapon(tempPlayer, 0.25, 500, AssetPaths.cursor__png , AssetPaths.fire_particle__png, 1));
-			add(tempPlayer);
 			Players.add(tempPlayer);
 		}
+		add(Players);
 		cameraObj = new FlxObject();
 		add(cameraObj);
 		camera = new FlxCamera(0, 0, 0, 0, 3);
@@ -121,6 +120,7 @@ class PlayState extends FlxState
 		
 		
 	}
+	
 	public function receiveDamage(obj1:FlxObject,obj2:FlxObject)
 	{
 		var enemy:Enemy = cast(obj2, Enemy);
@@ -141,6 +141,7 @@ class PlayState extends FlxState
 	{
 		obj1.kill();
 	}
+	
 	
 }
 

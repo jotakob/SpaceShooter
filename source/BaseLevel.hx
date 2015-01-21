@@ -128,7 +128,7 @@ class BaseLevel extends FlxGroup
 
 	public function addTextToLayer(textdata:TextData, layer:FlxGroup, scrollX:Float, scrollY:Float, embed:Bool, properties:Map<String,String>, onAddCallback:Dynamic ):FlxText
 	{
-		var textobj:FlxText = new FlxText(textdata.x, textdata.y, textdata.width, textdata.text, embed);
+		var textobj:FlxText = new FlxText(textdata.x, textdata.y, textdata.width, textdata.text, 8, embed);
 		textobj.setFormat(textdata.fontName, textdata.size, textdata.color, textdata.alignment);
 		addSpriteToLayer(textobj, FlxText, layer , 0, 0, textdata.angle, scrollX, scrollY, false, 1, 1, properties, onAddCallback );
 		textobj.height = textdata.height;

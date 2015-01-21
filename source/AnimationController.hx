@@ -10,6 +10,7 @@ import flixel.FlxObject;
 class AnimationController extends FlxSprite
 {
 	private var _owner:Actor;
+	
 	public var spriteSheet:String;
 	public var botSprite:FlxSprite = new FlxSprite();
 	public var topSprite:FlxSprite = new FlxSprite();

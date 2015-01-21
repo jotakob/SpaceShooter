@@ -10,7 +10,6 @@ import flixel.FlxObject;
 class AnimationController extends FlxSprite
 {
 	private var _owner:Actor;
-	
 	public var spriteSheet:String;
 	public var botSprite:FlxSprite = new FlxSprite();
 	public var topSprite:FlxSprite = new FlxSprite();
@@ -27,18 +26,20 @@ class AnimationController extends FlxSprite
 		}
 		else
 		trace("animationComponent is null");
-	
-		_owner.drag.x = _owner.drag.y = 1600;
 		
+		_owner.drag.x = _owner.drag.y = 1600;
+		trace(animationData[0]);
 		botSprite.loadGraphic("assets/images/" + animationData[0], true, 32, 32);
-		botSprite.drag.x = _owner.drag.y = 1600;
+		botSprite.drag.x = botSprite.drag.y = 1600;
+		
 		var botanimation:Array<Int> = new Array<Int>();
 		for (i in 0...animationData[1].length)
 		{
 			botanimation.push(Std.parseInt(animationData[1].charAt(i)));
 		}
-		botSprite.animation.add("lr",botanimation, 5, true);
 		Reg.currentState.add(botSprite);
+		trace(botanimation);
+		botSprite.animation.add("lr",botanimation, 5, true);
 		
 		topSprite.loadGraphic("assets/images/" + animationData[0], true, 32, 32);
 		topSprite.drag.x = topSprite.drag.y = 1600;
@@ -47,24 +48,11 @@ class AnimationController extends FlxSprite
 		{
 			topanimation.push(Std.parseInt(animationData[2].charAt(i)));
 		}
-		topSprite.animation.add("lr", topanimation, 12, false);
+		
+		topSprite.animation.add("lr", topanimation, 5, false);
+		
 		Reg.currentState.add(topSprite);
 		
-		//CODEBLOCK FOR INFILTRATOR ANIMATION!
-		
-		/*trace(AssetPaths.robot_sheet__png);
-	
-		_owner.drag.x = _owner.drag.y = 1600;
-		
-		botSprite.loadGraphic(AssetPaths.infiltrator_spritesheet__png, true, 32, 32);
-		botSprite.drag.x = _owner.drag.y = 1600;
-		botSprite.animation.add("lr",[1,2,1,0,3,4,3,0], 5, true);
-		Reg.currentState.add(botSprite);
-		
-		topSprite.loadGraphic(AssetPaths.infiltrator_spritesheet__png, true, 32, 32);
-		topSprite.drag.x = topSprite.drag.y = 1600;
-		topSprite.animation.add("lr", [4], 12, false);
-		Reg.currentState.add(topSprite);*/
 		
 		
 	}
@@ -114,3 +102,17 @@ class AnimationController extends FlxSprite
 	}
 	
 }
+
+		/*trace(AssetPaths.robot_sheet__png);
+	
+		_owner.drag.x = _owner.drag.y = 1600;
+		
+		botSprite.loadGraphic(AssetPaths.infiltrator_spritesheet__png, true, 32, 32);
+		botSprite.drag.x = _owner.drag.y = 1600;
+		botSprite.animation.add("lr",[1,2,1,0,3,4,3,0], 5, true);
+		Reg.currentState.add(botSprite);
+		
+		topSprite.loadGraphic(AssetPaths.infiltrator_spritesheet__png, true, 32, 32);
+		topSprite.drag.x = topSprite.drag.y = 1600;
+		topSprite.animation.add("lr", [4], 12, false);
+		Reg.currentState.add(topSprite);*/

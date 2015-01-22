@@ -50,7 +50,7 @@ class PlayState extends FlxState
 		
 		currentLevel = new Level_Demo(true, null, this);
 		Reg.currentLevel = currentLevel;
-		currentLevel.add(new Pickup(1700, 800, 10, 10, currentLevel));
+		add(new Pickup(500, 0, 10, 10, currentLevel));
 		
 		var tempPlayer;
 		var tempEnemy;

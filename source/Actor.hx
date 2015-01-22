@@ -30,6 +30,7 @@ class Actor extends FlxObject
 		if (hp < 1)
 		{
 			this.kill();
+			this.myAnimationController.destroy();
 		}
 		
 		super.update();

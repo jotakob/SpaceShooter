@@ -128,7 +128,7 @@ class PlayState extends FlxState
 		cameraObj.x = tempX;
 		cameraObj.y = tempY;
 		
-		FlxG.overlap(Reg.bulletGroup, Enemies, receiveDamage);	
+		FlxG.overlap(Reg.bulletGroup, Enemies, receiveDamage);
 		FlxG.collide(Reg.bulletGroup, currentLevel.hitTilemaps, collideWall);
 		FlxG.collide(Players, Enemies, enemyCollision);
 		FlxG.collide(Enemies, currentLevel.hitTilemaps);

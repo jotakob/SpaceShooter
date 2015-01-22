@@ -42,21 +42,21 @@ class Level_Demo extends BaseLevel
 		properties = generateProperties( [null] );
 		layerFloor = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, false, 128, 1, properties, onAddCallback );
 
-		mapString = ('assets/levels/mapCSV_Demo_Walls2.csv').toString();
-		image = ('assets/levels/tiles.png');
-		properties = generateProperties( [null] );
-		layerWalls2 = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, true, 128, 1, properties, onAddCallback );
-
 		mapString = ('assets/levels/mapCSV_Demo_Walls.csv').toString();
 		image = ('assets/levels/tiles.png');
 		properties = generateProperties( [null] );
-		layerWalls = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, true, 128, 1, properties, onAddCallback );
+		layerWalls = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, false, 128, 1, properties, onAddCallback );
+
+		mapString = ('assets/levels/mapCSV_Demo_Walls2.csv').toString();
+		image = ('assets/levels/tiles.png');
+		properties = generateProperties( [null] );
+		layerWalls2 = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, false, 128, 1, properties, onAddCallback );
 
 
 		//Add layers to the master group in correct order.
 		masterLayer.add(layerFloor);
-		masterLayer.add(layerWalls2);
 		masterLayer.add(layerWalls);
+		masterLayer.add(layerWalls2);
 		masterLayer.add(ObjectsGroup);
 
 		if ( addToStage )
@@ -73,12 +73,12 @@ class Level_Demo extends BaseLevel
 
 	override public function createObjects(onAddCallback:Dynamic = null, parentObject:Dynamic = null):Void
 	{
-		addShapesForLayerObjects(onAddCallback);
-		generateObjectLinks(onAddCallback);
 		if ( parentObject != null )
 			parentObject.add(masterLayer);
 		else
 			FlxG.state.add(masterLayer);
+		addShapesForLayerObjects(onAddCallback);
+		generateObjectLinks(onAddCallback);
 	}
 
 	public function addShapesForLayerObjects(onAddCallback:Dynamic = null):Void
@@ -87,19 +87,73 @@ class Level_Demo extends BaseLevel
 
 		obj = new BoxData(1974.040, 411.930, 0.000, 28.310, 31.830, ObjectsGroup );
 		shapes.push(obj);
-		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"settiles", value:"47,13,0|45,17,130" }, { name:"resettime", value:1000 }, { name:"repeatable", value:true }, null] ), 1, 1 );
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"settiles", value:"47,12,0|47,13,0|47,14,0" }, { name:"resettime", value:1500 }, { name:"repeatable", value:true }, null] ), 1, 1 );
 		obj = new BoxData(1694.980, 672.000, 0.000, 66.320, 21.700, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"trigger" }, { name:"text", value:"This doesn't seem right at all..." }, { name:"textsource", value:"Soldier" }, null] ), 1, 1 );
 		obj = new BoxData(1702.000, 788.000, 0.000, 52.040, 39.880, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"warpexit" }, { name:"id", value:0 }, null] ), 1, 1 );
-		obj = new BoxData(1460.000, 474.000, 0.000, 23.580, 31.830, ObjectsGroup );
-		shapes.push(obj);
-		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"settiles", value:"47,13,0|45,17,130" }, { name:"triggeronce", value:false }, { name:"resettimer", value:1000 }, null] ), 1, 1 );
 		obj = new BoxData(1793.000, 865.000, 0.000, 19.000, 19.000, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"pickup" }, { name:"class", value:"robot" }, null] ), 1, 1 );
+		obj = new BoxData(1461.000, 475.000, 0.000, 28.310, 31.830, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"settiles", value:"47,12,0|47,13,0|47,14,0" }, { name:"resettime", value:1500 }, { name:"repeatable", value:true }, null] ), 1, 1 );
+		obj = new BoxData(1919.000, 394.000, 0.000, 21.154, 21.154, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(1648.000, 389.000, 0.207, 21.154, 21.154, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(1189.000, 464.000, 270.092, 21.154, 21.154, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(1048.000, 347.000, 63.106, 21.154, 21.154, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(1008.000, 469.000, 273.111, 21.154, 21.154, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(1015.000, 587.000, 0.000, 21.154, 21.154, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(1028.000, 687.000, 312.607, 21.154, 21.154, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(1155.000, 686.000, 177.713, 21.154, 21.154, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(1127.000, 592.000, 89.500, 21.154, 21.154, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(1115.000, 456.000, 180.357, 21.154, 21.154, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(1164.000, 333.000, 90.861, 21.154, 21.154, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(994.000, 279.000, 0.000, 21.154, 21.154, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(1192.000, 595.000, 324.196, 21.154, 21.154, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(1125.000, 293.000, 24.291, 21.154, 21.154, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(1056.000, 442.000, 0.000, 21.154, 21.154, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(1085.000, 556.115, 24.500, 19.038, 19.038, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(1172.000, 403.000, 245.510, 21.154, 21.154, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(1217.000, 373.000, 291.205, 21.154, 21.154, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
 	}
 
 	public function generateObjectLinks(onAddCallback:Dynamic = null):Void

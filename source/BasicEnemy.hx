@@ -6,9 +6,11 @@ import haxe.Timer;
  */
 class BasicEnemy extends State
 {
-	private var timer:Int = 80;
-	private var angle:Float = 0;
-	public function new() { }
+	private var timer:Int = Std.random(20) + 60;
+	private var angle:Float;
+	public function new() 
+	{ 
+	}
 	public override function Enter(owner:Actor)
 	
 	{
@@ -16,6 +18,8 @@ class BasicEnemy extends State
 	}
 	public override function Execute(owner:Actor)
 	{
+		
+		angle = owner.angle;
 		timer--;
 		if (timer <= 0)
 		
@@ -24,7 +28,7 @@ class BasicEnemy extends State
 			timer = 80;
 		}
 		
-		
+		owner.angle = angle;
 		owner.myMovementController.Move(owner.speed, angle);
 		owner.myAnimationController.rotate(angle, true);
 		owner.myAnimationController.rotate(angle, false);

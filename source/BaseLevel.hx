@@ -11,6 +11,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxPoint;
 import flixel.tile.FlxTilemap;
 import flash.utils.Dictionary;
+import flixel.util.FlxRect;
 import openfl.Assets;
 
 class BaseLevel extends FlxGroup
@@ -36,6 +37,7 @@ class BaseLevel extends FlxGroup
 	
 	public var triggers:FlxTypedGroup<Trigger> = new FlxTypedGroup<Trigger>();
 	public var buttons:FlxTypedGroup<Button> = new FlxTypedGroup<Button>();
+	public var spawnPoint:FlxRect = new FlxRect();
 	
 	public var layerWalls2:FlxTilemap;
 	
@@ -166,16 +168,25 @@ class BaseLevel extends FlxGroup
 			case "button":
 				newobj = new Button(data.x, data.y, data.width, data.height, this);
 				buttons.add(newobj);
+				triggers.add(newobj);
 			case "trigger":
 				newobj = new Trigger(data.x, data.y, data.width, data.height, this);
+				triggers.add(newobj);
 			case "pickup":
 				newobj = new Pickup(data.x, data.y, data.width, data.height, this);
+				triggers.add(newobj);
+			case "enemy":
+				newobj = new Enemy(data.x, data.y);
+				cast(Reg.currentState, PlayState).Enemies.add(cast(newobj, Enemy));
+				//masterLayer.add(newobj);
+			case "warpexit":
+				newobj = spawnPoint = new FlxRect(data.x, data.y, data.width, data.height);
 			default:
 				newobj = new GameObject(data.x, data.y, data.width, data.height, this);
+				triggers.add(newobj);
 		}
-		
-		triggers.add(newobj);
 		newobj.angle = data.angle;
+		
 		if (properties["settiles"] != null)
 		{
 			var settiles = new Array<Array<Int>>();
@@ -189,7 +200,6 @@ class BaseLevel extends FlxGroup
 				newTileInt.push(this.layerWalls2.getTile(newTileInt[0], newTileInt[1]));
 				settiles.push(newTileInt);
 			}
-			trace(settiles);
 			newobj.tilesToSet = settiles;
 		}
 		if (properties["repeatable"] == true)

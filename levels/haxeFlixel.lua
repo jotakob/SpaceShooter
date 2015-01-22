@@ -609,6 +609,10 @@ for groupIndex = 0,groupCount do
 		
 		fileText = fileText..tab1.."override public function createObjects(onAddCallback:Dynamic = null, parentObject:Dynamic = null):Void\n"
 		fileText = fileText..tab1.."{\n"
+		fileText = fileText..tab2.."if ( parentObject != null )\n"
+		fileText = fileText..tab3.."parentObject.add(masterLayer);\n"
+		fileText = fileText..tab2.."else\n"
+		fileText = fileText..tab3.."FlxG.state.add(masterLayer);\n"
 		-- Must add the paths before the sprites as the sprites index into the paths array.
 		for i,v in ipairs(pathLayers) do
 			fileText = fileText..tab2.."addPathsForLayer"..pathLayers[i][3].."(onAddCallback);\n"
@@ -618,10 +622,6 @@ for groupIndex = 0,groupCount do
 		end
 		fileText = fileText..stageAddText
 		fileText = fileText..tab2.."generateObjectLinks(onAddCallback);\n"
-		fileText = fileText..tab2.."if ( parentObject != null )\n"
-		fileText = fileText..tab3.."parentObject.add(masterLayer);\n"
-		fileText = fileText..tab2.."else\n"
-		fileText = fileText..tab3.."FlxG.state.add(masterLayer);\n"
 		fileText = fileText..tab1.."}\n\n"
 		
 		-- Create the paths first so that sprites can reference them if any are attached.

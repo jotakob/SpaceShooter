@@ -40,7 +40,7 @@ class AnimationController extends FlxSprite
 		}
 		Reg.currentState.add(botSprite);
 		trace(botanimation);
-		botSprite.animation.add("lr",botanimation, 5, true);
+		botSprite.animation.add("lr",botanimation, 9, true);
 		
 		topSprite.loadGraphic("assets/images/sprites/" + animationData[0], true, 32, 32);
 		topSprite.drag.x = topSprite.drag.y = 1600;
@@ -51,7 +51,7 @@ class AnimationController extends FlxSprite
 			topanimation.push(Std.parseInt(animationData[2].charAt(i)));
 		}
 		
-		topSprite.animation.add("lr", topanimation, 5, false);
+		topSprite.animation.add("lr", topanimation, 6, false);
 		
 		Reg.currentState.add(topSprite);
 		

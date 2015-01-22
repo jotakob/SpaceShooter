@@ -28,7 +28,7 @@ class PlayState extends FlxState
 	private var _btnPlay:FlxButton;
 	private var _gamePads:Array<FlxGamepad> = new Array();
 	private var Players:FlxGroup = new FlxGroup();
-	private var Enemies:FlxGroup = new FlxGroup();
+	public var Enemies:FlxGroup = new FlxGroup();
 	
 	private var shootDirX:Float = 0;
 	private var shootDirY:Float = 0;
@@ -49,7 +49,7 @@ class PlayState extends FlxState
 		Reg.currentState = this;
 		
 		Reg.currentLevel = currentLevel = new Level_Demo(true, null, this);
-		currentLevel.add(new Pickup(1700, 800, 10, 10, currentLevel));
+		//currentLevel.add(new Pickup(1700, 800, 10, 10, currentLevel));
 		
 		var tempPlayer;
 		var tempEnemy;
@@ -63,13 +63,18 @@ class PlayState extends FlxState
 			trace("add");
 			_gamePads.push(FlxG.gamepads.getActiveGamepads()[i]);
 			tempPlayer = (new Player(4000, 1600, i, FlxG.gamepads.getActiveGamepads()[i]));
-			tempEnemy = (new Enemy(300, 200));
-			add(tempEnemy);
-			Enemies.add(tempEnemy);
+			tempPlayer.x = Std.random(Math.floor(currentLevel.spawnPoint.width - tempPlayer.width)) + currentLevel.spawnPoint.x;
+			tempPlayer.y = Std.random(Math.floor(currentLevel.spawnPoint.height - tempPlayer.height)) + currentLevel.spawnPoint.y;
 			tempPlayer.addWeapon(new ParticleWeapon(tempPlayer, 0.25, 500, AssetPaths.bullet__png , AssetPaths.fire_particle__png, 1));
 			Players.add(tempPlayer);
 		}
 		add(Players);
+		
+		tempEnemy = (new Enemy(300, 200));
+		Enemies.add(tempEnemy);
+		trace(Enemies.members);
+		add(Enemies);
+		
 		cameraObj = new FlxObject();
 		add(cameraObj);
 		camera = new FlxCamera(0, 0, 0, 0, 3);
@@ -115,6 +120,8 @@ class PlayState extends FlxState
 		FlxG.overlap(Reg.bulletGroup, Enemies, receiveDamage);	
 		FlxG.collide(Reg.bulletGroup, currentLevel.hitTilemaps, collideWall);
 		FlxG.collide(Players, Enemies, enemyCollision);
+		FlxG.collide(Enemies, currentLevel.hitTilemaps);
+		FlxG.collide(Enemies, Enemies);
 		
 		//Code for level collision
 		FlxG.collide(Players, currentLevel.hitTilemaps);

@@ -14,22 +14,22 @@ using 	flixel.util.FlxSpriteUtil;
  * ...
  * @author fgnbmghfsfghghjgffdsas
  */
-class HUD extends FlxSprite
+class HUD extends FlxGroup
 {
 	private var sprBack:FlxSprite;
-	private var players:FlxGroup;
-	private var playerHealth:Array<Int>;
-	private var healthbars:Array<FlxSprite>;
+	private var healthbars:Array<FlxSprite> = new Array<FlxSprite>();
 	
-	public function new(Players:FlxGroup) 
+	public function new() 
 	{
 		super();
-		players = Players;
+		Reg.currentState.add(this);
 		sprBack = new FlxSprite().makeGraphic(FlxG.width, 50, FlxColor.BLACK);
 		sprBack.y = FlxG.height - sprBack.height;
 		sprBack.scrollFactor.set();
-		//healthbars[0] = new FlxSprite().makeGraphic(players[0].
-        Reg.currentState.add(sprBack);
+		healthbars[0] = new FlxSprite().makeGraphic(cast(Reg.currentState, PlayState).Players.members[0].hp, 20, FlxColor.RED);
+		healthbars[0].scrollFactor.set();
+        add(sprBack);
+		add(healthbars[0]);
     }
 
     public function updateHUD():Void

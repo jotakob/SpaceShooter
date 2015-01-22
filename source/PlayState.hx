@@ -16,6 +16,7 @@ import flixel.input.gamepad.XboxButtonID;
 import flixel.group.FlxGroup;
 import openfl.utils.Object;
 import flixel.FlxCamera;
+import flixel.group.FlxTypedGroup;
 
 import openfl.Assets;
 import flixel.tile.FlxTilemap;
@@ -27,7 +28,7 @@ class PlayState extends FlxState
 {
 	private var _btnPlay:FlxButton;
 	private var _gamePads:Array<FlxGamepad> = new Array();
-	public var Players:FlxGroup = new FlxGroup();
+	public var Players:FlxTypedGroup<Player> = new FlxTypedGroup<Player>();
 	private var Enemies:FlxGroup = new FlxGroup();
 	
 	private var shootDirX:Float = 0;
@@ -85,7 +86,7 @@ class PlayState extends FlxState
 		
 		//Reg.music[0].play();
 		Reg.music[1].play();
-		hud = new HUD(Players);
+		hud = new HUD();
 		
 		trace(hud);
 		add(hud);

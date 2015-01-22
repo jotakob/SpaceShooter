@@ -2,7 +2,7 @@
 <project>
   <version>3.1.6</version>
   <bgColor>0x777777</bgColor>
-  <viewPos x="-1338.069344755192" y="-229.36997766918898"/>
+  <viewPos x="-1331.8612441965329" y="-316.87100225935285"/>
   <firstLayersTop>false</firstLayersTop>
   <spriteEntries currentId="1"/>
   <layers>
@@ -207,8 +207,7 @@
           <properties>
             <type typeof="Custom" name="type" value="button" hidden="false" typeName="type" customTypeIdx="0"/>
             <type typeof="String" name="settiles" value="47,13,0|45,17,130" hidden="false"/>
-            <type typeof="Boolean" name="triggeronce" value="false" hidden="false"/>
-            <type typeof="Int" name="resettimer" value="1000" hidden="false"/>
+            <type typeof="Int" name="resettime" value="1000" hidden="false"/>
             <type typeof="Boolean" name="repeatable" value="true" hidden="false"/>
           </properties>
         </shape>

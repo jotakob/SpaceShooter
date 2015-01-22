@@ -2,7 +2,7 @@
 <project>
   <version>3.1.6</version>
   <bgColor>0x777777</bgColor>
-  <viewPos x="-1418.1139279403753" y="-333.64165458175705"/>
+  <viewPos x="-1331.8612441965329" y="-316.87100225935285"/>
   <firstLayersTop>false</firstLayersTop>
   <spriteEntries currentId="1"/>
   <layers>
@@ -207,8 +207,8 @@
           <properties>
             <type typeof="Custom" name="type" value="button" hidden="false" typeName="type" customTypeIdx="0"/>
             <type typeof="String" name="settiles" value="47,13,0|45,17,130" hidden="false"/>
-            <type typeof="Boolean" name="triggeronce" value="false" hidden="false"/>
-            <type typeof="Int" name="resettimer" value="1000" hidden="false"/>
+            <type typeof="Int" name="resettime" value="1000" hidden="false"/>
+            <type typeof="Boolean" name="repeatable" value="true" hidden="false"/>
           </properties>
         </shape>
         <shape guid="9ABC0088-9AE0-C036-B6B1-22CAE8D8C503" type="square" x="1694.98" y="672" Z="0" angle="0" width="66.32" height="21.70" scaleX="1.326" scaleY="0.434">
@@ -230,6 +230,12 @@
             <type typeof="String" name="settiles" value="47,13,0|45,17,130" hidden="false"/>
             <type typeof="Boolean" name="triggeronce" value="false" hidden="false"/>
             <type typeof="Int" name="resettimer" value="1000" hidden="false"/>
+          </properties>
+        </shape>
+        <shape guid="FA7F7FBD-9590-F02B-FB33-33C40E26DA7F" type="square" x="1793" y="865" Z="0" angle="0" width="19.00" height="19.00" scaleX="0.380" scaleY="0.380">
+          <properties>
+            <type typeof="Custom" name="type" value="pickup" hidden="false" typeName="type" customTypeIdx="0"/>
+            <type typeof="String" name="class" value="robot" hidden="false"/>
           </properties>
         </shape>
       </shapelayer>
@@ -384,7 +390,7 @@
     <setting name="CSVDir">test</setting>
     <setting name="HxDir">test</setting>
   </exporter>
-  <projectExporter name="C:\Users\Jakob\Documents\GitHub\SpaceShooter\levels\haxeFlixel.lua" spritepos="Top Left" rotatedSpritePos="false" relativePaths="true" useProjectExporterOnly="true">
+  <projectExporter name="C:\Users\Jakob\Documents\github\SpaceShooter\levels\haxeFlixel.lua" spritepos="Top Left" rotatedSpritePos="false" relativePaths="true" useProjectExporterOnly="true">
     <setting name="ExportOnlyCSV">false</setting>
     <setting name="Imports"/>
     <setting name="TileMapClass">FlxTilemap</setting>
@@ -404,6 +410,7 @@
       <item label="trigger" exported=""/>
       <item label="warp" exported=""/>
       <item label="warpexit" exported=""/>
+      <item label="pickup" exported=""/>
     </type>
   </customPropertyTypes>
   <guides>

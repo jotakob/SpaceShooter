@@ -10,7 +10,7 @@ class GameObject extends FlxObject
 {
 	public var repeatable:Bool = false;
 	public var wasTriggered:Bool = false;
-	public var resetTime = 0;
+	public var resetTime = 1;
 	public var tilesToSet:Array<Array<Int>>;
 	private var level:BaseLevel;
 

@@ -41,7 +41,7 @@ class Level_MCTest extends BaseLevel
 		LevelCollisionGroup = new FlxGroup();
 
 		// Generate maps.
-		var properties:Map<String,String> = new Map<String,String>();
+		var properties:Map<String,Dynamic> = new Map<String,Dynamic>();
 
 		mapString = ('assets/levels/mapCSV_MCTest_LevelBase.csv').toString();
 		image = ('assets/levels/terrain.png');
@@ -55,10 +55,10 @@ class Level_MCTest extends BaseLevel
 
 
 		//Add layers to the master group in correct order.
-	masterLayer.add(layerLevelBase);
-	masterLayer.add(LevelCollisionGroup);
-	masterLayer.add(SpritesGroup);
-	masterLayer.add(layerCollisionMap);
+		masterLayer.add(layerLevelBase);
+		masterLayer.add(LevelCollisionGroup);
+		masterLayer.add(SpritesGroup);
+		masterLayer.add(layerCollisionMap);
 
 		if ( addToStage )
 			createObjects(onAddCallback, parentObject);

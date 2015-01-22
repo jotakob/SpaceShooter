@@ -421,7 +421,7 @@ for groupIndex = 0,groupCount do
 				-- For maps just generate the Embeds needed at the top of the class.
 				--fileText = fileText..tab2.."[Embed(source=\""..as3.tolua(DAME.GetRelativePath(hxDir, csvDir.."/"..mapFileName)).."\", mimeType=\"application/octet-stream\")] public var CSV_"..layerName..":Class;\n"
 				--fileText = fileText..tab2.."[Embed(source=\""..as3.tolua(DAME.GetRelativePath(compiledir, layer.imageFile)).."\")] public var Img_"..layerName..":Class;\n"
-				masterLayerAddText = masterLayerAddText..tab1.."masterLayer.add(layer"..layerName..");\n"
+				masterLayerAddText = masterLayerAddText..tab2.."masterLayer.add(layer"..layerName..");\n"
 			end
 
 		elseif exportOnlyCSV == false then
@@ -439,7 +439,7 @@ for groupIndex = 0,groupCount do
 			end
 			
 			if addGroup == true then
-				masterLayerAddText = masterLayerAddText..tab1.."masterLayer.add("..layerName.."Group);\n"
+				masterLayerAddText = masterLayerAddText..tab2.."masterLayer.add("..layerName.."Group);\n"
 				
 					--masterLayerAddText = masterLayerAddText..tab3..layerName.."Group.scrollFactor.x = "..string.format("%.4f",as3.tolua(layer.xScroll))..";\n"
 					--masterLayerAddText = masterLayerAddText..tab3..layerName.."Group.scrollFactor.y = "..string.format("%.4f",as3.tolua(layer.yScroll))..";\n"
@@ -460,7 +460,9 @@ for groupIndex = 0,groupCount do
 		if # maps > 0 then
 			fileText = fileText..tab1.."//Tilemaps\n"
 			for i,v in ipairs(maps) do
-				fileText = fileText..tab1.."public var layer"..maps[i][2]..":"..tileMapClass..";\n"
+				if maps[i][2] ~= "Walls2" then -- XXXX Change interactive Layer here
+					fileText = fileText..tab1.."public var layer"..maps[i][2]..":"..tileMapClass..";\n"
+				end
 			end
 			fileText = fileText.."\n"
 		end
@@ -528,7 +530,7 @@ for groupIndex = 0,groupCount do
 		
 		fileText = fileText..tab2.."// Generate maps.\n"
 		
-		fileText = fileText..tab2.."var properties:Map<String,String> = new Map<String,String>();\n\n"
+		fileText = fileText..tab2.."var properties:Map<String,Dynamic> = new Map<String,Dynamic>();\n\n"
 		--fileText = fileText..tab3.."var tileProperties:Dictionary = new Dictionary;\n\n"
 		
 		minx = 9999999
@@ -680,7 +682,7 @@ if exportOnlyCSV == false then
 
 	baseFileText = baseFileText..tab1.."}\n"	-- end class
 	--end package
-	DAME.WriteFile(hxDir.."/"..baseClassName..".hx", baseFileText )
+	--DAME.WriteFile(hxDir.."/"..baseClassName..".hx", baseFileText )
 
 	spriteAnimString = "%%spriteanimloop%%"..tab2.."spriteData.animData.push( new AnimData( \"%animname%\",[%%animframeloop%%%tileid%%separator:,%%%animframeloopend%%], %fps%, %looped% ) );\n%%spriteanimloopend%%"
 	spriteShapeString = "%%spriteframeloop%%"..tab2.."spriteData.shapeList[%frame%] = ( [%%shapeloop%%new AnimFrameShapeData(\"%shapename%\", AnimFrameShapeData.SHAPE_%TYPE%, %xpos%, %ypos%, %radius%, %wid%, %ht%)%separator:,\n"..tab5..tab5.."%%%shapeloopend%% ]);\n%%spriteframeloopend%%"
@@ -807,7 +809,7 @@ if exportOnlyCSV == false then
 		textfile = textfile..tab1.."import "..flixelPackage..".FlxSprite;\n\n"
 		textfile = textfile..tab1.."class PathData\n"
 		textfile = textfile..tab1.."{\n"
-		textfile = textfile..tab1.."public var nodes:Array;\n"
+		textfile = textfile..tab1.."public var nodes:Array<Dynamic>;\n"
 		textfile = textfile..tab1.."public var isClosed:Bool;\n"
 		textfile = textfile..tab1.."public var isSpline:Bool;\n"
 		textfile = textfile..tab1.."public var layer:FlxGroup;\n\n"
@@ -815,7 +817,7 @@ if exportOnlyCSV == false then
 		textfile = textfile..tab1.."public var childSprite:FlxSprite = null;\n"
 		textfile = textfile..tab1.."public var childAttachNode:Int = 0;\n"
 		textfile = textfile..tab1.."public var childAttachT:Float = 0;\t// position of child between attachNode and next node.(0-1)\n\n"
-		textfile = textfile..tab1.."public function new( Nodes:Array, Closed:Bool, Spline:Bool, Layer:FlxGroup )\n"
+		textfile = textfile..tab1.."public function new( Nodes:Array<Dynamic>, Closed:Bool, Spline:Bool, Layer:FlxGroup )\n"
 		textfile = textfile..tab1.."{\n"
 		textfile = textfile..tab2.."nodes = Nodes;\n"
 		textfile = textfile..tab2.."isClosed = Closed;\n"

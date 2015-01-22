@@ -18,7 +18,6 @@ class Level_Demo extends BaseLevel
 
 	//Tilemaps
 	public var layerFloor:FlxTilemap;
-	//public var layerWalls2:FlxTilemap;
 	public var layerWalls:FlxTilemap;
 
 	//Shapes
@@ -36,7 +35,7 @@ class Level_Demo extends BaseLevel
 		ObjectsGroup= new FlxGroup();
 
 		// Generate maps.
-		var properties:Map<String,String> = new Map<String,String>();
+		var properties:Map<String,Dynamic> = new Map<String,Dynamic>();
 
 		mapString = ('assets/levels/mapCSV_Demo_Floor.csv').toString();
 		image = ('assets/levels/tiles.png');
@@ -55,10 +54,10 @@ class Level_Demo extends BaseLevel
 
 
 		//Add layers to the master group in correct order.
-	masterLayer.add(layerFloor);
-	masterLayer.add(layerWalls2);
-	masterLayer.add(layerWalls);
-	masterLayer.add(ObjectsGroup);
+		masterLayer.add(layerFloor);
+		masterLayer.add(layerWalls2);
+		masterLayer.add(layerWalls);
+		masterLayer.add(ObjectsGroup);
 
 		if ( addToStage )
 			createObjects(onAddCallback, parentObject);
@@ -88,7 +87,7 @@ class Level_Demo extends BaseLevel
 
 		obj = new BoxData(1974.040, 411.930, 0.000, 28.310, 31.830, ObjectsGroup );
 		shapes.push(obj);
-		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"settiles", value:"47,13,0|45,17,130" }, { name:"triggeronce", value:false }, { name:"resettimer", value:1000 }, null] ), 1, 1 );
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"settiles", value:"47,13,0|45,17,130" }, { name:"resettime", value:1000 }, { name:"repeatable", value:true }, null] ), 1, 1 );
 		obj = new BoxData(1694.980, 672.000, 0.000, 66.320, 21.700, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"trigger" }, { name:"text", value:"This doesn't seem right at all..." }, { name:"textsource", value:"Soldier" }, null] ), 1, 1 );
@@ -100,7 +99,7 @@ class Level_Demo extends BaseLevel
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"settiles", value:"47,13,0|45,17,130" }, { name:"triggeronce", value:false }, { name:"resettimer", value:1000 }, null] ), 1, 1 );
 		obj = new BoxData(1793.000, 865.000, 0.000, 19.000, 19.000, ObjectsGroup );
 		shapes.push(obj);
-		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, null] ), 1, 1 );
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"pickup" }, { name:"class", value:"robot" }, null] ), 1, 1 );
 	}
 
 	public function generateObjectLinks(onAddCallback:Dynamic = null):Void

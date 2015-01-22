@@ -48,8 +48,7 @@ class PlayState extends FlxState
 	{
 		Reg.currentState = this;
 		
-		currentLevel = new Level_Demo(true, null, this);
-		Reg.currentLevel = currentLevel;
+		Reg.currentLevel = currentLevel = new Level_Demo(true, null, this);
 		currentLevel.add(new Pickup(1700, 800, 10, 10, currentLevel));
 		
 		var tempPlayer;

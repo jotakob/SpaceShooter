@@ -60,11 +60,11 @@ class InputManager extends FlxObject
 		_RTrigger = player._gamePad.getAxis(XboxButtonID.RIGHT_TRIGGER);
 		
 		// XXXX Currently broken! see fix below
-		_RaxisX = player._gamePad.getXAxis(XboxButtonID.RIGHT_ANALOGUE_X);
-		_RaxisY = player._gamePad.getYAxis(XboxButtonID.RIGHT_ANALOGUE_Y);
+		//_RaxisX = player._gamePad.getXAxis(XboxButtonID.RIGHT_ANALOGUE_X);
+		//_RaxisY = player._gamePad.getYAxis(XboxButtonID.RIGHT_ANALOGUE_Y);
 		
-		//_RaxisX = player._gamePad.getXAxis(3);
-		//_RaxisY = player._gamePad.getYAxis(4);
+		_RaxisX = player._gamePad.getXAxis(3);
+		_RaxisY = player._gamePad.getYAxis(4);
 		
 		
 		if (Math.sqrt(Math.pow(_LaxisX, 2) + Math.pow(_LaxisY, 2)) < deadZone)

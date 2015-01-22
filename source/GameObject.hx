@@ -8,9 +8,10 @@ import flixel.FlxObject;
  */
 class GameObject extends FlxObject
 {
-	public var triggerOnce:Bool = true;
+	public var repeatable:Bool = false;
 	public var wasTriggered:Bool = false;
-	public var tilesToSet:String;
+	public var resetTime = 0;
+	public var tilesToSet:Array<Array<Int>>;
 	private var level:BaseLevel;
 
 	public function new(X:Float=0, Y:Float=0, Width:Float=0, Height:Float=0, Level:BaseLevel) 
@@ -25,14 +26,19 @@ class GameObject extends FlxObject
 		
 	}
 	
-	private function setTiles(tilesToSet:String)
+	private function setTiles(tilesToSet:Array<Array<Int>>)
 	{
-		var rows = tilesToSet.split("|");
-		for (row in rows)
+		for (i in 0...tilesToSet.length)
 		{
-			var newTile = row.split(",");
-			level.layerWalls2.setTile(Std.parseInt(newTile[0]), Std.parseInt(newTile[1]), Std.parseInt(newTile[2]));
+			level.layerWalls2.setTile(tilesToSet[i][0], tilesToSet[i][1], tilesToSet[i][2]);
 		}
 	}
 	
+	private function deactivate()
+	{
+		for (i in 0...tilesToSet.length)
+		{
+			level.layerWalls2.setTile(tilesToSet[i][0], tilesToSet[i][1], tilesToSet[i][3]);
+		}
+	}
 }

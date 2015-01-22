@@ -56,8 +56,8 @@ class Level_MCTest extends BaseLevel
 
 		//Add layers to the master group in correct order.
 	masterLayer.add(layerLevelBase);
-		masterLayer.add(LevelCollisionGroup);
-		masterLayer.add(SpritesGroup);
+	masterLayer.add(LevelCollisionGroup);
+	masterLayer.add(SpritesGroup);
 	masterLayer.add(layerCollisionMap);
 
 		if ( addToStage )

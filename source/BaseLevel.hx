@@ -168,13 +168,36 @@ class BaseLevel extends FlxGroup
 				buttons.add(newobj);
 			case "trigger":
 				newobj = new Trigger(data.x, data.y, data.width, data.height, this);
+			case "pickup":
+				newobj = new Pickup(data.x, data.y, data.width, data.height, this);
 			default:
 				newobj = new GameObject(data.x, data.y, data.width, data.height, this);
 		}
 		
 		triggers.add(newobj);
 		newobj.angle = data.angle;
-		newobj.tilesToSet = properties["settiles"];
+		if (properties["settiles"] != null)
+		{
+			var settiles = new Array<Array<Int>>();
+			var rows = properties["settiles"].split("|");
+			for (row in rows)
+			{
+				var newTile = row.split(",");
+				var newTileInt:Array<Int> = new Array<Int>();
+				for (s in newTile)
+				{newTileInt.push(Std.parseInt(s));}
+				newTileInt.push(this.layerWalls2.getTile(newTileInt[0], newTileInt[1]));
+				settiles.push(newTileInt);
+			}
+			trace(settiles);
+			newobj.tilesToSet = settiles;
+		}
+		if (properties["triggeronce"] == "false")
+		{
+			newobj.repeatable = true;
+			newobj.resetTime = properties["resetTimer"];
+		}
+		add(newobj);
 		
 		return data;
 	}

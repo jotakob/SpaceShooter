@@ -1,6 +1,7 @@
 package ;
 
 import flixel.FlxObject;
+import haxe.Timer;
 
 /**
  * ...
@@ -8,7 +9,6 @@ import flixel.FlxObject;
  */
 class Button extends GameObject
 {
-	public var repeatable:Bool = false;
 	public var pressed:Bool = false;
 	
 
@@ -21,5 +21,10 @@ class Button extends GameObject
 	public function onPress(player:Player)
 	{
 		setTiles(tilesToSet);
+		if (repeatable)
+		{
+			trace("calling resetter");
+			Timer.delay(deactivate, resetTime);
+		}
 	}
 }

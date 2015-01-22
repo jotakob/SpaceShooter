@@ -9,6 +9,7 @@ import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
+import flixel.util.FlxPoint.FlxCallbackPoint;
 import flixel.util.FlxSpriteUtil;
 import flixel.input.gamepad.FlxGamepad;
 import flixel.input.gamepad.XboxButtonID;
@@ -49,6 +50,7 @@ class PlayState extends FlxState
 		
 		currentLevel = new Level_Demo(true, null, this);
 		Reg.currentLevel = currentLevel;
+		currentLevel.add(new Pickup(1700, 800, 10, 10, currentLevel));
 		
 		var tempPlayer;
 		var tempEnemy;

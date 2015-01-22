@@ -30,7 +30,7 @@ class AnimationController extends FlxSprite
 		
 		_owner.drag.x = _owner.drag.y = 1600;
 		
-		botSprite.loadGraphic("assets/images/" + animationData[0], true, 32, 32);
+		botSprite.loadGraphic("assets/images/sprites/" + animationData[0], true, 32, 32);
 		botSprite.drag.x = botSprite.drag.y = 1600;
 		
 		var botanimation:Array<Int> = new Array<Int>();
@@ -42,7 +42,7 @@ class AnimationController extends FlxSprite
 		trace(botanimation);
 		botSprite.animation.add("lr",botanimation, 5, true);
 		
-		topSprite.loadGraphic("assets/images/" + animationData[0], true, 32, 32);
+		topSprite.loadGraphic("assets/images/sprites/" + animationData[0], true, 32, 32);
 		topSprite.drag.x = topSprite.drag.y = 1600;
 		
 		var topanimation:Array<Int> = new Array<Int>();

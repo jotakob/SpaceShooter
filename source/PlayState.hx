@@ -27,7 +27,7 @@ class PlayState extends FlxState
 {
 	private var _btnPlay:FlxButton;
 	private var _gamePads:Array<FlxGamepad> = new Array();
-	private var Players:FlxGroup = new FlxGroup();
+	public var Players:FlxGroup = new FlxGroup();
 	private var Enemies:FlxGroup = new FlxGroup();
 	
 	private var shootDirX:Float = 0;
@@ -40,6 +40,10 @@ class PlayState extends FlxState
 	
 	private var camera:FlxCamera;
 	private var cameraObj:FlxObject;
+	
+	private var _sprBack:FlxSprite;
+	
+	private var hud:HUD;
 	
 	//private var music:Array<FlxSound> = new Array();
 	
@@ -81,6 +85,11 @@ class PlayState extends FlxState
 		
 		//Reg.music[0].play();
 		Reg.music[1].play();
+		hud = new HUD(Players);
+		
+		trace(hud);
+		add(hud);
+		
 		
 		super.create();
 	}

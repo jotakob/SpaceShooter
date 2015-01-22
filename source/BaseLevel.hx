@@ -6,6 +6,7 @@ import flixel.FlxG;
 import flixel.group.FlxGroup;
 import flixel.FlxSprite;
 import flixel.FlxObject;
+import flixel.group.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxPoint;
 import flixel.tile.FlxTilemap;
@@ -32,6 +33,12 @@ class BaseLevel extends FlxGroup
 	public var bgColor:Int;
 	public var paths:Array<Dynamic>;	// Array of PathData
 	public var shapes:Array<Dynamic>;	//Array of ShapeData.
+	
+	public var triggers:FlxTypedGroup<Trigger> = new FlxTypedGroup<Trigger>();
+	public var buttons:FlxTypedGroup<Button> = new FlxTypedGroup<Button>();
+	
+	public var layerWalls2:FlxTilemap;
+	
 	public static var linkedObjectDictionary:Array<Dynamic>;	// Array <Dynamic> instead of Dictionary
 
 	public function new()
@@ -84,6 +91,10 @@ class BaseLevel extends FlxGroup
 			FlxG.worldBounds.width = map.width;
 		if (FlxG.worldBounds.height < map.height)
 			FlxG.worldBounds.height = map.height;
+		/*FlxG.worldBounds.left = boundsMinX;
+		FlxG.worldBounds.right = boundsMaxX;
+		FlxG.worldBounds.top = boundsMinY;
+		FlxG.worldBounds.bottom = boundsMaxY;*/
 		
 		
 		if ( hits )
@@ -97,7 +108,8 @@ class BaseLevel extends FlxGroup
 
 	public function addSpriteToLayer(obj:FlxSprite, type:Dynamic, layer:FlxGroup, xpos:Float, ypos:Float, angle:Float, scrollX:Float, scrollY:Float, flipped:Bool = false, scaleX:Float = 1, scaleY:Float = 1, properties:Map<String,String> = null, onAddCallback:Dynamic = null):FlxSprite
 	{
-		if( obj == null ) {
+		if ( obj == null )
+		{
 			obj = Type.createInstance(type, [xpos,ypos]);
 		}
 		obj.x += obj.offset.x;
@@ -147,6 +159,23 @@ class BaseLevel extends FlxGroup
 			else if ( needsReturnData )
 				trace("Error: callback needs to return either the object passed in or a new object to set up links correctly.");
 		}
+		
+		var newobj:Dynamic;
+		switch (properties["type"])
+		{
+			case "button":
+				newobj = new Button(data.x, data.y, data.width, data.height, this);
+				buttons.add(newobj);
+			case "trigger":
+				newobj = new Trigger(data.x, data.y, data.width, data.height, this);
+			default:
+				newobj = new GameObject(data.x, data.y, data.width, data.height, this);
+		}
+		
+		triggers.add(newobj);
+		newobj.angle = data.angle;
+		newobj.tilesToSet = properties["settiles"];
+		
 		return data;
 	}
 
@@ -193,7 +222,7 @@ class BaseLevel extends FlxGroup
 		}
 		paths = null;
 
-		for ( i in shapes)
+		for ( i in shapes )
 		{
 			var shape:Dynamic = shapes[i];
 			if ( shape )
@@ -202,6 +231,11 @@ class BaseLevel extends FlxGroup
 			}
 		}
 		shapes = null;
+	}
+	
+	public override function update()
+	{
+		super.update();
 	}
 
 	// List of null classes allows you to spawn levels dynamically from code using ClassReference.

@@ -45,9 +45,10 @@ class PlayState extends FlxState
 	
 	override public function create():Void
 	{
-		Reg.currentState = this;		
+		Reg.currentState = this;
 		
 		currentLevel = new Level_Demo(true, null, this);
+		Reg.currentLevel = currentLevel;
 		
 		var tempPlayer;
 		var tempEnemy;
@@ -60,7 +61,7 @@ class PlayState extends FlxState
 			}
 			trace("add");
 			_gamePads.push(FlxG.gamepads.getActiveGamepads()[i]);
-			tempPlayer = (new Player(1700, 820, i, FlxG.gamepads.getActiveGamepads()[i]));
+			tempPlayer = (new Player(4000, 1600, i, FlxG.gamepads.getActiveGamepads()[i]));
 			tempEnemy = (new Enemy(300, 200));
 			add(tempEnemy);
 			Enemies.add(tempEnemy);
@@ -117,17 +118,20 @@ class PlayState extends FlxState
 		//Code for level collision
 		FlxG.collide(Players, currentLevel.hitTilemaps);
 		
+		
 		super.update();
 		
 		
 	}
 	
-	public function enemyCollision(obj1:FlxObject, obj2:FlxObject)
+	
+	
+	private function enemyCollision(obj1:FlxObject, obj2:FlxObject)
 	{
 		cast(obj1, Player).receiveDamage(5);
 	}
 	
-	public function receiveDamage(obj1:FlxObject,obj2:FlxObject)
+	private function receiveDamage(obj1:FlxObject,obj2:FlxObject)
 	{
 		var enemy:Enemy = cast(obj2, Enemy);
 		if (Type.getClass(obj1) == Bullet)

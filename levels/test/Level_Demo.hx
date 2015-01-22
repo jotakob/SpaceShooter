@@ -18,7 +18,7 @@ class Level_Demo extends BaseLevel
 
 	//Tilemaps
 	public var layerFloor:FlxTilemap;
-	public var layerWalls2:FlxTilemap;
+	//public var layerWalls2:FlxTilemap;
 	public var layerWalls:FlxTilemap;
 
 	//Shapes

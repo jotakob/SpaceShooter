@@ -134,5 +134,16 @@ class InputManager extends FlxObject
 			player.myAnimationController.rotate(lastLeftAngle, true);
 			lastRightAngle = leftAngle;
 		}
+		
+		//Buttons
+		if (player._gamePad.pressed(XboxButtonID.A))
+		{
+			FlxG.overlap(player, Reg.currentLevel.buttons, interact);
+		}
+	}
+	
+	private function interact(obj1:FlxObject, obj2:FlxObject)
+	{
+		cast(obj2, Button).onPress(cast(obj1, Player));
 	}
 }

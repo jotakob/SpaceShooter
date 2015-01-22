@@ -29,7 +29,8 @@ class MovementController extends FlxObject
 	}
 	public function Move(speed:Float,Angle:Float)
 	{
-		FlxAngle.rotatePoint(speed, 0, 0, 0, Angle,_owner.velocity);
+		FlxAngle.rotatePoint(speed, 0, 0, 0, Angle, _owner.velocity);
+		_owner.moving = true;
 	}
 	
 }

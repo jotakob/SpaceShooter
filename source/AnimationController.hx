@@ -60,6 +60,7 @@ class AnimationController extends FlxSprite
 		topSprite.x = _owner.x;
 		botSprite.y = _owner.y;
 		botSprite.x = _owner.x;
+		trace(this, _owner.moving);
 		Animate(_owner.moving);
 		super.update();
 		
@@ -95,7 +96,9 @@ class AnimationController extends FlxSprite
 			*/
 			topSprite.animation.play("lr");
 			if (move)
-			botSprite.animation.play("bot");
+			{
+				botSprite.animation.play("lr");
+			}
 		//}
 	}
 	

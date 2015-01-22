@@ -92,7 +92,6 @@ class InputManager extends FlxObject
 			lastLeftAngle = leftAngle;
 			player.myMovementController.Move(player.speed, leftAngle);
 			player.myAnimationController.rotate(lastLeftAngle, false);
-			player.moving = true;
 		}
 		else
 		{

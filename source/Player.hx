@@ -27,7 +27,9 @@ class Player extends Actor
 	//private var Input:InputManager;
 	public function new(X:Float=0, Y:Float=0,?PlayerNumber:Int,?GamePad:FlxGamepad) 
 	{
+		trace("playecoords: " + X + ", " + Y);
 		super(X, Y);
+		
 		playerNumber = PlayerNumber;
 		hp = 500;
 		speed = 200;
@@ -38,8 +40,10 @@ class Player extends Actor
 		{
 			case 0:
 				myAnimationController = new AnimationController(x, y, this, "robot");
+				addWeapon(new ParticleWeapon(this, 0.25, 500, AssetPaths.bullet__png , AssetPaths.fire_particle__png, 1));
 			case 1:
 				myAnimationController = new AnimationController(x, y, this, "infiltrator");
+				addWeapon(new Weapon(this, 0.5, 500, AssetPaths.bullet__png, AssetPaths.bullet__png, 5));
 			case 2:
 				myAnimationController = new AnimationController(x, y, this, "soldier");
 			default:

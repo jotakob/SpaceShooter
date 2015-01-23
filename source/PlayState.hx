@@ -26,6 +26,8 @@ import flixel.tile.FlxTilemap;
  */
 class PlayState extends FlxState
 {
+	private var screenCenterSize:Int = 6;
+	
 	private var _btnPlay:FlxButton;
 	private var _gamePads:Array<FlxGamepad> = new Array();
 	
@@ -71,7 +73,6 @@ class PlayState extends FlxState
 			tempPlayer = (new Player(4000, 1600, i, FlxG.gamepads.getActiveGamepads()[i]));
 			tempPlayer.x = Std.random(Math.floor(currentLevel.spawnPoint.width - tempPlayer.width)) + currentLevel.spawnPoint.x;
 			tempPlayer.y = Std.random(Math.floor(currentLevel.spawnPoint.height - tempPlayer.height)) + currentLevel.spawnPoint.y;
-			tempPlayer.addWeapon(new ParticleWeapon(tempPlayer, 0.25, 500, AssetPaths.bullet__png , AssetPaths.fire_particle__png, 1));
 			Players.add(tempPlayer);
 		}
 		add(Players);
@@ -82,6 +83,15 @@ class PlayState extends FlxState
 		add(Enemies);
 		
 		cameraObj = new FlxObject();
+		var tempX:Float = 0;
+		var tempY:Float = 0;
+		for (tempPlayer in Players.iterator())
+		{
+			tempX += tempPlayer.x;
+			tempY += tempPlayer.y;
+		}
+		cameraObj.x = tempX / Players.length;
+		cameraObj.y = tempY / Players.length;
 		add(cameraObj);
 		camera = new FlxCamera(0, 0, 0, 0, 3);
 		FlxG.camera.follow(cameraObj, FlxCamera.STYLE_LOCKON, null, 1);
@@ -114,33 +124,49 @@ class PlayState extends FlxState
 	 */
 	override public function update():Void
 	{
-		var tempX:Float = 0;
-		var tempY:Float = 0;
-		var playerCount = 0;
-		
-		for (i in Players.iterator())
-		{
-			var tmp:Player = cast(i, Player);
-			if (Math.abs(tmp.x - tempX) > FlxG.camera.width / 3)
-			{
-				tempX = (tempX + tmp.x)/2;
-			}
-			if (Math.abs(tmp.y - tempY) > FlxG.camera.height / 3)
-			{
-				tempY = (tempY + tmp.y)/2;
-			}
-		}
-		cameraObj.x = tempX;
-		cameraObj.y = tempY;
-		
 		FlxG.overlap(Reg.bulletGroup, Enemies, receiveDamage);
 		FlxG.collide(Reg.bulletGroup, currentLevel.hitTilemaps, collideWall);
 		FlxG.collide(Players, Enemies, enemyCollision);
 		FlxG.collide(Enemies, currentLevel.hitTilemaps);
 		FlxG.collide(Enemies, Enemies);
-		
-		//Code for level collision
 		FlxG.collide(Players, currentLevel.hitTilemaps);
+		
+		
+		var tempX:Float = 0;
+		var tempY:Float = 0;
+		var xPlayers = 0;
+		var yPlayers = 0;
+		
+		for (i in Players.iterator())
+		{
+			var tmpPlayer:Player = cast(i, Player);
+			if (tmpPlayer.x - cameraObj.x > (FlxG.camera.width / screenCenterSize))
+			{
+				tempX += tmpPlayer.x - (FlxG.camera.width / screenCenterSize);
+				xPlayers++;
+			}
+			if (cameraObj.x - tmpPlayer.x > (FlxG.camera.width / screenCenterSize))
+			{
+				tempX += tmpPlayer.x + (FlxG.camera.width / screenCenterSize);
+				xPlayers++;
+			}
+			if (tmpPlayer.y - cameraObj.y > (FlxG.camera.height / screenCenterSize))
+			{
+				tempY += tmpPlayer.y - (FlxG.camera.height / screenCenterSize);
+				yPlayers++;
+			}
+			if (cameraObj.y - tmpPlayer.y > (FlxG.camera.height / screenCenterSize))
+			{
+				tempY += tmpPlayer.y + (FlxG.camera.height / screenCenterSize);
+				yPlayers++;
+			}
+		}
+		if (xPlayers > 0)
+			cameraObj.x = tempX / xPlayers;
+		if (yPlayers > 0)
+			cameraObj.y = tempY / yPlayers;
+		
+		
 		
 		super.update();
 		

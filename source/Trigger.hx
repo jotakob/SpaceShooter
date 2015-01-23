@@ -13,9 +13,4 @@ class Trigger extends GameObject
 		
 	}
 	
-	public override function onTrigger(actor:Actor)
-	{
-		
-	}
-	
 }

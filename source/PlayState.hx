@@ -5,6 +5,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.FlxObject;
+import flixel.input.keyboard.FlxKey;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
@@ -32,7 +33,7 @@ class PlayState extends FlxState
 	private var _gamePads:Array<FlxGamepad> = new Array();
 	
 	public var Players:FlxTypedGroup<Player> = new FlxTypedGroup<Player>();
-	public var Enemies:FlxGroup = new FlxGroup();
+	public var Enemies:FlxTypedGroup<Actor> = new FlxTypedGroup<Actor>();
 	
 	private var shootDirX:Float = 0;
 	private var shootDirY:Float = 0;
@@ -120,12 +121,17 @@ class PlayState extends FlxState
 	 */
 	override public function update():Void
 	{
+		//Custom colliders
 		FlxG.overlap(Reg.bulletGroup, Enemies, receiveDamage);
 		FlxG.collide(Reg.bulletGroup, currentLevel.hitTilemaps, collideWall);
+		FlxG.overlap(currentLevel.triggers, Players, callTrigger);
 		FlxG.collide(Players, Enemies, enemyCollision);
+		
+		//Collision only
 		FlxG.collide(Enemies, currentLevel.hitTilemaps);
 		FlxG.collide(Enemies, Enemies);
-		FlxG.collide(Players, currentLevel.hitTilemaps);
+		if (!FlxG.keys.checkStatus(FlxG.keys.getKeyCode("N"), FlxKey.PRESSED))
+			FlxG.collide(Players, currentLevel.hitTilemaps);
 		
 		
 		var tempX:Float = 0;
@@ -163,18 +169,21 @@ class PlayState extends FlxState
 			cameraObj.y = tempY / yPlayers;
 		
 		
-		
+		currentLevel.repeatables.update();
 		super.update();
 		
 		
 	}
 	
-	
+	private function callTrigger(obj1:FlxObject, obj2:FlxObject)
+	{
+		var object = cast(obj1, GameObject);
+		object.trigger(cast(obj2, Player));
+	}
 	
 	private function enemyCollision(obj1:FlxObject, obj2:FlxObject)
 	{
 		cast(obj1, Player).receiveDamage(5);
-		//cast(obj1, Player).myAnimationController.DamageAnimation();
 	}
 	
 	private function receiveDamage(obj1:FlxObject,obj2:FlxObject)

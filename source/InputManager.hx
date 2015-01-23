@@ -144,6 +144,6 @@ class InputManager extends FlxObject
 	
 	private function interact(obj1:FlxObject, obj2:FlxObject)
 	{
-		cast(obj2, Button).onPress(cast(obj1, Player));
+		cast(obj2, Button).trigger(cast(obj1, Player));
 	}
 }

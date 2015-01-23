@@ -87,7 +87,7 @@ class Level_Demo extends BaseLevel
 
 		obj = new BoxData(1974.040, 411.930, 0.000, 28.310, 31.830, ObjectsGroup );
 		shapes.push(obj);
-		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"settiles", value:"47,12,0|47,13,0|47,14,0" }, { name:"resettime", value:1500 }, { name:"repeatable", value:true }, null] ), 1, 1 );
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"settiles", value:"47,12,0|47,13,0|47,14,0" }, { name:"resettime", value:90 }, { name:"repeatable", value:true }, null] ), 1, 1 );
 		obj = new BoxData(1694.980, 672.000, 0.000, 66.320, 21.700, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"trigger" }, { name:"text", value:"This doesn't seem right at all..." }, { name:"textsource", value:"Soldier" }, null] ), 1, 1 );
@@ -96,7 +96,7 @@ class Level_Demo extends BaseLevel
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"warpexit" }, { name:"id", value:0 }, null] ), 1, 1 );
 		obj = new BoxData(1461.000, 475.000, 0.000, 28.310, 31.830, ObjectsGroup );
 		shapes.push(obj);
-		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"settiles", value:"47,12,0|47,13,0|47,14,0" }, { name:"resettime", value:1500 }, { name:"repeatable", value:true }, null] ), 1, 1 );
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"settiles", value:"47,12,0|47,13,0|47,14,0" }, { name:"resettime", value:90 }, { name:"repeatable", value:true }, null] ), 1, 1 );
 		obj = new BoxData(1919.000, 394.000, 0.000, 21.150, 21.150, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
@@ -127,12 +127,9 @@ class Level_Demo extends BaseLevel
 		obj = new BoxData(1172.000, 403.000, 245.510, 21.150, 21.150, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
-		obj = new BoxData(1266.000, 669.000, 0.000, 28.310, 31.830, ObjectsGroup );
-		shapes.push(obj);
-		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"settiles", value:"42,6,0|43,6,0|44,6,0|45,6,0" }, { name:"resettime", value:1500 }, { name:"repeatable", value:false }, null] ), 1, 1 );
 		obj = new BoxData(1082.000, 934.000, 0.000, 19.702, 31.830, ObjectsGroup );
 		shapes.push(obj);
-		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"settiles", value:"42,9,0|43,9,0|44,9,0|45,9,0" }, { name:"resettime", value:1500 }, { name:"repeatable", value:false }, null] ), 1, 1 );
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"settiles", value:"42,6,0|43,6,0|44,6,0|45,6,0" }, { name:"repeatable", value:false }, null] ), 1, 1 );
 		obj = new BoxData(280.000, 392.000, 320.103, 21.150, 21.150, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
@@ -157,6 +154,9 @@ class Level_Demo extends BaseLevel
 		obj = new BoxData(691.000, 252.000, 0.210, 21.150, 21.150, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(1266.000, 669.000, 0.000, 28.310, 31.830, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"settiles", value:"42,9,0|43,9,0|44,9,0|45,9,0" }, { name:"repeatable", value:false }, null] ), 1, 1 );
 	}
 
 	public function generateObjectLinks(onAddCallback:Dynamic = null):Void

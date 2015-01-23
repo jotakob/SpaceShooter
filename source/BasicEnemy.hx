@@ -24,8 +24,8 @@ class BasicEnemy extends State
 		if (timer <= 0)
 		
 		{
-			angle += 90;
-			timer = 80;
+			angle += Std.random(20) * 5 + 45;
+			timer = Std.random(50)+40;
 		}
 		
 		owner.angle = angle;

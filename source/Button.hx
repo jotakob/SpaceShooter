@@ -1,6 +1,7 @@
 package ;
 
 import flixel.FlxObject;
+import flixel.system.FlxSound;
 import haxe.Timer;
 
 /**
@@ -9,23 +10,12 @@ import haxe.Timer;
  */
 class Button extends GameObject
 {
-	
 
 	public function new(X:Float=0, Y:Float=0, Width:Float=0, Height:Float=0, Level:BaseLevel)
 	{
 		super(X, Y, Width, Height, Level);
 		
+		sound = Reg.sounds[3];
 	}
 	
-	public function onPress(player:Player)
-	{
-		if (!pressed)
-			Reg.sounds[3].play();
-		pressed = true;
-		setTiles(tilesToSet);
-		if (repeatable)
-		{
-			Timer.delay(deactivate, resetTime);
-		}
-	}
 }

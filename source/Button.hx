@@ -9,7 +9,6 @@ import haxe.Timer;
  */
 class Button extends GameObject
 {
-	public var pressed:Bool = false;
 	
 
 	public function new(X:Float=0, Y:Float=0, Width:Float=0, Height:Float=0, Level:BaseLevel)
@@ -20,10 +19,12 @@ class Button extends GameObject
 	
 	public function onPress(player:Player)
 	{
+		if (!pressed)
+			Reg.sounds[3].play();
+		pressed = true;
 		setTiles(tilesToSet);
 		if (repeatable)
 		{
-			trace("calling resetter");
 			Timer.delay(deactivate, resetTime);
 		}
 	}

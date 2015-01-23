@@ -10,6 +10,7 @@ class GameObject extends FlxObject
 {
 	public var repeatable:Bool = false;
 	public var wasTriggered:Bool = false;
+	public var pressed:Bool = false;
 	public var resetTime = 1;
 	public var tilesToSet:Array<Array<Int>>;
 	private var level:BaseLevel;
@@ -39,5 +40,6 @@ class GameObject extends FlxObject
 		{
 			level.layerWalls2.setTile(tilesToSet[i][0], tilesToSet[i][1], tilesToSet[i][3]);
 		}
+		pressed = false;
 	}
 }

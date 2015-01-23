@@ -68,6 +68,10 @@ class MenuState extends FlxState
 		Reg.sounds[2] = new FlxSound();
 		Reg.sounds[2].loadStream("assets/sounds/flamethrower.ogg", true, false);
 		Reg.sounds[2].volume = 1;
+		
+		Reg.sounds[3] = new FlxSound();
+		Reg.sounds[3].loadStream("assets/sounds/click.ogg", false, false);
+		Reg.sounds[3].volume = 1;
 	}
 	
 	/**

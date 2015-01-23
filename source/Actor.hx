@@ -29,7 +29,6 @@ class Actor extends FlxObject
 		myAnimationController.update();
 		if (hp < 1)
 		{
-			//this.kill();
 			this.set_alive(false);
 			this.exists = false;
 			this.myAnimationController.topSprite.kill();

@@ -177,7 +177,7 @@ class PlayState extends FlxState
 	private function enemyCollision(obj1:FlxObject, obj2:FlxObject)
 	{
 		cast(obj1, Player).receiveDamage(5);
-		cast(obj1, Player).myAnimationController.DamageAnimation();
+		//cast(obj1, Player).myAnimationController.DamageAnimation();
 	}
 	
 	private function receiveDamage(obj1:FlxObject,obj2:FlxObject)

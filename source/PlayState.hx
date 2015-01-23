@@ -96,8 +96,6 @@ class PlayState extends FlxState
 		cameraObj.x = tempX / Players.length;
 		cameraObj.y = tempY / Players.length;
 		
-		
-		
 		//Reg.music[0].play();
 		Reg.music[1].play();
 		hud = new HUD();
@@ -176,6 +174,7 @@ class PlayState extends FlxState
 	private function enemyCollision(obj1:FlxObject, obj2:FlxObject)
 	{
 		cast(obj1, Player).receiveDamage(5);
+		cast(obj1, Player).myAnimationController.DamageAnimation();
 	}
 	
 	private function receiveDamage(obj1:FlxObject,obj2:FlxObject)

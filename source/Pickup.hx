@@ -33,7 +33,7 @@ class Pickup extends GameObject
 		{
 			var particle: FlxParticle = new FlxParticle();
 			particleSize = Std.random(3) + 3;
-			randomColor = FlxRandom.colorExt(0,255,0,255,0,255,255,255);
+			randomColor = FlxRandom.colorExt(0,0,0,255,255,255,255,255);
 			particle.makeGraphic(particleSize, particleSize, randomColor, false);
 			particle.exists = false;
 			emitter.add(particle);

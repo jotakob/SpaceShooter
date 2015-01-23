@@ -97,7 +97,7 @@ class InputManager extends FlxObject
 		{
 			player.moving = false;
 		}
-		if (_RTrigger > 0.1)
+		if (rightAngle != -4000)
 		{
 			player.isAiming = true;
 			player.activeWeapon.tryShooting();

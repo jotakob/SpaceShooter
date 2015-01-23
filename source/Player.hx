@@ -43,7 +43,7 @@ class Player extends Actor
 				addWeapon(new ParticleWeapon(this, 0.25, 500, AssetPaths.bullet__png , AssetPaths.fire_particle__png, 1));
 			case 1:
 				myAnimationController = new AnimationController(x, y, this, "infiltrator");
-				addWeapon(new Weapon(this, 0.5, 500, AssetPaths.bullet__png, AssetPaths.bullet__png, 5));
+				addWeapon(new Weapon(this, 0.5, 500, AssetPaths.bullet__png, AssetPaths.bullet__png, 20));
 			case 2:
 				myAnimationController = new AnimationController(x, y, this, "soldier");
 			default:

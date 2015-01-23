@@ -57,10 +57,15 @@ class PlayState extends FlxState
 		Reg.currentState = this;
 		
 		Reg.currentLevel = currentLevel = new Level_Demo(true, null, this);
-		//currentLevel.add(new Pickup(1700, 800, 10, 10, currentLevel));
 		
-		var tempPlayer;
-		var tempEnemy;
+		cameraObj = new FlxObject();
+		add(cameraObj);
+		camera = new FlxCamera(Math.floor(currentLevel.spawnPoint.x), Math.floor(currentLevel.spawnPoint.y), 0, 0, 3);
+		FlxG.camera.bounds = FlxG.worldBounds;
+		FlxG.camera.follow(cameraObj, FlxCamera.STYLE_LOCKON, null, 1);
+		
+		var tempPlayer:Player;
+		var tempEnemy:Enemy;
 		for (i in 0...FlxG.gamepads.getActiveGamepads().length)
 		{
 			if (_gamePads.indexOf(FlxG.gamepads.getActiveGamepads()[i]) >= 0)
@@ -70,19 +75,17 @@ class PlayState extends FlxState
 			}
 			trace("add");
 			_gamePads.push(FlxG.gamepads.getActiveGamepads()[i]);
-			tempPlayer = (new Player(4000, 1600, i, FlxG.gamepads.getActiveGamepads()[i]));
+			tempPlayer = (new Player(0, 0, i, FlxG.gamepads.getActiveGamepads()[i]));
 			tempPlayer.x = Std.random(Math.floor(currentLevel.spawnPoint.width - tempPlayer.width)) + currentLevel.spawnPoint.x;
 			tempPlayer.y = Std.random(Math.floor(currentLevel.spawnPoint.height - tempPlayer.height)) + currentLevel.spawnPoint.y;
 			Players.add(tempPlayer);
 		}
 		add(Players);
 		
-		tempEnemy = (new Enemy(300, 200));
-		Enemies.add(tempEnemy);
-		trace(Enemies.members);
+		//tempEnemy = (new Enemy(300, 200));
+		//Enemies.add(tempEnemy);
 		add(Enemies);
 		
-		cameraObj = new FlxObject();
 		var tempX:Float = 0;
 		var tempY:Float = 0;
 		for (tempPlayer in Players.iterator())
@@ -92,18 +95,13 @@ class PlayState extends FlxState
 		}
 		cameraObj.x = tempX / Players.length;
 		cameraObj.y = tempY / Players.length;
-		add(cameraObj);
-		camera = new FlxCamera(0, 0, 0, 0, 3);
-		FlxG.camera.follow(cameraObj, FlxCamera.STYLE_LOCKON, null, 1);
 		
 		
-		trace("Music here");
 		
 		//Reg.music[0].play();
 		Reg.music[1].play();
 		hud = new HUD();
 		
-		trace(hud);
 		add(hud);
 		
 		

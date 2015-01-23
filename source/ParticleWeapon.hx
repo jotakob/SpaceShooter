@@ -45,7 +45,8 @@ class ParticleWeapon extends Weapon
 		}
 	}
 	
-	public function stopEmitter() {
+	public function stopEmitter() 
+	{
 		emitter.on = false;
 		Reg.sounds[2].stop();
 	}

@@ -39,7 +39,6 @@ class AnimationController extends FlxSprite
 			botanimation.push(Std.parseInt(animationData[1].charAt(i)));
 		}
 		Reg.currentState.add(botSprite);
-		trace(botanimation);
 		botSprite.animation.add("lr",botanimation, 9, true);
 		
 		topSprite.loadGraphic("assets/images/sprites/" + animationData[0], true, 32, 32);

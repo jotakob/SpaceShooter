@@ -18,7 +18,6 @@ class GameObject extends FlxObject
 	{
 		super(X, Y, Width, Height);
 		level = Level;
-		
 	}
 	
 	public function onTrigger(trigger:Actor)

@@ -206,7 +206,6 @@ class BaseLevel extends FlxGroup
 		{
 			newobj.repeatable = true;
 			newobj.resetTime = cast(properties["resettime"], Int);
-			trace(newobj);
 		}
 		add(newobj);
 		
@@ -228,7 +227,6 @@ class BaseLevel extends FlxGroup
 				properties.set(Reflect.field(args[i], "name"), Reflect.field(args[i], "value"));
 			}
 		}
-		trace(properties);
 		return properties;
 	}
 

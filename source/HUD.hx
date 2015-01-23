@@ -36,7 +36,6 @@ class HUD extends FlxGroup
 			healthbars[i].x = FlxG.width / 20 + i * 150;
 			healthbars[i].y = FlxG.height - healthbars[0].height / 2 - sprBack.height / 2;
 			add(healthbars[i]);
-			trace(i);
 		}
     }
 
@@ -44,8 +43,6 @@ class HUD extends FlxGroup
     {
 		for (i in 0...(cast(Reg.currentState, PlayState).Players.length))
 		{
-			trace(i);
-			trace(healthbars[i].scale);
 			healthbars[i].scale.x = (cast(Reg.currentState, PlayState).Players.members[i].hp / 200) * 48;
 		}
 		super.update();

@@ -15,6 +15,8 @@ class AnimationController extends FlxSprite
 	public var topSprite:FlxSprite = new FlxSprite();
 	private var animationData:Array<String>;
 	private var hitboxOffset:Int;
+	private var isDamaged:Bool = false;
+	private var damageTimer:Int = 90;
 	
 	public function new(X:Float=0, Y:Float=0,animationComponent:Actor,AnimationID:String) 
 	{
@@ -82,27 +84,17 @@ class AnimationController extends FlxSprite
 	}
 	public function Animate(move:Bool = false)
 	{
-		/*
-		if ((_owner.velocity.x != 0 || _owner.velocity.y != 0) && _owner.touching == FlxObject.NONE) 
-		{
-			
-			switch(_owner.facing)
-			{
-			case FlxObject.LEFT, FlxObject.RIGHT:
-				//_owner.animation.play("lr");
-				topSprite.animation.play("lr");
-			case FlxObject.UP:
-				_owner.animation.play("u");
-			case FlxObject.DOWN:
-				_owner.animation.play("d");
-			}
-			*/
 			topSprite.animation.play("lr");
 			if (move)
 			{
 				botSprite.animation.play("lr");
 			}
-		//}
 	}
-	
+	public function DamageAnimation()
+	{
+		
+		trace("doing damage animation");
+		topSprite.setColorTransform(.5, .2, .8, 1, -200, 0, 0);
+		botSprite.setColorTransform(.5, .2, .8, 1, -200, 0, 0);
+	}
 }

@@ -96,7 +96,6 @@ class PlayState extends FlxState
 		camera = new FlxCamera(0, 0, 0, 0, 3);
 		FlxG.camera.follow(cameraObj, FlxCamera.STYLE_LOCKON, null, 1);
 		
-		
 		trace("Music here");
 		
 		//Reg.music[0].play();
@@ -178,6 +177,7 @@ class PlayState extends FlxState
 	private function enemyCollision(obj1:FlxObject, obj2:FlxObject)
 	{
 		cast(obj1, Player).receiveDamage(5);
+		cast(obj1, Player).myAnimationController.DamageAnimation();
 	}
 	
 	private function receiveDamage(obj1:FlxObject,obj2:FlxObject)

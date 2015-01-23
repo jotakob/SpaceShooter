@@ -24,10 +24,10 @@ class Pickup extends GameObject
 	{
 		super(X, Y, Width, Height, Level);
 		
-		emitter = new FlxEmitter(1700, 800);
+		emitter = new FlxEmitter(X, Y);
 		pickupImage.loadGraphic(AssetPaths.engineer_pickup_card__png, false, 32, 32, false);
-		pickupImage.x = 1700- pickupImage.width/2;
-		pickupImage.y = 800 - pickupImage.width / 2;
+		pickupImage.x = X- pickupImage.width/2;
+		pickupImage.y = Y - pickupImage.width / 2;
 			
 		for ( i in 0...particles)
 		{

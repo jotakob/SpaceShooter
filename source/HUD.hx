@@ -44,7 +44,6 @@ class HUD extends FlxGroup
 			
 			add(healthBarOutlines);
 			add(healthbars[i]);
-			trace(i);
 		}
     }
 

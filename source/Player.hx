@@ -24,10 +24,11 @@ class Player extends Actor
 	public var activeWeapon:Weapon;
 	public var weapons:Array<Weapon> = new Array<Weapon>();
 	
+	private var skipFrames:Int = 3;
+	
 	//private var Input:InputManager;
 	public function new(X:Float=0, Y:Float=0,?PlayerNumber:Int,?GamePad:FlxGamepad) 
 	{
-		trace("playecoords: " + X + ", " + Y);
 		super(X, Y);
 		
 		playerNumber = PlayerNumber;
@@ -46,13 +47,13 @@ class Player extends Actor
 				addWeapon(new Weapon(this, 0.5, 500, AssetPaths.bullet__png, AssetPaths.bullet__png, 20));
 			case 2:
 				myAnimationController = new AnimationController(x, y, this, "soldier");
+				addWeapon(new Weapon(this, 0.1, 400, AssetPaths.bullet__png, AssetPaths.bullet__png, 20));
 			default:
 				myAnimationController = new AnimationController(x, y, this, "enemy");
 				trace("using default animations");
 		}
 		
 		inputmanager = new InputManager(this);
-		trace(playerNumber);
 		myAnimationController.setAnimations("bot", [0,1,2,3]);
 	}
 	
@@ -71,17 +72,25 @@ class Player extends Actor
 			{
 				
 			}
-			if (this.x < FlxG.camera.scroll.x)
-				this.x = FlxG.camera.scroll.x;
-			if (this.x + this.width > FlxG.camera.scroll.x + FlxG.camera.width)
+			
+			if (!(skipFrames > 0))
 			{
-				this.x  = FlxG.camera.scroll.x + FlxG.camera.width - this.width;
+				if (this.x < FlxG.camera.scroll.x)
+					this.x = FlxG.camera.scroll.x;
+				if (this.x + this.width > FlxG.camera.scroll.x + FlxG.camera.width)
+				{
+					this.x  = FlxG.camera.scroll.x + FlxG.camera.width - this.width;
+				}
+				if (this.y < FlxG.camera.scroll.y)
+					this.y = FlxG.camera.scroll.y;
+				if (this.y + this.height > FlxG.camera.scroll.y + FlxG.camera.height)
+				{
+					this.y  = FlxG.camera.scroll.y + FlxG.camera.height - this.height;
+				}
 			}
-			if (this.y < FlxG.camera.scroll.y)
-				this.y = FlxG.camera.scroll.y;
-			if (this.y + this.height > FlxG.camera.scroll.y + FlxG.camera.height)
+			else
 			{
-				this.y  = FlxG.camera.scroll.y + FlxG.camera.height - this.height;
+				skipFrames--;
 			}
 		}
 	}

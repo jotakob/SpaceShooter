@@ -37,15 +37,12 @@ class MenuState extends FlxState
 	
 	private function loadAnimations()
 	{
-		trace(Assets.getText(AssetPaths.characterAnimations__csv));
 		for (row in Assets.getText(AssetPaths.characterAnimations__csv).split("\r\n"))
 		{
 			var animation:Array<String> = row.split(",");
 			animation.reverse();
 			var title:String = animation.pop();
 			animation.reverse();
-			trace(title);
-			trace(animation);
 			Reg.characterAnimations.set(title, animation);
 		}
 	}

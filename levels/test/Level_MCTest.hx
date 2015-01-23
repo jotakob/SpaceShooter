@@ -74,13 +74,13 @@ class Level_MCTest extends BaseLevel
 
 	override public function createObjects(onAddCallback:Dynamic = null, parentObject:Dynamic = null):Void
 	{
-		addPathsForLayerLevelCollision(onAddCallback);
-		addShapesForLayerSprites(onAddCallback);
-		generateObjectLinks(onAddCallback);
 		if ( parentObject != null )
 			parentObject.add(masterLayer);
 		else
 			FlxG.state.add(masterLayer);
+		addPathsForLayerLevelCollision(onAddCallback);
+		addShapesForLayerSprites(onAddCallback);
+		generateObjectLinks(onAddCallback);
 	}
 
 		public function addPathsForLayerLevelCollision(onAddCallback:Dynamic = null):Void

@@ -30,7 +30,6 @@ class Enemy extends Actor
 	
 	public function SetGameState()
 	{
-		trace(myStateManager);
 		myStateManager.ChangeState(new BasicEnemy()); 
 	}
 }

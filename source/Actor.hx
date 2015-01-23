@@ -29,8 +29,11 @@ class Actor extends FlxObject
 		myAnimationController.update();
 		if (hp < 1)
 		{
-			this.kill();
-			this.myAnimationController.destroy();
+			//this.kill();
+			
+			if (Type.getClass(this) == Player)
+				cast(this, Player).inputmanager.kill();
+				
 		}
 		
 		super.update();

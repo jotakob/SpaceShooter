@@ -84,7 +84,7 @@ class PlayState extends FlxState
 		cameraObj = new FlxObject();
 		add(cameraObj);
 		camera = new FlxCamera(0, 0, 0, 0, 3);
-		FlxG.camera.follow(cameraObj, FlxCamera.STYLE_TOPDOWN, null, 1);
+		FlxG.camera.follow(cameraObj, FlxCamera.STYLE_LOCKON, null, 1);
 		
 		
 		trace("Music here");
@@ -116,15 +116,20 @@ class PlayState extends FlxState
 	{
 		var tempX:Float = 0;
 		var tempY:Float = 0;
+		var playerCount = 0;
 		
 		for (i in Players.iterator())
 		{
 			var tmp:Player = cast(i, Player);
-			tempX += tmp.x;
-			tempY += tmp.y;
+			if (Math.abs(tmp.x - tempX) > FlxG.camera.width / 3)
+			{
+				tempX = (tempX + tmp.x)/2;
+			}
+			if (Math.abs(tmp.y - tempY) > FlxG.camera.height / 3)
+			{
+				tempY = (tempY + tmp.y)/2;
+			}
 		}
-		tempX = tempX / Players.length;
-		tempY = tempY / Players.length;
 		cameraObj.x = tempX;
 		cameraObj.y = tempY;
 		
@@ -136,7 +141,6 @@ class PlayState extends FlxState
 		
 		//Code for level collision
 		FlxG.collide(Players, currentLevel.hitTilemaps);
-		
 		
 		super.update();
 		

@@ -44,10 +44,10 @@ class Player extends Actor
 				addWeapon(new ParticleWeapon(this, 0.25, 500, AssetPaths.bullet__png , AssetPaths.fire_particle__png, 1));
 			case 1:
 				myAnimationController = new AnimationController(x, y, this, "infiltrator");
-				addWeapon(new Weapon(this, 0.5, 500, AssetPaths.bullet__png, AssetPaths.bullet__png, 20));
+				addWeapon(new Weapon(this, 0.2, 500, AssetPaths.bullet__png, AssetPaths.bullet__png, 25));
 			case 2:
 				myAnimationController = new AnimationController(x, y, this, "soldier");
-				addWeapon(new Weapon(this, 0.1, 400, AssetPaths.bullet__png, AssetPaths.bullet__png, 20));
+				addWeapon(new Weapon(this, 0.1, 400, AssetPaths.bullet__png, AssetPaths.bullet__png, 40));
 			default:
 				myAnimationController = new AnimationController(x, y, this, "enemy");
 				trace("using default animations");

@@ -2,7 +2,7 @@
 <project>
   <version>3.1.6</version>
   <bgColor>0x777777</bgColor>
-  <viewPos x="-834.4873003038317" y="-107.2788776796973"/>
+  <viewPos x="-898.4873003038317" y="-454.2788776796973"/>
   <firstLayersTop>false</firstLayersTop>
   <spriteEntries currentId="1"/>
   <layers>
@@ -222,12 +222,6 @@
           <properties>
             <type typeof="Custom" name="type" value="warpexit" hidden="false" typeName="type" customTypeIdx="0"/>
             <type typeof="Int" name="id" value="0" hidden="false"/>
-          </properties>
-        </shape>
-        <shape guid="FA7F7FBD-9590-F02B-FB33-33C40E26DA7F" type="square" x="1793" y="865" Z="0" angle="0" width="19.00" height="19.00" scaleX="0.380" scaleY="0.380">
-          <properties>
-            <type typeof="Custom" name="type" value="pickup" hidden="false" typeName="type" customTypeIdx="0"/>
-            <type typeof="String" name="class" value="robot" hidden="false"/>
           </properties>
         </shape>
         <shape guid="BCF212AB-8F19-65F7-D788-35C070EB8D29" type="square" x="1461" y="475" Z="0" angle="0" width="28.31" height="31.83" scaleX="0.566" scaleY="0.637">

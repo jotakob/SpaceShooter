@@ -94,9 +94,6 @@ class Level_Demo extends BaseLevel
 		obj = new BoxData(1702.000, 788.000, 0.000, 52.040, 39.880, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"warpexit" }, { name:"id", value:0 }, null] ), 1, 1 );
-		obj = new BoxData(1793.000, 865.000, 0.000, 19.000, 19.000, ObjectsGroup );
-		shapes.push(obj);
-		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"pickup" }, { name:"class", value:"robot" }, null] ), 1, 1 );
 		obj = new BoxData(1461.000, 475.000, 0.000, 28.310, 31.830, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"settiles", value:"47,12,0|47,13,0|47,14,0" }, { name:"resettime", value:1500 }, { name:"repeatable", value:true }, null] ), 1, 1 );

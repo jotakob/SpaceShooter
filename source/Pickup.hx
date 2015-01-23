@@ -27,8 +27,8 @@ class Pickup extends GameObject
 			emitter.add(particle);
 			particle.maxVelocity.x = 20;
 			particle.maxVelocity.y = 20;
-			emitter.setXSpeed( -1000, 1000);
-			emitter.setYSpeed( -1000, 1000);
+			emitter.setXSpeed( -2000, 2000);
+			emitter.setYSpeed( -2000, 2000);
 			
 		}
 		Reg.currentState.add(emitter);

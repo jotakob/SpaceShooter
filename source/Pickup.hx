@@ -23,10 +23,13 @@ class Pickup extends GameObject
 		{
 			var particle: FlxParticle = new FlxParticle();
 			particle.loadGraphic(AssetPaths.pickup_particle_glow__png, true, 5, 5, false);
-			emitter.setXSpeed( -100, 100);
-			emitter.setYSpeed( -100, 100);
 			particle.exists = false;
 			emitter.add(particle);
+			particle.maxVelocity.x = 20;
+			particle.maxVelocity.y = 20;
+			emitter.setXSpeed( -1000, 1000);
+			emitter.setYSpeed( -1000, 1000);
+			
 		}
 		Reg.currentState.add(emitter);
 		emitter.start(false, 0.2, 0, 0, 0);

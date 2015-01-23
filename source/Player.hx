@@ -55,27 +55,30 @@ class Player extends Actor
 	override public function update():Void 
 	{
 		super.update();
-		inputmanager.update();
-		
-		try
+		if (inputmanager != null && myAnimationController != null && myMovementController != null)
 		{
-			activeWeapon.update();
-		}
-		catch (exception:Dynamic)
-		{
+			inputmanager.update();
 			
-		}
-		if (this.x < FlxG.camera.scroll.x)
-			this.x = FlxG.camera.scroll.x;
-		if (this.x + this.width > FlxG.camera.scroll.x + FlxG.camera.width)
-		{
-			this.x  = FlxG.camera.scroll.x + FlxG.camera.width - this.width;
-		}
-		if (this.y < FlxG.camera.scroll.y)
-			this.y = FlxG.camera.scroll.y;
-		if (this.y + this.height > FlxG.camera.scroll.y + FlxG.camera.height)
-		{
-			this.y  = FlxG.camera.scroll.y + FlxG.camera.height - this.height;
+			try
+			{
+				activeWeapon.update();
+			}
+			catch (exception:Dynamic)
+			{
+				
+			}
+			if (this.x < FlxG.camera.scroll.x)
+				this.x = FlxG.camera.scroll.x;
+			if (this.x + this.width > FlxG.camera.scroll.x + FlxG.camera.width)
+			{
+				this.x  = FlxG.camera.scroll.x + FlxG.camera.width - this.width;
+			}
+			if (this.y < FlxG.camera.scroll.y)
+				this.y = FlxG.camera.scroll.y;
+			if (this.y + this.height > FlxG.camera.scroll.y + FlxG.camera.height)
+			{
+				this.y  = FlxG.camera.scroll.y + FlxG.camera.height - this.height;
+			}
 		}
 	}
 	

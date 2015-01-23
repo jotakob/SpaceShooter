@@ -30,9 +30,23 @@ class Actor extends FlxObject
 		if (hp < 1)
 		{
 			//this.kill();
-			
+			this.set_alive(false);
+			this.exists = false;
+			this.myAnimationController.topSprite.kill();
+			this.myAnimationController.botSprite.kill();
+			this.myAnimationController = null;
 			if (Type.getClass(this) == Player)
+			{
 				cast(this, Player).inputmanager.kill();
+				if (Type.getClass(cast(this, Player).activeWeapon) == ParticleWeapon)
+				{
+					cast(cast(this, Player).activeWeapon, ParticleWeapon).stopEmitter();
+				}
+				cast(this, Player).myMovementController.kill();
+				cast(this, Player).activeWeapon = null;
+				cast(this, Player).weapons = null;
+			}
+			
 				
 		}
 		

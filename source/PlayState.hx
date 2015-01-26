@@ -18,6 +18,7 @@ import flixel.group.FlxGroup;
 import openfl.utils.Object;
 import flixel.FlxCamera;
 import flixel.group.FlxTypedGroup;
+import flixel.util.FlxCollision;
 
 import openfl.Assets;
 import flixel.tile.FlxTilemap;
@@ -67,7 +68,6 @@ class PlayState extends FlxState
 		FlxG.camera.follow(cameraObj, FlxCamera.STYLE_LOCKON, null, 1);
 		
 		var tempPlayer:Player;
-		var tempEnemy:Enemy;
 		for (i in 0...FlxG.gamepads.getActiveGamepads().length)
 		{
 			if (_gamePads.indexOf(FlxG.gamepads.getActiveGamepads()[i]) >= 0)
@@ -84,8 +84,6 @@ class PlayState extends FlxState
 		}
 		add(Players);
 		
-		//tempEnemy = (new Enemy(300, 200));
-		//Enemies.add(tempEnemy);
 		add(Enemies);
 		
 		var tempX:Float = 0;
@@ -132,7 +130,9 @@ class PlayState extends FlxState
 		FlxG.collide(Enemies, currentLevel.hitTilemaps);
 		FlxG.collide(Enemies, Enemies);
 		if (!FlxG.keys.checkStatus(FlxG.keys.getKeyCode("N"), FlxKey.PRESSED))
+		{
 			FlxG.collide(Players, currentLevel.hitTilemaps);
+		}
 		
 		
 		var tempX:Float = 0;
@@ -195,13 +195,11 @@ class PlayState extends FlxState
 		{
 			var bullet:Bullet  = cast(obj1, Bullet);
 			enemy.receiveDamage(bullet.damage);
-			enemy.myAnimationController.DamageColoring();
 		}
 		else if (Type.getClass(obj1) == ParticleBullet)
 		{
 			var bullet:ParticleBullet = cast(obj1, ParticleBullet);
 			enemy.receiveDamage(bullet.damage);
-			enemy.myAnimationController.DamageColoring(30);
 		}
 		
 		obj1.kill();

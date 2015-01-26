@@ -51,6 +51,7 @@ class BaseLevel extends FlxGroup
 		tilemaps = new FlxGroup();
 		paths = new Array<Dynamic>();
 		shapes = new Array<Dynamic>();
+		
 		linkedObjectDictionary = new Array<Dynamic>();
 		
 		super();
@@ -262,23 +263,6 @@ class BaseLevel extends FlxGroup
 				}
 			}
 		}
-	}
-	
-	public function getCollidableSprites(tilemap:FlxTilemap):Array<FlxSprite>
-	{
-		var sprites = new Array<FlxSprite>();
-		for (id in Reg.animatedTiles)
-		{
-			if (tilemap.getTileInstances(id) != null)
-			{
-				for (tileIndex in tilemap.getTileInstances(id))
-				{
-					var sprite:FlxSprite = tilemap.tileToFlxSprite(tileIndex % tilemap.widthInTiles, Math.floor(tileIndex / tilemap.widthInTiles), -1);
-					sprites.push(sprite);
-				}
-			}
-		}
-		return sprites;
 	}
 	
 	override public function destroy():Void

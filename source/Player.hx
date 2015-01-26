@@ -18,7 +18,7 @@ import haxe.io.Input;
 class Player extends Actor
 {
 	public var _gamePad:FlxGamepad;
-	private var playerNumber:Int;
+	public var playerNumber:Int;
 	public var inputmanager:InputManager;
 	public var isAiming = false;
 	public var activeWeapon:Weapon;
@@ -47,7 +47,8 @@ class Player extends Actor
 				addWeapon(new Weapon(this, 0.2, 500, AssetPaths.bullet__png, AssetPaths.bullet__png, 25));
 			case 2:
 				myAnimationController = new AnimationController(x, y, this, "soldier");
-				addWeapon(new Weapon(this, 0.1, 400, AssetPaths.bullet__png, AssetPaths.bullet__png, 40));
+				addWeapon(new Weapon(this, 0.02, 200, AssetPaths.bullet__png, AssetPaths.bullet__png, 10));
+				this.activeWeapon.explosiveBullet = true;
 			default:
 				myAnimationController = new AnimationController(x, y, this, "enemy");
 				trace("using default animations");

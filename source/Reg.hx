@@ -29,6 +29,4 @@ class Reg
 	public static var characterAnimations:Map<String,Array<String>> = new Map<String,Array<String>>();
 	
 	public static var animatedTiles:Array<Int> = [156]; // , 157, 158, 159, 172, 173, 174, 175
-	
-	public static var collidableTiles:Array<Int> = [64, 65, 66, 67, 148, 149, 150, 151, 153, 154, 155, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 176, 177];
 }

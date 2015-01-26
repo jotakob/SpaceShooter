@@ -53,6 +53,7 @@ class Actor extends FlxObject
 	}
 	public function receiveDamage(damage:Int)
 	{
+		this.myAnimationController.DamageColoring(30);
 		hp -= damage;
 	}
 	

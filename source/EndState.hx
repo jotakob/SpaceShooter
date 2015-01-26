@@ -1,6 +1,7 @@
 package ;
 import flixel.FlxSprite;
 import flixel.FlxState;
+
 import openfl.Assets;
 /**
  * ...
@@ -8,10 +9,10 @@ import openfl.Assets;
  */
 class EndState extends FlxState
 {
-	var endingScreen:FlxSprite;
+	var endingScreen:FlxSprite = new FlxSprite();
 	override public function create():Void
 	{
-		endingScreen.loadGraphic(AssetPaths.EndScreen__png, false, 1280, 720);
+		endingScreen.loadGraphic(AssetPaths.EndScreen__png);
 		add(endingScreen); 
 		super.create();
 	}

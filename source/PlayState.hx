@@ -128,7 +128,7 @@ class PlayState extends FlxState
 		
 		//Collision only
 		FlxG.collide(Enemies, currentLevel.hitTilemaps);
-		FlxG.collide(Enemies, Enemies);
+		//FlxG.collide(Enemies, Enemies);
 		if (!FlxG.keys.checkStatus(FlxG.keys.getKeyCode("N"), FlxKey.PRESSED))
 		{
 			FlxG.collide(Players, currentLevel.hitTilemaps);
@@ -170,7 +170,7 @@ class PlayState extends FlxState
 			cameraObj.y = tempY / yPlayers;
 		trace(Enemies.members.length);
 		
-		if (Enemies.members.length < 10)
+		if (Enemies.members.length < 20)
 		{
 			FlxG.switchState(new EndState());
 		}

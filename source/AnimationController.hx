@@ -97,11 +97,11 @@ class AnimationController extends FlxSprite
 				botSprite.animation.play("lr");
 			}
 	}
-	public function DamageColoring()
+	public function DamageColoring(timer:Int = 60)
 	{
-		damageTimer = 60;
-		topSprite.setColorTransform(1, .2, .2, 1, -500, 0, 0);
-		botSprite.setColorTransform(1, .2, .2, 1, -500, 0, 0);
+		damageTimer = timer;
+		topSprite.setColorTransform(1, .2, .2, 1, 255, 0, 0);
+		botSprite.setColorTransform(1, .2, .2, 1, 255, 0, 0);
 	}
 	public function DamageColoringReset()
 	{

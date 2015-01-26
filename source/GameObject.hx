@@ -40,7 +40,7 @@ class GameObject extends FlxObject
 	{
 		for (i in 0...tilesToSet.length)
 		{
-			level.layerWalls2.setTile(tilesToSet[i][0], tilesToSet[i][1], tilesToSet[i][2]);
+			level.layerInteractiveTiles.setTile(tilesToSet[i][0], tilesToSet[i][1], tilesToSet[i][2]);
 		}
 	}
 	
@@ -58,7 +58,7 @@ class GameObject extends FlxObject
 			deactivateSound.play();
 		for (i in tilesToSet)
 		{
-			level.layerWalls2.setTile(i[0], i[1], i[3]);
+			level.layerInteractiveTiles.setTile(i[0], i[1], i[3]);
 		}
 	}
 	

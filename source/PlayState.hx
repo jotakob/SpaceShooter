@@ -59,6 +59,7 @@ class PlayState extends FlxState
 		Reg.currentState = this;
 		
 		Reg.currentLevel = currentLevel = new Level_Demo(true, null, this);
+		currentLevel.addTileAnimations(currentLevel.layerInteractiveTiles);
 		
 		cameraObj = new FlxObject();
 		add(cameraObj);

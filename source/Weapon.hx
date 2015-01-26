@@ -14,7 +14,7 @@ class Weapon
 	private var	 bulletImage: String;
 	private var  damage:Int;
 	private var  framesUntilShooting:Int = 0;
-	
+	public var explosiveBullet:Bool = false;
 	
 	public function new(player:Player, FiringRate:Float, ProjectileSpeed:Int, WeaponImage:String, BulletImage:String, Damage:Int) 
 	{
@@ -40,10 +40,10 @@ class Weapon
 	
 	private function shoot()
 	{
-		trace(owner.inputmanager.lastRightAngle);
 		var tempBullet:Bullet = new Bullet(0, 0, owner.inputmanager.lastRightAngle, projectileSpeed, damage, bulletImage);
 		tempBullet.x = owner.x + 16;
 		tempBullet.y = owner.y + 16;
+		tempBullet.explosive = this.explosiveBullet;
 		Reg.currentState.add(tempBullet);
 		Reg.bulletGroup.add(tempBullet);
 		Reg.sounds[0].play(true);

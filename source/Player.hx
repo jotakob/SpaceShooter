@@ -39,15 +39,16 @@ class Player extends Actor
 		
 		switch(playerNumber)
 		{
-			case 0:
+			case 2:
 				myAnimationController = new AnimationController(x, y, this, "robot");
 				addWeapon(new ParticleWeapon(this, 0.25, 500, AssetPaths.bullet__png , AssetPaths.fire_particle__png, 1));
 			case 1:
 				myAnimationController = new AnimationController(x, y, this, "infiltrator");
 				addWeapon(new Weapon(this, 0.2, 500, AssetPaths.bullet__png, AssetPaths.bullet__png, 25));
-			case 2:
+			case 0:
 				myAnimationController = new AnimationController(x, y, this, "soldier");
-				addWeapon(new Weapon(this, 0.1, 400, AssetPaths.bullet__png, AssetPaths.bullet__png, 40));
+				addWeapon(new Weapon(this, 0.02, 200, AssetPaths.bullet__png, AssetPaths.bullet__png, 10));
+				this.activeWeapon.explosiveBullet = true;
 			default:
 				myAnimationController = new AnimationController(x, y, this, "enemy");
 				trace("using default animations");

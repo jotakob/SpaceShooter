@@ -202,13 +202,11 @@ class PlayState extends FlxState
 		{
 			var bullet:Bullet  = cast(obj1, Bullet);
 			enemy.receiveDamage(bullet.damage);
-			enemy.myAnimationController.DamageColoring();
 		}
 		else if (Type.getClass(obj1) == ParticleBullet)
 		{
 			var bullet:ParticleBullet = cast(obj1, ParticleBullet);
 			enemy.receiveDamage(bullet.damage);
-			enemy.myAnimationController.DamageColoring(30);
 		}
 		
 		obj1.kill();

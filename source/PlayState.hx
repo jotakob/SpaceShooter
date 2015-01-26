@@ -18,6 +18,7 @@ import flixel.group.FlxGroup;
 import openfl.utils.Object;
 import flixel.FlxCamera;
 import flixel.group.FlxTypedGroup;
+import flixel.util.FlxCollision;
 
 import openfl.Assets;
 import flixel.tile.FlxTilemap;
@@ -66,7 +67,6 @@ class PlayState extends FlxState
 		FlxG.camera.follow(cameraObj, FlxCamera.STYLE_LOCKON, null, 1);
 		
 		var tempPlayer:Player;
-		var tempEnemy:Enemy;
 		for (i in 0...FlxG.gamepads.getActiveGamepads().length)
 		{
 			if (_gamePads.indexOf(FlxG.gamepads.getActiveGamepads()[i]) >= 0)
@@ -83,8 +83,6 @@ class PlayState extends FlxState
 		}
 		add(Players);
 		
-		//tempEnemy = (new Enemy(300, 200));
-		//Enemies.add(tempEnemy);
 		add(Enemies);
 		
 		var tempX:Float = 0;
@@ -131,7 +129,16 @@ class PlayState extends FlxState
 		FlxG.collide(Enemies, currentLevel.hitTilemaps);
 		FlxG.collide(Enemies, Enemies);
 		if (!FlxG.keys.checkStatus(FlxG.keys.getKeyCode("N"), FlxKey.PRESSED))
-			FlxG.collide(Players, currentLevel.hitTilemaps);
+		{
+			for (i in 0...Players.length)
+			{
+				for (j in 0...currentLevel.hitTilemaps.length)
+				{
+					//FlxCollision.pixelPerfectCheck(cast(Players.members[i], FlxSprite), cast(currentLevel.hitTilemaps.members[j], FlxSprite));
+				}
+			}
+			//FlxG.collide(Players, currentLevel.hitTilemaps);
+		}
 		
 		
 		var tempX:Float = 0;

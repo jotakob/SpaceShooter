@@ -8,17 +8,16 @@ class BasicEnemy extends State
 {
 	private var timer:Int = Std.random(20) + 60;
 	private var angle:Float;
-	public function new() 
-	{ 
-	}
-	public override function Enter(owner:Actor)
+	private var distance:Float;
 	
+	public function new (){}
+	public override function Enter(owner:Actor) 
 	{
 		
 	}
-	public override function Execute(owner:Actor)
+	
+	public override function Execute(owner:Actor) 
 	{
-		
 		angle = owner.angle;
 		timer--;
 		if (timer <= 0)
@@ -32,13 +31,22 @@ class BasicEnemy extends State
 		owner.myMovementController.Move(owner.speed, angle);
 		owner.myAnimationController.rotate(angle, true);
 		owner.myAnimationController.rotate(angle, false);
+		for (i in 0...cast(Reg.currentState, PlayState).Players.members.length)
+		{
+			distance = Math.sqrt(
+			Math.pow(cast(Reg.currentState, PlayState).Players.members[i].x - owner.x, 2) + 
+			Math.pow(cast(Reg.currentState, PlayState).Players.members[i].y - owner.y, 2)
+			);
+			if (distance < 200)
+			{
+				owner.myStateManager.ChangeState(new ChaseBehaviour(cast(Reg.currentState, PlayState).Players.members[i]));
+			}
+		}
 	}
-	public override function Exit(owner:Actor)
+	
+	public override function Exit(owner:Actor) 
 	{
 		
 	}
-
-
-	
 	
 }

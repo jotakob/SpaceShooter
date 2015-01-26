@@ -45,7 +45,7 @@ class Level_Demo extends BaseLevel
 		mapString = ('assets/levels/mapCSV_Demo_Walls.csv').toString();
 		image = ('assets/levels/tiles.png');
 		properties = generateProperties( [null] );
-		layerWalls = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, false, 128, 1, properties, onAddCallback );
+		layerWalls = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, false, 60, 1, properties, onAddCallback );
 
 		mapString = ('assets/levels/mapCSV_Demo_Walls2.csv').toString();
 		image = ('assets/levels/tiles.png');

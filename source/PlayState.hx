@@ -60,6 +60,8 @@ class PlayState extends FlxState
 		
 		Reg.currentLevel = currentLevel = new Level_Demo(true, null, this);
 		currentLevel.addTileAnimations(currentLevel.layerInteractiveTiles);
+		currentLevel.collidableSprites = currentLevel.getCollidableSprites(cast(currentLevel, Level_Demo).layerWalls);
+		add(currentLevel.collidableSprites);
 		
 		cameraObj = new FlxObject();
 		add(cameraObj);
@@ -131,13 +133,29 @@ class PlayState extends FlxState
 		FlxG.collide(Enemies, Enemies);
 		if (!FlxG.keys.checkStatus(FlxG.keys.getKeyCode("N"), FlxKey.PRESSED))
 		{
+			FlxG.collide(Players, currentLevel.hitTilemaps);
+			FlxG.overlap(Players, currentLevel.collidableSprites, colide);
+			/*
 			for (i in 0...Players.length)
 			{
 				for (j in 0...currentLevel.hitTilemaps.length)
 				{
-					//FlxCollision.pixelPerfectCheck(cast(Players.members[i], FlxSprite), cast(currentLevel.hitTilemaps.members[j], FlxSprite));
+					if (Players.members[i].playerNumber == 0)
+					{
+						
+						trace("player 0");
+						if (FlxCollision.pixelPerfectCheck(cast(Players.members[i].myAnimationController.botSprite, FlxSprite), currentLevel.getCollidableSprites(cast(currentLevel, Level_Demo).layerWalls)[j]))
+						{
+							FlxG.collide(Players.members[i], currentLevel.getCollidableSprites(cast(currentLevel, Level_Demo).layerWalls)[j]);
+						}
+					}
+					else
+					{
+						FlxCollision.pixelPerfectCheck(cast(Players.members[i].myAnimationController.topSprite, FlxSprite), currentLevel.getCollidableSprites(cast(currentLevel, Level_Demo).layerWalls)[j]);
+					}
 				}
 			}
+			*/
 			//FlxG.collide(Players, currentLevel.hitTilemaps);
 		}
 		
@@ -188,7 +206,16 @@ class PlayState extends FlxState
 		var object = cast(obj1, GameObject);
 		object.trigger(cast(obj2, Player));
 	}
-	
+	private function colide(obj1:FlxObject, obj2:FlxObject)
+	{
+		trace("overlapping");
+		var tempSprite1:Player = cast(obj1,Player);
+		var tempSprite2:FlxSprite = cast(obj2, FlxSprite);
+		if (FlxCollision.pixelPerfectCheck(tempSprite1.myAnimationController.botSprite,tempSprite2))
+		{
+			FlxG.collide(tempSprite1,tempSprite2);
+		}
+	}
 	private function enemyCollision(obj1:FlxObject, obj2:FlxObject)
 	{
 		cast(obj1, Player).receiveDamage(5);

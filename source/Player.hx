@@ -18,7 +18,7 @@ import haxe.io.Input;
 class Player extends Actor
 {
 	public var _gamePad:FlxGamepad;
-	private var playerNumber:Int;
+	public var playerNumber:Int;
 	public var inputmanager:InputManager;
 	public var isAiming = false;
 	public var activeWeapon:Weapon;

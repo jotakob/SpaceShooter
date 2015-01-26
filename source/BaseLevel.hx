@@ -35,6 +35,8 @@ class BaseLevel extends FlxGroup
 	public var paths:Array<Dynamic>;	// Array of PathData
 	public var shapes:Array<Dynamic>;	//Array of ShapeData
 	
+	public var collidableSprites:FlxTypedGroup<FlxSprite>;
+	
 	public var triggers:FlxTypedGroup<Trigger> = new FlxTypedGroup<Trigger>();
 	public var buttons:FlxTypedGroup<Button> = new FlxTypedGroup<Button>();
 	public var repeatables:FlxTypedGroup<GameObject> = new FlxTypedGroup<GameObject>();
@@ -51,6 +53,7 @@ class BaseLevel extends FlxGroup
 		tilemaps = new FlxGroup();
 		paths = new Array<Dynamic>();
 		shapes = new Array<Dynamic>();
+		
 		linkedObjectDictionary = new Array<Dynamic>();
 		
 		super();
@@ -264,17 +267,17 @@ class BaseLevel extends FlxGroup
 		}
 	}
 	
-	public function getCollidableSprites(tilemap:FlxTilemap):Array<FlxSprite>
+	public function getCollidableSprites(tilemap:FlxTilemap):FlxTypedGroup<FlxSprite>
 	{
-		var sprites = new Array<FlxSprite>();
-		for (id in Reg.animatedTiles)
+		var sprites = new FlxTypedGroup<FlxSprite>();
+		for (id in Reg.collidableTiles)
 		{
 			if (tilemap.getTileInstances(id) != null)
 			{
 				for (tileIndex in tilemap.getTileInstances(id))
 				{
-					var sprite:FlxSprite = tilemap.tileToFlxSprite(Math.floor(tileIndex / 32), tileIndex % 32, -1);
-					sprites.push(sprite);
+					var sprite:FlxSprite = tilemap.tileToFlxSprite(Math.floor(tileIndex / 32), tileIndex % 32, 0);
+					sprites.add(sprite);
 				}
 			}
 		}

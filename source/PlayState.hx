@@ -77,7 +77,7 @@ class PlayState extends FlxState
 			}
 			trace("add");
 			_gamePads.push(FlxG.gamepads.getActiveGamepads()[i]);
-			tempPlayer = (new Player(0, 0, i, FlxG.gamepads.getActiveGamepads()[i]));
+			tempPlayer = (new Player(0, 0, 2, FlxG.gamepads.getActiveGamepads()[i]));
 			tempPlayer.x = Std.random(Math.floor(currentLevel.spawnPoint.width - tempPlayer.width)) + currentLevel.spawnPoint.x;
 			tempPlayer.y = Std.random(Math.floor(currentLevel.spawnPoint.height - tempPlayer.height)) + currentLevel.spawnPoint.y;
 			Players.add(tempPlayer);
@@ -128,7 +128,7 @@ class PlayState extends FlxState
 		
 		//Collision only
 		FlxG.collide(Enemies, currentLevel.hitTilemaps);
-		FlxG.collide(Enemies, Enemies);
+		//FlxG.collide(Enemies, Enemies);
 		if (!FlxG.keys.checkStatus(FlxG.keys.getKeyCode("N"), FlxKey.PRESSED))
 		{
 			FlxG.collide(Players, currentLevel.hitTilemaps);
@@ -170,7 +170,7 @@ class PlayState extends FlxState
 			cameraObj.y = tempY / yPlayers;
 		trace(Enemies.members.length);
 		
-		if (Enemies.members.length < 10)
+		if (Enemies.members.length < 20)
 		{
 			FlxG.switchState(new EndState());
 		}

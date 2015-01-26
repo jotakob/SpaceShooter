@@ -46,6 +46,9 @@ class Weapon
 		tempBullet.explosive = this.explosiveBullet;
 		Reg.currentState.add(tempBullet);
 		Reg.bulletGroup.add(tempBullet);
+		if (this.explosiveBullet)
+		Reg.sounds[4].play(true);
+		else
 		Reg.sounds[0].play(true);
 	}
 

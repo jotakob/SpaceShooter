@@ -174,7 +174,7 @@ class PlayState extends FlxState
 	private function enemyCollision(obj1:FlxObject, obj2:FlxObject)
 	{
 		cast(obj1, Player).receiveDamage(5);
-		//cast(obj1, Player).myAnimationController.DamageAnimation();
+		cast(obj1, Player).myAnimationController.DamageColoring();
 	}
 	
 	private function receiveDamage(obj1:FlxObject,obj2:FlxObject)
@@ -184,11 +184,13 @@ class PlayState extends FlxState
 		{
 			var bullet:Bullet  = cast(obj1, Bullet);
 			enemy.receiveDamage(bullet.damage);
+			enemy.myAnimationController.DamageColoring();
 		}
 		else if (Type.getClass(obj1) == ParticleBullet)
 		{
 			var bullet:ParticleBullet = cast(obj1, ParticleBullet);
 			enemy.receiveDamage(bullet.damage);
+			enemy.myAnimationController.DamageColoring();
 		}
 		
 		obj1.kill();

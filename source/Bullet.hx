@@ -13,7 +13,7 @@ import haxe.Timer;
  */
 class Bullet extends FlxSprite
 {
-	private var timer:Float = 180;
+	private var lifetime:Float = 180;
 	private var speed:Int;
 	public var damage:Int;
 	public var explosive:Bool = false;
@@ -36,8 +36,8 @@ class Bullet extends FlxSprite
 		//x = x + directionX;
 		//y = y + directionY;
 		FlxAngle.rotatePoint(speed, 0, 0, 0, angle, velocity);
-		timer --;
-		if (timer < 1)
+		lifetime --;
+		if (lifetime < 1)
 		{
 			this.kill();
 		}

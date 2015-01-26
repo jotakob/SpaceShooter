@@ -156,7 +156,7 @@ class Level_Demo extends BaseLevel
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"setTiles", value:"42,9,0|43,9,0|44,9,0|45,9,0" }, { name:"repeatable", value:false }, null] ), 1, 1 );
 		obj = new BoxData(1787.000, 697.000, 0.000, 29.412, 18.027, ObjectsGroup );
 		shapes.push(obj);
-		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"repeatable", value:true }, { name:"resetTime", value:90 }, { name:"setTiles", value:"52,20,0|53,20,0|54,20,0|55,20,0|56,21,172" }, null] ), 1, 1 );
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"repeatable", value:false }, { name:"resetTime", value:90 }, { name:"setTiles", value:"52,20,0|53,20,0|54,20,0|55,20,0|56,21,172" }, null] ), 1, 1 );
 		obj = new BoxData(1461.000, 475.000, 0.000, 28.310, 31.830, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"setTiles", value:"47,12,0|47,13,0|47,14,0" }, { name:"resetTime", value:90 }, { name:"repeatable", value:true }, null] ), 1, 1 );

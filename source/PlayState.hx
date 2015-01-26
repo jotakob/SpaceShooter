@@ -168,8 +168,13 @@ class PlayState extends FlxState
 			cameraObj.x = tempX / xPlayers;
 		if (yPlayers > 0)
 			cameraObj.y = tempY / yPlayers;
+		trace(Enemies.members.length);
 		
-		
+		if (Enemies.members.length < 10)
+		{
+			FlxG.switchState(new EndState());
+		}
+			
 		currentLevel.repeatables.update();
 		super.update();
 		
@@ -209,7 +214,6 @@ class PlayState extends FlxState
 	{
 		obj1.kill();
 	}
-	
 	
 }
 

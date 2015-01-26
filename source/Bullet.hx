@@ -51,6 +51,7 @@ class Bullet extends FlxSprite
 			explosion.x = this.x - explosion.width / 2;
 			explosion.y = this.y - explosion.height / 2;
 			Reg.currentState.add(explosion);
+			Reg.sounds[5].play(true);
 			FlxG.overlap(explosion, cast(Reg.currentState, PlayState).Enemies, explodeEnemies);
 			Timer.delay(explosion.kill, 100);
 		}

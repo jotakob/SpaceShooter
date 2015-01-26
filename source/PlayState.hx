@@ -77,7 +77,7 @@ class PlayState extends FlxState
 			}
 			trace("add");
 			_gamePads.push(FlxG.gamepads.getActiveGamepads()[i]);
-			tempPlayer = (new Player(0, 0, i, FlxG.gamepads.getActiveGamepads()[i]));
+			tempPlayer = (new Player(0, 0, 2, FlxG.gamepads.getActiveGamepads()[i]));
 			tempPlayer.x = Std.random(Math.floor(currentLevel.spawnPoint.width - tempPlayer.width)) + currentLevel.spawnPoint.x;
 			tempPlayer.y = Std.random(Math.floor(currentLevel.spawnPoint.height - tempPlayer.height)) + currentLevel.spawnPoint.y;
 			Players.add(tempPlayer);

@@ -460,7 +460,7 @@ for groupIndex = 0,groupCount do
 		if # maps > 0 then
 			fileText = fileText..tab1.."//Tilemaps\n"
 			for i,v in ipairs(maps) do
-				if maps[i][2] ~= "Walls2" then -- XXXX Change interactive Layer here
+				if maps[i][2] ~= "InteractiveTiles" then -- XXXX Change interactive Layer here
 					fileText = fileText..tab1.."public var layer"..maps[i][2]..":"..tileMapClass..";\n"
 				end
 			end

@@ -33,14 +33,14 @@ class BaseLevel extends FlxGroup
 	public var boundsMax:FlxPoint;
 	public var bgColor:Int;
 	public var paths:Array<Dynamic>;	// Array of PathData
-	public var shapes:Array<Dynamic>;	//Array of ShapeData.
+	public var shapes:Array<Dynamic>;	//Array of ShapeData
 	
 	public var triggers:FlxTypedGroup<Trigger> = new FlxTypedGroup<Trigger>();
 	public var buttons:FlxTypedGroup<Button> = new FlxTypedGroup<Button>();
 	public var repeatables:FlxTypedGroup<GameObject> = new FlxTypedGroup<GameObject>();
 	public var spawnPoint:FlxRect = new FlxRect();
 	
-	public var layerWalls2:FlxTilemap;
+	public var layerInteractiveTiles:FlxTilemap;
 	
 	public static var linkedObjectDictionary:Array<Dynamic>;	// Array <Dynamic> instead of Dictionary
 
@@ -100,7 +100,7 @@ class BaseLevel extends FlxGroup
 		FlxG.worldBounds.bottom = boundsMaxY;*/
 		
 		
-		//if ( hits )
+		if ( hits )
 			hitTilemaps.add(map);			
 		tilemaps.add(map);
 		//if(onAddCallback != null)
@@ -185,21 +185,24 @@ class BaseLevel extends FlxGroup
 				newobj = new GameObject(data.x, data.y, data.width, data.height, this);
 				triggers.add(newobj);
 		}
+		properties.remove("type");
+		
 		newobj.angle = data.angle;
 		
-		if (properties["settiles"] != null)
+		if (properties["setTiles"] != null)
 		{
 			var settiles = new Array<Array<Int>>();
-			var rows = cast(properties["settiles"], String).split("|");
+			var rows = cast(properties["setTiles"], String).split("|");
 			for (row in rows)
 			{
 				var newTile = row.split(",");
 				var newTileInt:Array<Int> = new Array<Int>();
 				for (s in newTile)
 				{newTileInt.push(Std.parseInt(s));}
-				newTileInt.push(this.layerWalls2.getTile(newTileInt[0], newTileInt[1]));
+				newTileInt.push(this.layerInteractiveTiles.getTile(newTileInt[0], newTileInt[1]));
 				settiles.push(newTileInt);
 			}
+			properties.remove("setTiles");
 			newobj.tilesToSet = settiles;
 		}
 		if (properties["repeatable"] == true)
@@ -207,6 +210,12 @@ class BaseLevel extends FlxGroup
 			cast(newobj, GameObject).repeatable = true;
 			cast(newobj, GameObject).resetTime = properties["resettime"];
 			repeatables.add(cast(newobj, GameObject));
+			properties.remove("repeatable");
+		}
+		
+		for ( p in properties.keys())
+		{
+			Reflect.setField(newobj, p, properties[p]);
 		}
 		add(newobj);
 		
@@ -237,6 +246,41 @@ class BaseLevel extends FlxGroup
 		callbackNewData(link, onAddCallback, null, properties, objectFrom.scrollFactor.x, objectFrom.scrollFactor.y);
 	}
 
+	public function addTileAnimations(tilemap:FlxTilemap)
+	{
+		for (id in Reg.animatedTiles)
+		{
+			if (tilemap.getTileInstances(id) != null)
+			{
+				for (tileIndex in tilemap.getTileInstances(id))
+				{
+					var sprite:FlxSprite = tilemap.tileToFlxSprite(Math.floor(tileIndex / 32), tileIndex % 32, -1);
+					sprite.loadGraphic("assets/levels/tileanimations/" + id + ".png", true, 32, 32);
+					sprite.animation.add("a", [0, 1, 2, 3, 4, 5], 6, true);
+					sprite.animation.play("a");
+					Reg.currentState.add(sprite);
+				}
+			}
+		}
+	}
+	
+	public function getCollidableSprites(tilemap:FlxTilemap):Array<FlxSprite>
+	{
+		var sprites = new Array<FlxSprite>();
+		for (id in Reg.animatedTiles)
+		{
+			if (tilemap.getTileInstances(id) != null)
+			{
+				for (tileIndex in tilemap.getTileInstances(id))
+				{
+					var sprite:FlxSprite = tilemap.tileToFlxSprite(Math.floor(tileIndex / 32), tileIndex % 32, -1);
+					sprites.push(sprite);
+				}
+			}
+		}
+		return sprites;
+	}
+	
 	override public function destroy():Void
 	{
 		masterLayer.destroy();

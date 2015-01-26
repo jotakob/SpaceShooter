@@ -37,6 +37,7 @@ class BaseLevel extends FlxGroup
 	
 	public var triggers:FlxTypedGroup<Trigger> = new FlxTypedGroup<Trigger>();
 	public var buttons:FlxTypedGroup<Button> = new FlxTypedGroup<Button>();
+	public var repeatables:FlxTypedGroup<GameObject> = new FlxTypedGroup<GameObject>();
 	public var spawnPoint:FlxRect = new FlxRect();
 	
 	public var layerWalls2:FlxTilemap;
@@ -168,7 +169,6 @@ class BaseLevel extends FlxGroup
 			case "button":
 				newobj = new Button(data.x, data.y, data.width, data.height, this);
 				buttons.add(newobj);
-				triggers.add(newobj);
 			case "trigger":
 				newobj = new Trigger(data.x, data.y, data.width, data.height, this);
 				triggers.add(newobj);
@@ -204,8 +204,9 @@ class BaseLevel extends FlxGroup
 		}
 		if (properties["repeatable"] == true)
 		{
-			newobj.repeatable = true;
-			newobj.resetTime = cast(properties["resettime"], Int);
+			cast(newobj, GameObject).repeatable = true;
+			cast(newobj, GameObject).resetTime = properties["resettime"];
+			repeatables.add(cast(newobj, GameObject));
 		}
 		add(newobj);
 		

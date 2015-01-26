@@ -1,6 +1,7 @@
 package ;
 
 import flixel.FlxObject;
+import flixel.system.FlxSound;
 
 /**
  * ...
@@ -9,10 +10,14 @@ import flixel.FlxObject;
 class GameObject extends FlxObject
 {
 	public var repeatable:Bool = false;
-	public var wasTriggered:Bool = false;
-	public var pressed:Bool = false;
-	public var resetTime = 1;
-	public var tilesToSet:Array<Array<Int>>;
+	private var hasBeenExecuted:Bool = false; //Has the associated action been executed?
+	public var triggered:Bool = false; //Is it being triggered right at this moment?
+	public var resetTime:Int = 50; // In Frames
+	private var framesUntilReset:Int = 1;
+	public var sound:FlxSound;
+	public var deactivateSound:FlxSound;
+	
+	public var tilesToSet:Array<Array<Int>> = new Array<Array<Int>>();
 	private var level:BaseLevel;
 
 	public function new(X:Float=0, Y:Float=0, Width:Float=0, Height:Float=0, Level:BaseLevel) 
@@ -21,9 +26,14 @@ class GameObject extends FlxObject
 		level = Level;
 	}
 	
-	public function onTrigger(trigger:Actor)
+	public function trigger(actor:Actor)
 	{
-		
+		triggered = true;
+		if (!repeatable && !hasBeenExecuted)
+		{
+			hasBeenExecuted = true;
+			activate();
+		}
 	}
 	
 	private function setTiles(tilesToSet:Array<Array<Int>>)
@@ -34,12 +44,47 @@ class GameObject extends FlxObject
 		}
 	}
 	
+	private function activate()
+	{
+		if (sound != null)
+			sound.play();
+		setTiles(tilesToSet);
+		trace("activating");
+	}
+	
 	private function deactivate()
 	{
-		for (i in 0...tilesToSet.length)
+		if (deactivateSound != null)
+			deactivateSound.play();
+		for (i in tilesToSet)
 		{
-			level.layerWalls2.setTile(tilesToSet[i][0], tilesToSet[i][1], tilesToSet[i][3]);
+			level.layerWalls2.setTile(i[0], i[1], i[3]);
 		}
-		pressed = false;
+	}
+	
+	public override function update()
+	{
+		super.update();
+		if (repeatable)
+		{
+			framesUntilReset--;
+			
+			if (triggered)
+			{
+				framesUntilReset = resetTime;
+				if (!hasBeenExecuted)
+				{
+					activate();
+					hasBeenExecuted = true;
+				}
+				
+				triggered = false;
+			}
+			if (framesUntilReset == 0)
+			{
+				deactivate();
+				hasBeenExecuted = false;
+			}
+		}
 	}
 }

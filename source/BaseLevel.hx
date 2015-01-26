@@ -254,7 +254,7 @@ class BaseLevel extends FlxGroup
 			{
 				for (tileIndex in tilemap.getTileInstances(id))
 				{
-					var sprite:FlxSprite = tilemap.tileToFlxSprite(Math.floor(tileIndex / 32), tileIndex % 32, -1);
+					var sprite:FlxSprite = tilemap.tileToFlxSprite(tileIndex % tilemap.widthInTiles, Math.floor(tileIndex / tilemap.widthInTiles), -1);
 					sprite.loadGraphic("assets/levels/tileanimations/" + id + ".png", true, 32, 32);
 					sprite.animation.add("a", [0, 1, 2, 3, 4, 5], 6, true);
 					sprite.animation.play("a");
@@ -273,7 +273,7 @@ class BaseLevel extends FlxGroup
 			{
 				for (tileIndex in tilemap.getTileInstances(id))
 				{
-					var sprite:FlxSprite = tilemap.tileToFlxSprite(Math.floor(tileIndex / 32), tileIndex % 32, -1);
+					var sprite:FlxSprite = tilemap.tileToFlxSprite(tileIndex % tilemap.widthInTiles, Math.floor(tileIndex / tilemap.widthInTiles), -1);
 					sprites.push(sprite);
 				}
 			}

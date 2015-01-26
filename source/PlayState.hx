@@ -170,7 +170,7 @@ class PlayState extends FlxState
 			cameraObj.y = tempY / yPlayers;
 		trace(Enemies.members.length);
 		
-		if (Enemies.members.length < 20)
+		if (Enemies.members.length < 1)
 		{
 			FlxG.switchState(new EndState());
 		}

@@ -29,6 +29,12 @@ class Enemy extends Actor
 		super.update();
 	}
 	
+	override public function die()
+	{
+		super.die();
+		cast(Reg.currentState, PlayState).Enemies.remove(this, true);
+	}
+	
 	public function SetGameState()
 	{
 		myStateManager.ChangeState(new BasicEnemy()); 

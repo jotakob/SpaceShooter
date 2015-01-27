@@ -55,6 +55,8 @@ class MenuState extends FlxState
 		_btnPlay.onUp.sound = FlxG.sound.load("assets/sounds/click.ogg");
 		add(_btnPlay);
 		
+		
+		Reg.inventory.set("pickup", 0);
 		loadAnimations();
 		loadMusic();
 		Reg.music[0].play();
@@ -163,8 +165,6 @@ class MenuState extends FlxState
 	 */
 	override public function update():Void
 	{
-		trace(hover);
-		trace(spaceship.y);
 		background.x = background.x - 1;
 		background2.x = background2.x -1;
 		if (background.x < -background.width)
@@ -196,7 +196,7 @@ class MenuState extends FlxState
 			else
 			{
 				explosion.x = spaceship.x + spaceship.width/2 - 20;
-				explosion.y = spaceship.y + spaceship.height/2;
+				explosion.y = spaceship.y + spaceship.height/2 - 20;
 				add(explosion);
 				explosion.animation.play("explosion");
 			}

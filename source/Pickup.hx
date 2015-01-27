@@ -25,7 +25,7 @@ class Pickup extends GameObject
 		super(X, Y, Width, Height, Level);
 		
 		emitter = new FlxEmitter(X, Y);
-		pickupImage.loadGraphic(AssetPaths.enigneer_pickup_card__png, false, 32, 32, false);
+		pickupImage.loadGraphic(AssetPaths.lore_pickup_card__png, false, 32, 32, false);
 		pickupImage.x = X- pickupImage.width/2;
 		pickupImage.y = Y - pickupImage.width / 2;
 			
@@ -47,8 +47,20 @@ class Pickup extends GameObject
 		Reg.currentState.add(emitter);
 		emitter.start(false, 0.2, 0, 0, 0);
 		Reg.currentState.add(pickupImage);
-		}
 		
-		
+	}
+	
+	public override function activate()
+	{
+		Reg.inventory.set("pickup", Reg.inventory["pickup"] + 1);
+		this.kill();
+	}
+	
+	public override function kill()
+	{
+		emitter.destroy();
+		pickupImage.destroy();
+		super.kill();
+	}
 	
 }

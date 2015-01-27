@@ -62,10 +62,6 @@ class Actor extends FlxObject
 			cast(this, Player).activeWeapon = null;
 			cast(this, Player).weapons = null;
 		}
-		if (Type.getClass(this) == Enemy)
-		{
-			cast (Reg.currentState, PlayState).Enemies.remove(this, true);
-		}
 	}
 	
 }

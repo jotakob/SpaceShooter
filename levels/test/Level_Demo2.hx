@@ -45,12 +45,12 @@ class Level_Demo2 extends BaseLevel
 		mapString = ('assets/levels/mapCSV_Demo2_Walls.csv').toString();
 		image = ('assets/levels/tiles.png');
 		properties = generateProperties( [null] );
-		layerWalls = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, false, 128, 1, properties, onAddCallback );
+		layerWalls = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, true, 128, 1, properties, onAddCallback );
 
 		mapString = ('assets/levels/mapCSV_Demo2_InteractiveTiles.csv').toString();
 		image = ('assets/levels/tiles.png');
 		properties = generateProperties( [null] );
-		layerInteractiveTiles = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, false, 128, 1, properties, onAddCallback );
+		layerInteractiveTiles = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, true, 128, 1, properties, onAddCallback );
 
 
 		//Add layers to the master group in correct order.
@@ -205,7 +205,7 @@ class Level_Demo2 extends BaseLevel
 		obj = new BoxData(577.000, 548.000, 0.000, 21.150, 21.150, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
-		obj = new BoxData(237.000, 1055.000, 0.000, 35.846, 63.725, ObjectsGroup );
+		obj = new BoxData(237.000, 1055.000, 0.000, 35.850, 63.730, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"collisionbox" }, null] ), 1, 1 );
 	}

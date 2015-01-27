@@ -15,6 +15,11 @@ import flixel.util.FlxRect;
 import openfl.Assets;
 import flixel.system.FlxCollisionType;
 
+
+/**
+ * 
+ * @author Jakob
+ */
 class BaseLevel extends FlxGroup
 {
 	// The masterLayer contains every single object in this group making it easy to empty the level.
@@ -90,20 +95,14 @@ class BaseLevel extends FlxGroup
 		map.y = ypos;
 		map.scrollFactor.x = scrollX;
 		map.scrollFactor.y = scrollY;
-		map.tileScaleHack = 1.0;
 		
 		
-		if (FlxG.worldBounds.width < map.width)
+		/*if (FlxG.worldBounds.width < map.width)
 			FlxG.worldBounds.width = map.width;
 		if (FlxG.worldBounds.height < map.height)
-			FlxG.worldBounds.height = map.height;
-		/*FlxG.worldBounds.left = boundsMinX;
-		FlxG.worldBounds.right = boundsMaxX;
-		FlxG.worldBounds.top = boundsMinY;
-		FlxG.worldBounds.bottom = boundsMaxY;*/
+			FlxG.worldBounds.height = map.height;*/
 		
-		
-		//if ( hits )
+		if ( hits )
 			hitTilemaps.add(map);			
 		tilemaps.add(map);
 		//if(onAddCallback != null)
@@ -181,7 +180,6 @@ class BaseLevel extends FlxGroup
 			case "enemy":
 				newobj = new Enemy(data.x, data.y);
 				cast(Reg.currentState, PlayState).Enemies.add(cast(newobj, Enemy));
-				//masterLayer.add(newobj);
 			case "warp":
 				newobj = new Warp(data.x, data.y, data.width, data.height, this);
 				triggers.add(newobj);

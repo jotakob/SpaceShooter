@@ -49,7 +49,6 @@ class GameObject extends FlxObject
 		if (sound != null)
 			sound.play();
 		setTiles(tilesToSet);
-		trace("activating");
 	}
 	
 	private function deactivate()

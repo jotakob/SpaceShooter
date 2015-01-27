@@ -15,8 +15,8 @@ class Warp extends GameObject
 	
 	public override function activate()
 	{
-		trace("warping");
-		cast(Reg.currentState, PlayState).changeLevel(target, 0);
+		//if (cast(Reg.currentState, PlayState).Enemies.members.length < 4)
+			cast(Reg.currentState, PlayState).changeLevel(target, 0);
 	}
 	
 }

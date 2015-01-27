@@ -75,7 +75,6 @@ class PlayState extends FlxState
 				trace("break");
 				break;
 			}
-			trace("adding Player");
 			_gamePads.push(FlxG.gamepads.getActiveGamepads()[i]);
 			tempPlayer = (new Player(0, 0, i, FlxG.gamepads.getActiveGamepads()[i]));
 			Players.add(tempPlayer);
@@ -121,6 +120,10 @@ class PlayState extends FlxState
 		Reg.currentLevel = currentLevel = Reg.levels[name];
 		currentLevel.createObjects(null, this);
 		currentLevel.addTileAnimations(currentLevel.layerInteractiveTiles);
+		FlxG.worldBounds.left = currentLevel.boundsMinX;
+		FlxG.worldBounds.right = currentLevel.boundsMaxX;
+		FlxG.worldBounds.top = currentLevel.boundsMinY;
+		FlxG.worldBounds.bottom = currentLevel.boundsMaxY;
 		add(Enemies);
 		
 		for (tempPlayer in Players.iterator())
@@ -144,6 +147,11 @@ class PlayState extends FlxState
 		add(PlayerStuff);
 		add(Players);
 		add(hud);
+	}
+	
+	private function killstuff(obj:FlxBasic)
+	{
+		obj.destroy();
 	}
 	
 	/**
@@ -174,8 +182,9 @@ class PlayState extends FlxState
 		if (!FlxG.keys.checkStatus(FlxG.keys.getKeyCode("N"), FlxKey.PRESSED))
 		{
 			FlxG.collide(Players, currentLevel.hitTilemaps);
-		FlxG.collide(Players, currentLevel.collisionBoxes);
+			FlxG.collide(Players, currentLevel.collisionBoxes);
 		}
+		
 		
 		
 		var tempX:Float = 0;
@@ -206,19 +215,23 @@ class PlayState extends FlxState
 				tempY += tmpPlayer.y + (FlxG.camera.height / screenCenterSize);
 				yPlayers++;
 			}
+			
+			//Game Ending
+			if ((tmpPlayer.playerNumber == 0) && (tmpPlayer._gamePad.checkStatus(XboxButtonID.START, FlxGamepad.PRESSED)))
+				FlxG.camera.fade(0xff000000, 2, false, endGame);
 		}
 		if (xPlayers > 0)
 			cameraObj.x = tempX / xPlayers;
 		if (yPlayers > 0)
 			cameraObj.y = tempY / yPlayers;
-		
-		if (Enemies.members.length < 17)
-		{
-			//FlxG.camera.fade(0xff000000, 1);
-		}
 			
 		currentLevel.repeatables.update();
 		super.update();
+	}
+	
+	private function endGame()
+	{
+		FlxG.switchState(new EndState());
 	}
 	
 	private function callTrigger(obj1:FlxObject, obj2:FlxObject)
@@ -255,10 +268,6 @@ class PlayState extends FlxState
 		obj1.kill();
 	}
 	
-	private function killstuff(obj:FlxBasic)
-	{
-		obj.destroy();
-	}
 	
 }
 

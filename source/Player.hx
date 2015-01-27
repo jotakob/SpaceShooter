@@ -43,7 +43,7 @@ class Player extends Actor
 				width = height = 16;
 				myAnimationController = new AnimationController(x, y, this, "engineer");
 				addWeapon(new Weapon(this, 0.08, 700, AssetPaths.bullet__png, AssetPaths.bullet__png, 40));
-				hitSound = Reg.sounds[1];
+				hitSound = Reg.sounds[11];
 			case 2:
 				width = height = 24;
 				myAnimationController = new AnimationController(x, y, this, "robot");
@@ -53,12 +53,12 @@ class Player extends Actor
 				width = height = 16;
 				myAnimationController = new AnimationController(x, y, this, "infiltrator");
 				addWeapon(new Weapon(this, 0.2, 500, AssetPaths.bullet__png, AssetPaths.bullet__png, 25));
-				hitSound = Reg.sounds[1];
+				hitSound = Reg.sounds[8];
 			case 0:
 				width = height = 24;
 				myAnimationController = new AnimationController(x, y, this, "soldier");
 				addWeapon(new Weapon(this, 0.03, 400, AssetPaths.bullet__png, AssetPaths.Potatoetile2__png, 10));
-				hitSound = Reg.sounds[1];
+				hitSound = Reg.sounds[7];
 				this.activeWeapon.explosiveBullet = true;
 			default:
 				myAnimationController = new AnimationController(x, y, this, "enemy");

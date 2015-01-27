@@ -40,7 +40,6 @@ class AnimationController extends FlxSprite
 		{
 			botanimation.push(Std.parseInt(animationData[1].charAt(i)));
 		}
-		Reg.currentState.add(botSprite);
 		botSprite.animation.add("lr",botanimation, 9, true);
 		
 		topSprite.loadGraphic("assets/images/sprites/" + animationData[0], true, 32, 32);
@@ -54,7 +53,16 @@ class AnimationController extends FlxSprite
 		
 		topSprite.animation.add("lr", topanimation, 6, false);
 		
-		Reg.currentState.add(topSprite);
+		if (Type.getClass(_owner) == Player)
+		{
+			cast(Reg.currentState, PlayState).PlayerStuff.add(topSprite);
+			cast(Reg.currentState, PlayState).PlayerStuff.add(botSprite);
+		}
+		else
+		{
+			Reg.currentState.add(topSprite);
+			Reg.currentState.add(botSprite);
+		}
 		
 		hitboxOffset = Math.floor((32 - _owner.width) /2);
 	}

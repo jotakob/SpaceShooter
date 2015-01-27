@@ -24,7 +24,7 @@ class Player extends Actor
 	public var activeWeapon:Weapon;
 	public var weapons:Array<Weapon> = new Array<Weapon>();
 	
-	private var skipFrames:Int = 3;
+	public var skipFrames:Int = 2;
 	
 	//private var Input:InputManager;
 	public function new(X:Float=0, Y:Float=0,?PlayerNumber:Int,?GamePad:FlxGamepad) 

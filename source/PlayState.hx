@@ -125,6 +125,7 @@ class PlayState extends FlxState
 		
 		for (tempPlayer in Players.iterator())
 		{
+			tempPlayer.skipFrames = 2;
 			tempPlayer.x = Std.random(Math.floor(currentLevel.spawnPoints[spawnPointID].width - tempPlayer.width)) + currentLevel.spawnPoints[spawnPointID].x;
 			tempPlayer.y = Std.random(Math.floor(currentLevel.spawnPoints[spawnPointID].height - tempPlayer.height)) + currentLevel.spawnPoints[spawnPointID].y;
 		}

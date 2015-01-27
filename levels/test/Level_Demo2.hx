@@ -45,12 +45,12 @@ class Level_Demo2 extends BaseLevel
 		mapString = ('assets/levels/mapCSV_Demo2_Walls.csv').toString();
 		image = ('assets/levels/tiles.png');
 		properties = generateProperties( [null] );
-		layerWalls = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, true, 128, 1, properties, onAddCallback );
+		layerWalls = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, false, 128, 1, properties, onAddCallback );
 
 		mapString = ('assets/levels/mapCSV_Demo2_InteractiveTiles.csv').toString();
 		image = ('assets/levels/tiles.png');
 		properties = generateProperties( [null] );
-		layerInteractiveTiles = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, true, 128, 1, properties, onAddCallback );
+		layerInteractiveTiles = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, false, 128, 1, properties, onAddCallback );
 
 
 		//Add layers to the master group in correct order.
@@ -88,9 +88,9 @@ class Level_Demo2 extends BaseLevel
 		obj = new BoxData(286.000, 1067.000, 0.000, 124.600, 73.000, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"warpexit" }, { name:"id", value:0 }, null] ), 1, 1 );
-		obj = new BoxData(527.000, 160.000, 0.000, 28.028, 26.580, ObjectsGroup );
+		obj = new BoxData(527.000, 160.000, 0.000, 28.030, 26.580, ObjectsGroup );
 		shapes.push(obj);
-		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"setTiles", value:"17,6,0|17,7,0|17,80|17,9,0|17,10,0" }, null] ), 1, 1 );
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"setTiles", value:"18,6,0|18,7,0|18,8,0|18,9,0|18,10,0" }, null] ), 1, 1 );
 		obj = new BoxData(640.000, 829.000, 0.000, 28.000, 28.000, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"pickup" }, { name:"class", value:"lore" }, null] ), 1, 1 );
@@ -205,6 +205,9 @@ class Level_Demo2 extends BaseLevel
 		obj = new BoxData(577.000, 548.000, 0.000, 21.150, 21.150, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"enemy" }, null] ), 1, 1 );
+		obj = new BoxData(237.000, 1055.000, 0.000, 35.846, 63.725, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"collisionbox" }, null] ), 1, 1 );
 	}
 
 	public function generateObjectLinks(onAddCallback:Dynamic = null):Void

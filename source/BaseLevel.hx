@@ -103,7 +103,7 @@ class BaseLevel extends FlxGroup
 		FlxG.worldBounds.bottom = boundsMaxY;*/
 		
 		
-		if ( hits )
+		//if ( hits )
 			hitTilemaps.add(map);			
 		tilemaps.add(map);
 		//if(onAddCallback != null)
@@ -220,7 +220,7 @@ class BaseLevel extends FlxGroup
 		if (properties["repeatable"] == true)
 		{
 			cast(newobj, GameObject).repeatable = true;
-			cast(newobj, GameObject).resetTime = properties["resettime"];
+			cast(newobj, GameObject).resetTime = properties["resetTime"];
 			repeatables.add(cast(newobj, GameObject));
 			properties.remove("repeatable");
 		}

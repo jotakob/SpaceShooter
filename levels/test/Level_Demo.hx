@@ -45,12 +45,12 @@ class Level_Demo extends BaseLevel
 		mapString = ('assets/levels/mapCSV_Demo_Walls.csv').toString();
 		image = ('assets/levels/tiles.png');
 		properties = generateProperties( [null] );
-		layerWalls = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, true, 128, 1, properties, onAddCallback );
+		layerWalls = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, false, 128, 1, properties, onAddCallback );
 
 		mapString = ('assets/levels/mapCSV_Demo_InteractiveTiles.csv').toString();
 		image = ('assets/levels/tiles.png');
 		properties = generateProperties( [null] );
-		layerInteractiveTiles = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, true, 128, 1, properties, onAddCallback );
+		layerInteractiveTiles = addTilemap(Assets.getText(mapString) ,image, 0.000, 0.000, 32, 32, 1.000, 1.000, false, 128, 1, properties, onAddCallback );
 
 
 		//Add layers to the master group in correct order.
@@ -160,9 +160,30 @@ class Level_Demo extends BaseLevel
 		obj = new BoxData(1461.000, 475.000, 0.000, 28.310, 31.830, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"setTiles", value:"47,12,0|47,13,0|47,14,0" }, { name:"resetTime", value:90 }, { name:"repeatable", value:true }, null] ), 1, 1 );
-		obj = new BoxData(2.000, 3.000, 0.000, 127.059, 127.059, ObjectsGroup );
+		obj = new BoxData(138.139, 578.000, 0.000, 50.504, 58.643, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"warp" }, { name:"target", value:"Demo2" }, null] ), 1, 1 );
+		obj = new BoxData(111.000, 576.000, 0.000, 32.353, 62.245, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"collisionbox" }, null] ), 1, 1 );
+		obj = new BoxData(1325.000, 800.000, 0.000, 36.275, 62.000, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"collisionbox" }, null] ), 1, 1 );
+		obj = new BoxData(617.000, 415.000, 0.000, 45.137, 62.000, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"collisionbox" }, null] ), 1, 1 );
+		obj = new BoxData(1506.000, 962.000, 0.000, 27.451, 27.451, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"trigger" }, { name:"setTiles", value:"45,27,255|45,29,6|47,30,4" }, { name:"repeatable", value:true }, { name:"resetTime", value:2 }, null] ), 1, 1 );
+		obj = new BoxData(1314.000, 898.000, 0.000, 27.451, 27.451, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"trigger" }, { name:"setTiles", value:"43,28,255|43,27,6|41,28,4" }, { name:"repeatable", value:true }, { name:"resetTime", value:2 }, null] ), 1, 1 );
+		obj = new BoxData(1378.000, 962.000, 0.000, 27.451, 27.451, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"trigger" }, { name:"setTiles", value:"45,29,255|43,28,6|43,30,4" }, { name:"repeatable", value:true }, { name:"resetTime", value:2 }, null] ), 1, 1 );
+		obj = new BoxData(1410.000, 802.000, 0.000, 27.416, 27.416, ObjectsGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"trigger" }, { name:"setTiles", value:"45,27,6|43,27,255|44,25,4" }, { name:"repeatable", value:true }, { name:"resetTime", value:2 }, null] ), 1, 1 );
 	}
 
 	public function generateObjectLinks(onAddCallback:Dynamic = null):Void

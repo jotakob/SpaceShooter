@@ -1,5 +1,5 @@
 package ;
-
+import flixel.FlxG;
 /**
  * ...
  * @author JJM
@@ -16,7 +16,10 @@ class Warp extends GameObject
 	public override function activate()
 	{
 		trace("warping");
+		FlxG.camera.fade( 0xFF000000, 2, false, nextLevel);
+	}
+	private function nextLevel():Void
+	{
 		cast(Reg.currentState, PlayState).changeLevel(target, 0);
 	}
-	
 }

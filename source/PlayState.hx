@@ -144,6 +144,7 @@ class PlayState extends FlxState
 		add(PlayerStuff);
 		add(Players);
 		add(hud);
+		FlxG.camera.fade( 0xFF000000, 2, true,null,true);
 	}
 	
 	/**

@@ -7,3 +7,4 @@ export/
 # Other files and folders
 .settings/
 *.wav
+*.asd

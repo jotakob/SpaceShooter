@@ -170,15 +170,13 @@ class PlayState extends FlxState
 			cameraObj.y = tempY / yPlayers;
 		trace(Enemies.members.length);
 		
-		if (Enemies.members.length < 1)
+		if (Enemies.members.length < 17)
 		{
-			FlxG.switchState(new EndState());
+			FlxG.camera.fade(0xff000000, 1);
 		}
 			
 		currentLevel.repeatables.update();
 		super.update();
-		
-		
 	}
 	
 	private function callTrigger(obj1:FlxObject, obj2:FlxObject)

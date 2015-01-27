@@ -40,7 +40,7 @@ class BaseLevel extends FlxGroup
 	public var buttons:FlxTypedGroup<Button> = new FlxTypedGroup<Button>();
 	public var collisionBoxes:FlxTypedGroup<GameObject> = new FlxTypedGroup<GameObject>();
 	public var repeatables:FlxTypedGroup<GameObject> = new FlxTypedGroup<GameObject>();
-	public var spawnPoint:FlxRect = new FlxRect();
+	public var spawnPoints:Array<FlxRect> = new Array<FlxRect>();
 	
 	public var layerInteractiveTiles:FlxTilemap;
 	
@@ -182,8 +182,13 @@ class BaseLevel extends FlxGroup
 				newobj = new Enemy(data.x, data.y);
 				cast(Reg.currentState, PlayState).Enemies.add(cast(newobj, Enemy));
 				//masterLayer.add(newobj);
+			case "warp":
+				newobj = new Warp(data.x, data.y, data.width, data.height, this);
+				triggers.add(newobj);
 			case "warpexit":
-				newobj = spawnPoint = new FlxRect(data.x, data.y, data.width, data.height);
+				newobj = new FlxRect(data.x, data.y, data.width, data.height);
+				spawnPoints.push(newobj);
+				properties.remove("id");
 			case "collisionbox":
 				newobj = new GameObject(data.x, data.y, data.width, data.height, this);
 				cast(newobj, GameObject).immovable = true;

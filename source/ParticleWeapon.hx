@@ -27,7 +27,7 @@ class ParticleWeapon extends Weapon
 			var particle:ParticleBullet = new ParticleBullet(damage);
 			emitter.add(particle);
 		}
-		Reg.currentState.add(emitter);
+		cast(Reg.currentState, PlayState).PlayerStuff.add(emitter);
 		emitter.start(false,0.01,0.003,0,0.40);
 		emitter.on = false;
 	

@@ -35,14 +35,15 @@ class PlayState extends FlxState
 	private var _gamePads:Array<FlxGamepad> = new Array();
 	
 	public var Players:FlxTypedGroup<Player> = new FlxTypedGroup<Player>();
-	public var Enemies:FlxTypedGroup<Actor> = new FlxTypedGroup<Actor>();
+	public var Enemies:FlxTypedGroup<Actor>;
+	public var PlayerStuff:FlxGroup = new FlxGroup();
 	
 	private var index:Int;
 	
 	private var currentLevel:BaseLevel;
 	
 	private var camera:FlxCamera;
-	private var cameraObj:FlxObject;
+	private var cameraObj:FlxObject = new FlxObject();
 	
 	private var _sprBack:FlxSprite;
 	
@@ -56,15 +57,14 @@ class PlayState extends FlxState
 		FlxG.camera.fade(FlxColor.BLACK, 2, true);
 		Reg.currentState = this;
 		
-		Reg.currentLevel = currentLevel = new Level_Demo(true, null, this);
-		currentLevel.addTileAnimations(currentLevel.layerInteractiveTiles);
-		add(currentLevel.collisionBoxes);
+		Reg.levels.set("Demo", new Level_Demo(false, null, this));
+		Reg.levels.set("MCTest", new Level_MCTest(false, null, this));
 		
-		cameraObj = new FlxObject();
-		add(cameraObj);
-		camera = new FlxCamera(Math.floor(currentLevel.spawnPoint.x), Math.floor(currentLevel.spawnPoint.y), 0, 0, 3);
+		camera = new FlxCamera(0, 0, 0, 0, 3);
 		FlxG.camera.bounds = FlxG.worldBounds;
 		FlxG.camera.follow(cameraObj, FlxCamera.STYLE_LOCKON, null, 1);
+		
+		changeLevel("Demo", 0);
 		
 		var tempPlayer:Player;
 		for (i in 0...FlxG.gamepads.getActiveGamepads().length)
@@ -74,17 +74,19 @@ class PlayState extends FlxState
 				trace("break");
 				break;
 			}
-			trace("add");
+			trace("adding Player");
 			_gamePads.push(FlxG.gamepads.getActiveGamepads()[i]);
 			tempPlayer = (new Player(0, 0, 2, FlxG.gamepads.getActiveGamepads()[i]));
-			tempPlayer.x = Std.random(Math.floor(currentLevel.spawnPoint.width - tempPlayer.width)) + currentLevel.spawnPoint.x;
-			tempPlayer.y = Std.random(Math.floor(currentLevel.spawnPoint.height - tempPlayer.height)) + currentLevel.spawnPoint.y;
 			Players.add(tempPlayer);
 		}
-		add(Players);
 		
-		add(Enemies);
+		for (tempPlayer in Players.iterator())
+		{
+			tempPlayer.x = Std.random(Math.floor(currentLevel.spawnPoints[0].width - tempPlayer.width)) + currentLevel.spawnPoints[0].x;
+			tempPlayer.y = Std.random(Math.floor(currentLevel.spawnPoints[0].height - tempPlayer.height)) + currentLevel.spawnPoints[0].y;
+		}
 		
+		add(cameraObj);
 		var tempX:Float = 0;
 		var tempY:Float = 0;
 		for (tempPlayer in Players.iterator())
@@ -99,10 +101,47 @@ class PlayState extends FlxState
 		Reg.music[1].play();
 		hud = new HUD();
 		
-		add(hud);
-		
 		
 		super.create();
+	}
+	
+	public function changeLevel(name:String, spawnPointID:Int)
+	{
+		if (currentLevel != null)
+			this.remove(currentLevel.masterLayer);
+		this.remove(Players);
+		this.remove(PlayerStuff);
+		this.remove(cameraObj);
+		this.remove(hud);
+		
+		this.forEach(killstuff);
+		
+		Enemies = new FlxTypedGroup<Actor>();
+		Reg.currentLevel = currentLevel = Reg.levels[name];
+		currentLevel.createObjects(null, this);
+		currentLevel.addTileAnimations(currentLevel.layerInteractiveTiles);
+		add(Enemies);
+		
+		for (tempPlayer in Players.iterator())
+		{
+			tempPlayer.x = Std.random(Math.floor(currentLevel.spawnPoints[spawnPointID].width - tempPlayer.width)) + currentLevel.spawnPoints[spawnPointID].x;
+			tempPlayer.y = Std.random(Math.floor(currentLevel.spawnPoints[spawnPointID].height - tempPlayer.height)) + currentLevel.spawnPoints[spawnPointID].y;
+		}
+		
+		add(cameraObj);
+		var tempX:Float = 0;
+		var tempY:Float = 0;
+		for (tempPlayer in Players.iterator())
+		{
+			tempX += tempPlayer.x;
+			tempY += tempPlayer.y;
+		}
+		cameraObj.x = tempX / Players.length;
+		cameraObj.y = tempY / Players.length;
+		
+		add(PlayerStuff);
+		add(Players);
+		add(hud);
 	}
 	
 	/**
@@ -122,6 +161,7 @@ class PlayState extends FlxState
 		//Custom colliders
 		FlxG.overlap(Reg.bulletGroup, Enemies, receiveDamage);
 		FlxG.collide(Reg.bulletGroup, currentLevel.hitTilemaps, collideWall);
+		FlxG.collide(Reg.bulletGroup, currentLevel.collisionBoxes, collideWall);
 		FlxG.overlap(currentLevel.triggers, Players, callTrigger);
 		FlxG.collide(Players, Enemies, enemyCollision);
 		
@@ -211,6 +251,11 @@ class PlayState extends FlxState
 	public function collideWall(obj1:FlxObject, obj2:FlxObject)
 	{
 		obj1.kill();
+	}
+	
+	private function killstuff(obj:FlxBasic)
+	{
+		obj.destroy();
 	}
 	
 }

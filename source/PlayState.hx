@@ -19,6 +19,7 @@ import openfl.utils.Object;
 import flixel.FlxCamera;
 import flixel.group.FlxTypedGroup;
 import flixel.util.FlxCollision;
+import flixel.util.FlxColor;
 
 import openfl.Assets;
 import flixel.tile.FlxTilemap;
@@ -39,7 +40,6 @@ class PlayState extends FlxState
 	private var shootDirX:Float = 0;
 	private var shootDirY:Float = 0;
 	
-	
 	private var index:Int;
 	
 	private var currentLevel:BaseLevel;
@@ -56,6 +56,7 @@ class PlayState extends FlxState
 	
 	override public function create():Void
 	{
+		FlxG.camera.fade(FlxColor.BLACK, 2, true);
 		Reg.currentState = this;
 		
 		Reg.currentLevel = currentLevel = new Level_Demo(true, null, this);

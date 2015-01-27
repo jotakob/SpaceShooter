@@ -13,6 +13,7 @@ import flixel.tile.FlxTilemap;
 import flash.utils.Dictionary;
 import flixel.util.FlxRect;
 import openfl.Assets;
+import flixel.system.FlxCollisionType;
 
 class BaseLevel extends FlxGroup
 {
@@ -37,6 +38,7 @@ class BaseLevel extends FlxGroup
 	
 	public var triggers:FlxTypedGroup<Trigger> = new FlxTypedGroup<Trigger>();
 	public var buttons:FlxTypedGroup<Button> = new FlxTypedGroup<Button>();
+	public var collisionBoxes:FlxTypedGroup<GameObject> = new FlxTypedGroup<GameObject>();
 	public var repeatables:FlxTypedGroup<GameObject> = new FlxTypedGroup<GameObject>();
 	public var spawnPoint:FlxRect = new FlxRect();
 	
@@ -182,6 +184,10 @@ class BaseLevel extends FlxGroup
 				//masterLayer.add(newobj);
 			case "warpexit":
 				newobj = spawnPoint = new FlxRect(data.x, data.y, data.width, data.height);
+			case "collisionbox":
+				newobj = new GameObject(data.x, data.y, data.width, data.height, this);
+				cast(newobj, GameObject).immovable = true;
+				collisionBoxes.add(newobj);
 			default:
 				newobj = new GameObject(data.x, data.y, data.width, data.height, this);
 				triggers.add(newobj);

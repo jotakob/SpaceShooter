@@ -115,7 +115,10 @@ class Player extends Actor
 	
 	public override function die()
 	{
-		var tomb:FlxSprite = new FlxSprite(x, y, AssetPaths.gravestone__png);
+		var tomb:FlxSprite = new FlxSprite();
+		tomb.loadGraphic(AssetPaths.gravestone__png);
+		tomb.x = this.x;
+		tomb.y = this.y;
 		Reg.currentState.add(tomb);
 		super.die();
 	}

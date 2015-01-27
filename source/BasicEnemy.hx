@@ -37,7 +37,7 @@ class BasicEnemy extends State
 			Math.pow(cast(Reg.currentState, PlayState).Players.members[i].x - owner.x, 2) + 
 			Math.pow(cast(Reg.currentState, PlayState).Players.members[i].y - owner.y, 2)
 			);
-			if (distance < 200)
+			if (distance < 200 && cast(Reg.currentState, PlayState).Players.members[i].hp > 0)
 			{
 				owner.myStateManager.ChangeState(new ChaseBehaviour(cast(Reg.currentState, PlayState).Players.members[i]));
 			}

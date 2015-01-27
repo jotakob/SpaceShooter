@@ -47,7 +47,10 @@ class Bullet extends FlxSprite
 	{
 		if (this.explosive)
 		{
-			var explosion = new FlxSprite (this.x, this.y, AssetPaths.explosion__png);
+			var explosion = new FlxSprite ();
+			explosion.loadGraphic(AssetPaths.explosion__png);
+			explosion.x = this.x;
+			explosion.y = this.y;
 			explosion.x = this.x - explosion.width / 2;
 			explosion.y = this.y - explosion.height / 2;
 			Reg.currentState.add(explosion);

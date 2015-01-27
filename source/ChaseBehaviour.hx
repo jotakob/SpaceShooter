@@ -27,18 +27,26 @@ class ChaseBehaviour extends State
 	
 	public override function Execute(owner:Actor) 
 	{
-		DeltaY = _player.y - owner.y;
-		DeltaX = _player.x - owner.x;
-		Angle = Math.atan2(DeltaY, DeltaX) * 180 / Math.PI;
-		distance = Math.sqrt(Math.pow(_player.x - owner.x, 2) + Math.pow(_player.y - owner.y, 2));
+		if (_player.hp > 0)
+		{
+			DeltaY = _player.y - owner.y;
+			DeltaX = _player.x - owner.x;
+			Angle = Math.atan2(DeltaY, DeltaX) * 180 / Math.PI;
+			distance = Math.sqrt(Math.pow(_player.x - owner.x, 2) + Math.pow(_player.y - owner.y, 2));
+			owner.myAnimationController.rotate(Angle, true);
+			owner.myAnimationController.rotate(Angle, false);	
+			owner.myMovementController.Move(owner.speed / 4 * 3, Angle);
+		}
+		else
+		{
+			owner.myStateManager.ChangeState(new BasicEnemy());
+		}
 		if (distance > 220)
 		{
 			owner.myStateManager.ChangeState(new BasicEnemy());
 		}
 		
-		owner.myAnimationController.rotate(Angle, true);
-		owner.myAnimationController.rotate(Angle, false);	
-		owner.myMovementController.Move(owner.speed / 4 * 3, Angle);
+		
 	}
 	
 	public override function Exit(owner:Actor) 

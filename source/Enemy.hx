@@ -16,6 +16,7 @@ class Enemy extends Actor
 	{ 
 		super(X, Y);
 		isAI = true;
+		hitSound = Reg.sounds[1];
 		SetGameState();
 		hp = 200;
 		myAnimationController = new AnimationController(x, y, this, "enemy1");

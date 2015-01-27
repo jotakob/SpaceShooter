@@ -1,6 +1,7 @@
 package ;
 import flixel.FlxObject;
 import flixel.FlxSprite;
+import flixel.system.FlxSound;
 
 /**
  * ...
@@ -11,6 +12,8 @@ class Actor extends FlxObject
 	public var speed:Int = 200;
 	public var hp:Int;
 	private var isAI:Bool;
+	private var hitSound:FlxSound;
+	
 	public var myMovementController:MovementController;
 	public var myAnimationController:AnimationController;
 	public var myStateManager:AiStateController;
@@ -37,6 +40,7 @@ class Actor extends FlxObject
 	public function receiveDamage(damage:Int)
 	{
 		this.myAnimationController.DamageColoring(30);
+		hitSound.play();
 		hp -= damage;
 	}
 	

@@ -57,7 +57,7 @@ class Player extends Actor
 			case 0:
 				width = height = 24;
 				myAnimationController = new AnimationController(x, y, this, "soldier");
-				addWeapon(new Weapon(this, 0.03, 400, AssetPaths.bullet__png, AssetPaths.Potatoetile2__png, 10));
+				addWeapon(new Weapon(this, 0.03, 400, AssetPaths.bullet__png, AssetPaths.Potatoetile2__png, 20));
 				hitSound = Reg.sounds[7];
 				this.activeWeapon.explosiveBullet = true;
 			default:

@@ -76,7 +76,7 @@ class PlayState extends FlxState
 			}
 			trace("adding Player");
 			_gamePads.push(FlxG.gamepads.getActiveGamepads()[i]);
-			tempPlayer = (new Player(0, 0, 2, FlxG.gamepads.getActiveGamepads()[i]));
+			tempPlayer = (new Player(0, 0, i, FlxG.gamepads.getActiveGamepads()[i]));
 			Players.add(tempPlayer);
 		}
 		

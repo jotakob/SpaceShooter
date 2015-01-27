@@ -55,13 +55,13 @@ class AnimationController extends FlxSprite
 		
 		if (Type.getClass(_owner) == Player)
 		{
-			cast(Reg.currentState, PlayState).PlayerStuff.add(topSprite);
 			cast(Reg.currentState, PlayState).PlayerStuff.add(botSprite);
+			cast(Reg.currentState, PlayState).PlayerStuff.add(topSprite);
 		}
 		else
 		{
-			Reg.currentState.add(topSprite);
 			Reg.currentState.add(botSprite);
+			Reg.currentState.add(topSprite);
 		}
 		
 		hitboxOffset = Math.floor((32 - _owner.width) /2);

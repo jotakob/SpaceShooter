@@ -106,39 +106,39 @@ class MenuState extends FlxState
 		
 		Reg.sounds[6] = new FlxSound();
 		Reg.sounds[6].loadStream(AssetPaths.man1__ogg, false, false);
-		Reg.sounds[6].volume = 1;
+		Reg.sounds[6].volume = 0.7;
 		
 		Reg.sounds[7] = new FlxSound();
 		Reg.sounds[7].loadStream(AssetPaths.man2__ogg, false, false);
-		Reg.sounds[7].volume = 1;
+		Reg.sounds[7].volume = 0.7;
 		
 		Reg.sounds[8] = new FlxSound();
 		Reg.sounds[8].loadStream(AssetPaths.man3__ogg, false, false);
-		Reg.sounds[8].volume = 1;
+		Reg.sounds[8].volume = 0.7;
 		
 		Reg.sounds[9] = new FlxSound();
 		Reg.sounds[9].loadStream(AssetPaths.man4__ogg, false, false);
-		Reg.sounds[9].volume = 1;
+		Reg.sounds[9].volume = 0.7;
 		
 		Reg.sounds[10] = new FlxSound();
 		Reg.sounds[10].loadStream(AssetPaths.man5__ogg, false, false);
-		Reg.sounds[10].volume = 1;
+		Reg.sounds[10].volume = 0.7;
 		
 		Reg.sounds[11] = new FlxSound();
 		Reg.sounds[11].loadStream(AssetPaths.woman1__ogg, false, false);
-		Reg.sounds[11].volume = 1;
+		Reg.sounds[11].volume =0.71;
 		
 		Reg.sounds[12] = new FlxSound();
 		Reg.sounds[12].loadStream(AssetPaths.woman2__ogg, false, false);
-		Reg.sounds[12].volume = 1;
+		Reg.sounds[12].volume = 0.7;
 		
 		Reg.sounds[13] = new FlxSound();
 		Reg.sounds[13].loadStream(AssetPaths.robot_hit__ogg, false, false);
-		Reg.sounds[13].volume = 1;
+		Reg.sounds[13].volume = 0.7;
 		
 		Reg.sounds[14] = new FlxSound();
-		Reg.sounds[14].loadStream(AssetPaths.space_ship_crash__ogg, false, false);
-		Reg.sounds[14].volume = 1;
+		Reg.sounds[14].loadStream(AssetPaths.alien_hit__ogg, false, false);
+		Reg.sounds[14].volume = 0.7;
 		
 		Reg.sounds[15] = new FlxSound();
 		Reg.sounds[15].loadStream(AssetPaths.space_ship_crash__ogg, false, false);

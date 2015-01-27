@@ -23,6 +23,7 @@ class MenuState extends FlxState
 	private var background2:FlxSprite = new FlxSprite();
 	private var spaceship:FlxSprite = new FlxSprite();
 	private var planet:FlxSprite = new FlxSprite();
+	private var explosion:FlxSprite = new FlxSprite();
 	private var hover:Float = 0;
 	private var goingUP:Bool = false;
 	private var pressed = false;
@@ -41,7 +42,9 @@ class MenuState extends FlxState
 		spaceship.y = FlxG.height / 2 - spaceship.height / 2;
 		planet.loadGraphic(AssetPaths.Planet__png);
 		planet.x = FlxG.width;
-		planet.y = FlxG.height/2  - 100;
+		planet.y = FlxG.height / 2  - 100;
+		explosion.loadGraphic(AssetPaths.explosionspaceship__png, true, 32, 32);
+		explosion.animation.add("explode", [0, 1, 2, 3, 4], 4, false);
 		add(background);
 		add(background2);
 		add(planet);
@@ -168,16 +171,19 @@ class MenuState extends FlxState
 			background.x = background.width;
 		if (background2.x < -background2.width)
 			background2.x = background2.width;
-		spaceship.y = spaceship.y + hover;
 		
-		if (goingUP)
-			hover = -0.15;
-		else
-			hover = 0.15;
-		if (spaceship.y < 142)
-			goingUP = false;
-		if (spaceship.y > 153)
-			goingUP = true;
+		if (spaceship.scale.x > 0.004)
+		{
+			spaceship.y = spaceship.y + hover;
+			if (goingUP)
+				hover = -0.15;
+			else
+				hover = 0.15;
+			if (spaceship.y < 142)
+				goingUP = false;
+			if (spaceship.y > 153)
+				goingUP = true;
+		}
 		
 		if (pressed)
 		{
@@ -186,6 +192,13 @@ class MenuState extends FlxState
 				spaceship.scale.x = spaceship.scale.y = spaceship.scale.x - 0.004;
 				spaceship.x = spaceship.x + 0.9;
 				planet.x = planet.x - 1;
+			}
+			else
+			{
+				explosion.x = spaceship.x + spaceship.width/2 - 20;
+				explosion.y = spaceship.y + spaceship.height/2;
+				add(explosion);
+				explosion.animation.play("explosion");
 			}
 		}
 			

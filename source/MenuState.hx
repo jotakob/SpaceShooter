@@ -9,6 +9,8 @@ import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 import flixel.util.FlxDestroyUtil;
 import flixel.input.gamepad.XboxButtonID;
+import flixel.util.FlxColor;
+import haxe.Timer;
 using flixel.util.FlxSpriteUtil;
 import openfl.Assets;
 
@@ -19,6 +21,11 @@ class MenuState extends FlxState
 {
 	private var background:FlxSprite = new FlxSprite();
 	private var background2:FlxSprite = new FlxSprite();
+	private var spaceship:FlxSprite = new FlxSprite();
+	private var planet:FlxSprite = new FlxSprite();
+	private var hover:Float = 0;
+	private var goingUP:Bool = false;
+	private var pressed = false;
 	private var _btnPlay:FlxButton;
 	private var cursor:Cursor;
 	/**
@@ -29,17 +36,25 @@ class MenuState extends FlxState
 		background.loadGraphic(AssetPaths.spaceBackground__png);
 		background2.loadGraphic(AssetPaths.spaceBackground__png);
 		background2.x = background2.width;
+		spaceship.loadGraphic(AssetPaths.spaceship__png);
+		spaceship.x = FlxG.width / 2 - spaceship.width / 2;
+		spaceship.y = FlxG.height / 2 - spaceship.height / 2;
+		planet.loadGraphic(AssetPaths.Planet__png);
+		planet.x = FlxG.width;
+		planet.y = FlxG.height/2  - 100;
 		add(background);
 		add(background2);
-		_btnPlay = new FlxButton(0, 0, "Play", clickPlay);
-		_btnPlay.screenCenter();
+		add(planet);
+		add(spaceship);
+		
+		_btnPlay = new FlxButton(FlxG.width /2 - 40, FlxG.height /2 + 150, "Play", clickPlay);
 		_btnPlay.onDown.sound = FlxG.sound.load("assets/sounds/click.ogg");
 		_btnPlay.onUp.sound = FlxG.sound.load("assets/sounds/click.ogg");
 		add(_btnPlay);
 		
 		loadAnimations();
 		loadMusic();
-		
+		Reg.music[0].play();
 		super.create();
 	}
 	
@@ -91,35 +106,43 @@ class MenuState extends FlxState
 		
 		Reg.sounds[6] = new FlxSound();
 		Reg.sounds[6].loadStream(AssetPaths.man1__ogg, false, false);
-		Reg.sounds[6].volume = 1;
+		Reg.sounds[6].volume = 0.7;
 		
 		Reg.sounds[7] = new FlxSound();
 		Reg.sounds[7].loadStream(AssetPaths.man2__ogg, false, false);
-		Reg.sounds[7].volume = 1;
+		Reg.sounds[7].volume = 0.7;
 		
 		Reg.sounds[8] = new FlxSound();
 		Reg.sounds[8].loadStream(AssetPaths.man3__ogg, false, false);
-		Reg.sounds[8].volume = 1;
+		Reg.sounds[8].volume = 0.7;
 		
 		Reg.sounds[9] = new FlxSound();
 		Reg.sounds[9].loadStream(AssetPaths.man4__ogg, false, false);
-		Reg.sounds[9].volume = 1;
+		Reg.sounds[9].volume = 0.7;
 		
 		Reg.sounds[10] = new FlxSound();
 		Reg.sounds[10].loadStream(AssetPaths.man5__ogg, false, false);
-		Reg.sounds[10].volume = 1;
+		Reg.sounds[10].volume = 0.7;
 		
 		Reg.sounds[11] = new FlxSound();
 		Reg.sounds[11].loadStream(AssetPaths.woman1__ogg, false, false);
-		Reg.sounds[11].volume = 1;
+		Reg.sounds[11].volume =0.71;
 		
 		Reg.sounds[12] = new FlxSound();
 		Reg.sounds[12].loadStream(AssetPaths.woman2__ogg, false, false);
-		Reg.sounds[12].volume = 1;
+		Reg.sounds[12].volume = 0.7;
 		
 		Reg.sounds[13] = new FlxSound();
 		Reg.sounds[13].loadStream(AssetPaths.robot_hit__ogg, false, false);
-		Reg.sounds[13].volume = 1;
+		Reg.sounds[13].volume = 0.7;
+		
+		Reg.sounds[14] = new FlxSound();
+		Reg.sounds[14].loadStream(AssetPaths.alien_hit__ogg, false, false);
+		Reg.sounds[14].volume = 0.7;
+		
+		Reg.sounds[15] = new FlxSound();
+		Reg.sounds[15].loadStream(AssetPaths.space_ship_crash__ogg, false, false);
+		Reg.sounds[15].volume = 1;
 	}
 	
 	/**
@@ -137,15 +160,38 @@ class MenuState extends FlxState
 	 */
 	override public function update():Void
 	{
+		trace(hover);
+		trace(spaceship.y);
 		background.x = background.x - 1;
 		background2.x = background2.x -1;
 		if (background.x < -background.width)
 			background.x = background.width;
 		if (background2.x < -background2.width)
 			background2.x = background2.width;
+		spaceship.y = spaceship.y + hover;
+		
+		if (goingUP)
+			hover = -0.15;
+		else
+			hover = 0.15;
+		if (spaceship.y < 142)
+			goingUP = false;
+		if (spaceship.y > 153)
+			goingUP = true;
+		
+		if (pressed)
+		{
+			if (spaceship.scale.x > 0.004)
+			{
+				spaceship.scale.x = spaceship.scale.y = spaceship.scale.x - 0.004;
+				spaceship.x = spaceship.x + 0.9;
+				planet.x = planet.x - 1;
+			}
+		}
+			
 		for (i in 0...FlxG.gamepads.getActiveGamepads().length)
 		{
-			if (FlxG.gamepads.getActiveGamepads()[i].pressed(XboxButtonID.A))
+			if (FlxG.gamepads.getActiveGamepads()[i].pressed(XboxButtonID.A) && pressed == false)
 			{
 				Reg.sounds[3].play();
 				clickPlay();
@@ -156,7 +202,18 @@ class MenuState extends FlxState
 	
 	private function clickPlay():Void
 	{
+		FlxG.camera.shake(0.005, 7);
+		FlxG.camera.fade(FlxColor.BLACK, 7, false, nextState);
+		Timer.delay(crashSound, 500);
+		pressed = true;
+		_btnPlay = FlxDestroyUtil.destroy(_btnPlay);
+	}
+	private function nextState():Void
+	{
 		FlxG.switchState(new PlayState());
 	}
-	
+	private function crashSound():Void
+	{
+		Reg.sounds[15].play();
+	}
 }

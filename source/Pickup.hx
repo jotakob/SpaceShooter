@@ -25,7 +25,7 @@ class Pickup extends GameObject
 		super(X, Y, Width, Height, Level);
 		
 		emitter = new FlxEmitter(X, Y);
-		pickupImage.loadGraphic(AssetPaths.engineer_pickup_card__png, false, 32, 32, false);
+		pickupImage.loadGraphic(AssetPaths.enigneer_pickup_card__png, false, 32, 32, false);
 		pickupImage.x = X- pickupImage.width/2;
 		pickupImage.y = Y - pickupImage.width / 2;
 			

@@ -1,5 +1,5 @@
 package ;
-
+import flixel.FlxG;
 /**
  * ...
  * @author JJM
@@ -15,8 +15,11 @@ class Warp extends GameObject
 	
 	public override function activate()
 	{
-		//if (cast(Reg.currentState, PlayState).Enemies.members.length < 4)
-			cast(Reg.currentState, PlayState).changeLevel(target, 0);
+		if (cast(Reg.currentState, PlayState).Enemies.members.length < 4)
+			FlxG.camera.fade( 0xFF000000, 2, false, nextLevel);
 	}
-	
+	private function nextLevel():Void
+	{
+		cast(Reg.currentState, PlayState).changeLevel(target, 0);
+	}
 }

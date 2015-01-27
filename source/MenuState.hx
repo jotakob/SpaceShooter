@@ -107,7 +107,7 @@ class MenuState extends FlxState
 		
 		Reg.sounds[5] = new FlxSound();
 		Reg.sounds[5].loadStream("assets/sounds/missile_explode.ogg", false, false);
-		Reg.sounds[5].volume = 1;
+		Reg.sounds[5].volume = 0.3;
 		
 		Reg.sounds[6] = new FlxSound();
 		Reg.sounds[6].loadStream(AssetPaths.man1__ogg, false, false);
@@ -131,7 +131,7 @@ class MenuState extends FlxState
 		
 		Reg.sounds[11] = new FlxSound();
 		Reg.sounds[11].loadStream(AssetPaths.woman1__ogg, false, false);
-		Reg.sounds[11].volume =0.71;
+		Reg.sounds[11].volume = 0.7;
 		
 		Reg.sounds[12] = new FlxSound();
 		Reg.sounds[12].loadStream(AssetPaths.woman2__ogg, false, false);
@@ -195,8 +195,8 @@ class MenuState extends FlxState
 			}
 			else
 			{
-				explosion.x = spaceship.x + spaceship.width/2 - 20;
-				explosion.y = spaceship.y + spaceship.height/2 - 20;
+				explosion.x = spaceship.x + spaceship.width/2 - 16;
+				explosion.y = spaceship.y + spaceship.height/2 - 16;
 				add(explosion);
 				explosion.animation.play("explosion");
 			}

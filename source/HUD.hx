@@ -49,6 +49,8 @@ class HUD extends FlxGroup
 			charachterIcons[i] = new FlxSprite().loadGraphic(AssetPaths.infiltrator_Icon__png, 32, 32);
 			if (i == 2)
 			charachterIcons[i] = new FlxSprite().loadGraphic(AssetPaths.soldier_Icon__png, 32, 32);
+			if (i == 3)
+			charachterIcons[i] = new FlxSprite().loadGraphic(AssetPaths.engineer_icon__png, 32, 32);
 			
 			charachterIcons[i].origin.x = charachterIcons[i].origin.y = 0;
 			charachterIcons[i].scrollFactor.set();

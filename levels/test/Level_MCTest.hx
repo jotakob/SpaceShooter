@@ -110,6 +110,9 @@ class Level_MCTest extends BaseLevel
 	{
 		var obj:Dynamic;
 
+		obj = new BoxData(55.000, 280.000, 0.000, 50.000, 50.000, SpritesGroup );
+		shapes.push(obj);
+		callbackNewData( obj, onAddCallback, SpritesGroup, generateProperties( [{ name:"type", value:"warpexit" }, { name:"id", value:"0" }, null] ), 1, 1 );
 	}
 
 	public function generateObjectLinks(onAddCallback:Dynamic = null):Void

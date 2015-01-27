@@ -60,6 +60,7 @@ class PlayState extends FlxState
 		
 		Reg.currentLevel = currentLevel = new Level_Demo(true, null, this);
 		currentLevel.addTileAnimations(currentLevel.layerInteractiveTiles);
+		add(currentLevel.collisionBoxes);
 		
 		cameraObj = new FlxObject();
 		add(cameraObj);
@@ -128,10 +129,12 @@ class PlayState extends FlxState
 		
 		//Collision only
 		FlxG.collide(Enemies, currentLevel.hitTilemaps);
+		FlxG.collide(Enemies, currentLevel.collisionBoxes);
 		//FlxG.collide(Enemies, Enemies);
 		if (!FlxG.keys.checkStatus(FlxG.keys.getKeyCode("N"), FlxKey.PRESSED))
 		{
 			FlxG.collide(Players, currentLevel.hitTilemaps);
+		FlxG.collide(Players, currentLevel.collisionBoxes);
 		}
 		
 		
@@ -168,7 +171,6 @@ class PlayState extends FlxState
 			cameraObj.x = tempX / xPlayers;
 		if (yPlayers > 0)
 			cameraObj.y = tempY / yPlayers;
-		trace(Enemies.members.length);
 		
 		if (Enemies.members.length < 1)
 		{

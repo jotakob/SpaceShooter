@@ -160,12 +160,9 @@ class Level_Demo extends BaseLevel
 		obj = new BoxData(1461.000, 475.000, 0.000, 28.310, 31.830, ObjectsGroup );
 		shapes.push(obj);
 		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"button" }, { name:"setTiles", value:"47,12,0|47,13,0|47,14,0" }, { name:"resetTime", value:90 }, { name:"repeatable", value:true }, null] ), 1, 1 );
-		obj = new BoxData(1731.000, 869.000, 359.928, 50.000, 50.000, ObjectsGroup );
+		obj = new BoxData(2.000, 3.000, 0.000, 127.059, 127.059, ObjectsGroup );
 		shapes.push(obj);
-		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"collisionbox" }, null] ), 1, 1 );
-		obj = new BoxData(1633.000, 861.000, 0.000, 32.000, 32.000, ObjectsGroup );
-		shapes.push(obj);
-		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"warp" }, { name:"target", value:"Demo" }, null] ), 1, 1 );
+		callbackNewData( obj, onAddCallback, ObjectsGroup, generateProperties( [{ name:"type", value:"warp" }, { name:"target", value:"Demo2" }, null] ), 1, 1 );
 	}
 
 	public function generateObjectLinks(onAddCallback:Dynamic = null):Void

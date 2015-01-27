@@ -58,6 +58,7 @@ class PlayState extends FlxState
 		Reg.currentState = this;
 		
 		Reg.levels.set("Demo", new Level_Demo(false, null, this));
+		Reg.levels.set("Demo2", new Level_Demo2(false, null, this));
 		Reg.levels.set("MCTest", new Level_MCTest(false, null, this));
 		
 		camera = new FlxCamera(0, 0, 0, 0, 3);

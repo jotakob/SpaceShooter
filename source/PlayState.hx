@@ -37,9 +37,6 @@ class PlayState extends FlxState
 	public var Players:FlxTypedGroup<Player> = new FlxTypedGroup<Player>();
 	public var Enemies:FlxTypedGroup<Actor> = new FlxTypedGroup<Actor>();
 	
-	private var shootDirX:Float = 0;
-	private var shootDirY:Float = 0;
-	
 	private var index:Int;
 	
 	private var currentLevel:BaseLevel;

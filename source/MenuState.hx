@@ -8,6 +8,7 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 import flixel.util.FlxDestroyUtil;
+import flixel.input.gamepad.XboxButtonID;
 using flixel.util.FlxSpriteUtil;
 import openfl.Assets;
 
@@ -16,6 +17,8 @@ import openfl.Assets;
  */
 class MenuState extends FlxState
 {
+	private var background:FlxSprite = new FlxSprite();
+	private var background2:FlxSprite = new FlxSprite();
 	private var _btnPlay:FlxButton;
 	private var cursor:Cursor;
 	/**
@@ -23,6 +26,11 @@ class MenuState extends FlxState
 	 */
 	override public function create():Void
 	{
+		background.loadGraphic(AssetPaths.spaceBackground__png);
+		background2.loadGraphic(AssetPaths.spaceBackground__png);
+		background2.x = background2.width;
+		add(background);
+		add(background2);
 		_btnPlay = new FlxButton(0, 0, "Play", clickPlay);
 		_btnPlay.screenCenter();
 		_btnPlay.onDown.sound = FlxG.sound.load("assets/sounds/click.ogg");
@@ -108,6 +116,10 @@ class MenuState extends FlxState
 		Reg.sounds[12] = new FlxSound();
 		Reg.sounds[12].loadStream(AssetPaths.woman2__ogg, false, false);
 		Reg.sounds[12].volume = 1;
+		
+		Reg.sounds[13] = new FlxSound();
+		Reg.sounds[13].loadStream(AssetPaths.robot_hit__ogg, false, false);
+		Reg.sounds[13].volume = 1;
 	}
 	
 	/**
@@ -125,6 +137,20 @@ class MenuState extends FlxState
 	 */
 	override public function update():Void
 	{
+		background.x = background.x - 1;
+		background2.x = background2.x -1;
+		if (background.x < -background.width)
+			background.x = background.width;
+		if (background2.x < -background2.width)
+			background2.x = background2.width;
+		for (i in 0...FlxG.gamepads.getActiveGamepads().length)
+		{
+			if (FlxG.gamepads.getActiveGamepads()[i].pressed(XboxButtonID.A))
+			{
+				Reg.sounds[3].play();
+				clickPlay();
+			}
+		}
 		super.update();
 	}	
 	

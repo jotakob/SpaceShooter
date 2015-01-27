@@ -174,7 +174,7 @@ class PlayState extends FlxState
 		
 		if (Enemies.members.length < 17)
 		{
-			FlxG.camera.fade(0xff000000, 1);
+			//FlxG.camera.fade(0xff000000, 1);
 		}
 			
 		currentLevel.repeatables.update();

@@ -48,7 +48,7 @@ class Player extends Actor
 				width = height = 24;
 				myAnimationController = new AnimationController(x, y, this, "robot");
 				addWeapon(new ParticleWeapon(this, 0.25, 500, AssetPaths.bullet__png , AssetPaths.fire_particle__png, 1));
-				hitSound = Reg.sounds[1];
+				hitSound = Reg.sounds[13];
 			case 1:
 				width = height = 16;
 				myAnimationController = new AnimationController(x, y, this, "infiltrator");

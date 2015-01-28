@@ -4,18 +4,18 @@ import flixel.FlxObject;
 import flixel.system.FlxSound;
 
 /**
- * ...
+ * A basic Gameobject in a level
  * @author JJM
  */
 class GameObject extends FlxObject
 {
-	public var repeatable:Bool = false;
+	public var repeatable:Bool = false; //Can the Action be executed more than once?
 	private var hasBeenExecuted:Bool = false; //Has the associated action been executed?
 	public var triggered:Bool = false; //Is it being triggered right at this moment?
 	public var resetTime:Int = 50; // In Frames
-	private var framesUntilReset:Int = 1;
-	public var sound:FlxSound;
-	public var deactivateSound:FlxSound;
+	private var framesUntilReset:Int = 1; //Countdown variable
+	public var sound:FlxSound; //Sound to be played when activated
+	public var deactivateSound:FlxSound; //Sound to be played when deactivated
 	
 	public var tilesToSet:Array<Array<Int>> = new Array<Array<Int>>();
 	private var level:BaseLevel;
@@ -26,6 +26,10 @@ class GameObject extends FlxObject
 		level = Level;
 	}
 	
+	/**
+	 * Called whenever a object is triggered
+	 * @param	actor The actor that triggered the GameObject
+	 */
 	public function trigger(actor:Actor)
 	{
 		triggered = true;
@@ -36,6 +40,11 @@ class GameObject extends FlxObject
 		}
 	}
 	
+	
+	/**
+	 * A function to set tiles on the layerInteractiveTiles tilemap
+	 * @param	tilesToSet An Array of tiles to set, each tile to set needs 3 values: [X, Y, newTileID]
+	 */
 	private function setTiles(tilesToSet:Array<Array<Int>>)
 	{
 		for (i in 0...tilesToSet.length)
@@ -44,6 +53,10 @@ class GameObject extends FlxObject
 		}
 	}
 	
+	/**
+	 * called whenever an object is activated.
+	 * this function is overridden in most child classes to execute specific actions
+	 */
 	private function activate()
 	{
 		if (sound != null)
@@ -51,6 +64,9 @@ class GameObject extends FlxObject
 		setTiles(tilesToSet);
 	}
 	
+	/**
+	 * undoing the actions done in activate(), used for repeatable tiggers
+	 */
 	private function deactivate()
 	{
 		if (deactivateSound != null)
@@ -61,6 +77,11 @@ class GameObject extends FlxObject
 		}
 	}
 	
+	
+	/**
+	 * this is used for the timeout of repeatable objects, as well as the check to tigger them in the first place.
+	 * repeatable objects check their triggered-property every frame, and if the trigger is deactivated activates accordingly
+	 */
 	public override function update()
 	{
 		super.update();

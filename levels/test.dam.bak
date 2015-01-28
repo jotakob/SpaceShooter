@@ -356,7 +356,7 @@
             <type typeof="Custom" name="type" value="warp" hidden="false" typeName="type" customTypeIdx="0"/>
             <type typeof="String" name="target" value="Demo2" hidden="false"/>
             <type typeof="Boolean" name="repeatable" value="true" hidden="false"/>
-            <type typeof="Int" name="resetTimer" value="1" hidden="false"/>
+            <type typeof="Int" name="resetTime" value="1" hidden="false"/>
           </properties>
         </shape>
         <shape guid="9B2A3014-3C24-7687-CE58-4888862397DF" type="square" x="111" y="576" Z="0" angle="0" width="32.35" height="62.24" scaleX="0.647" scaleY="1.245">

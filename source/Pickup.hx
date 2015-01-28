@@ -1,5 +1,5 @@
 package ;
-import flixel.effects.particles.FlxEmitter;
+import flixel.effects.particles.FlxEmitter; //all of the below imports are usefull for flixel functionality
 import flixel.effects.particles.FlxParticle;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
@@ -11,9 +11,9 @@ import flixel.util.FlxRandom;
  * ...
  * @author Luuk
  */
-class Pickup extends GameObject 
+class Pickup extends GameObject //extends gameobject becasue everything that is added to the level that isnt a tile is a gameobject
 {
-    public var emitter:FlxEmitter;
+    public var emitter:FlxEmitter;  
 	private var particles:Int = 500;
 	private var pickupImage = new FlxSprite();
 	private var randomColor:Int;

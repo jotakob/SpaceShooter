@@ -249,7 +249,7 @@ class PlayState extends FlxState
 				yPlayers++;
 			}
 			
-			//Game Ending for the demonstration only!!
+			//Game Ending
 			if (Reg.inventory["pickup"] >= 3)
 				FlxG.camera.fade(0xff000000, 2, false, endGame);
 		}

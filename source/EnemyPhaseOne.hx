@@ -1,8 +1,8 @@
 package ;
 
 /**
- * ...
- * @author fgnbmghfsfghghjgffdsas
+ * Enemy AI, currently not used
+ * @author Rutger
  */
 class EnemyPhaseOne extends State
 {

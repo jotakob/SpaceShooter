@@ -4,8 +4,9 @@ import flixel.effects.particles.FlxEmitter;
 import flixel.effects.particles.FlxParticle;
 import Std;
 /**
- * ...
- * @author ho
+ * A weapon shooting particles using an FlxEmitter
+ * @author Rutger
+ * @author Luuk
  */
 class ParticleWeapon extends Weapon
 {

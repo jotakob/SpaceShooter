@@ -1,7 +1,7 @@
 package ;
 
 /**
- * This class is probably going to become useful later
+ * This class is probably going to become more useful later
  * @author JJM
  */
 class Trigger extends GameObject

@@ -1,7 +1,7 @@
 package ;
 import flixel.FlxG;
 /**
- * This is 
+ * This is the class for warps, which are essentially triggers that load a new level
  * @author JJM
  */
 class Warp extends GameObject

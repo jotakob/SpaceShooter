@@ -7,8 +7,8 @@ import flixel.input.gamepad.XboxButtonID;
 import haxe.Timer;
 
 /**
- * ...
- * @author ho
+ * This class manages the gamepad input for a player, executing the appropriate actions
+ * @author Rutger
  */
 class InputManager extends FlxObject
 {
@@ -39,7 +39,9 @@ class InputManager extends FlxObject
 			player = TempPlayer;
 		}
 		else
-		trace("animationComponent is null");
+		{
+			trace("player is null");
+		}
 		
 		
 		
@@ -59,7 +61,8 @@ class InputManager extends FlxObject
 		
 		_RTrigger = player._gamePad.getAxis(XboxButtonID.RIGHT_TRIGGER);
 		
-		// XXXX Currently broken! see fix below
+		// Broken for certain openfl versions, see fix below
+		// Does not fix A-button not working though
 		_RaxisX = player._gamePad.getXAxis(XboxButtonID.RIGHT_ANALOGUE_X);
 		_RaxisY = player._gamePad.getYAxis(XboxButtonID.RIGHT_ANALOGUE_Y);
 		
@@ -80,12 +83,12 @@ class InputManager extends FlxObject
 		rightAngle = Math.atan2(_RaxisY, _RaxisX);
 		rightAngle = rightAngle * (180 / Math.PI);
 		if (_RaxisX == 0 && _RaxisY == 0)
-		rightAngle = -4000;
+			rightAngle = -4000;
 		
 		leftAngle = Math.atan2(_LaxisY, _LaxisX);
 		leftAngle = leftAngle * (180 / Math.PI);
 		if (_LaxisX == 0 && _LaxisY == 0)
-		leftAngle = -4000;
+			leftAngle = -4000;
 		
 		if (_LaxisX != 0 || _LaxisY != 0)
 		{
@@ -100,6 +103,8 @@ class InputManager extends FlxObject
 		if (rightAngle != -4000)
 		{
 			player.isAiming = true;
+			lastRightAngle = rightAngle;
+			timer = 100;
 			player.activeWeapon.tryShooting();
 		}
 		else
@@ -113,12 +118,6 @@ class InputManager extends FlxObject
 					cast(player.activeWeapon, ParticleWeapon).stopEmitter();
 				}
 			}
-		}
-		if (rightAngle != -4000)
-		{	
-			player.isAiming = true;
-			lastRightAngle = rightAngle;
-			timer = 100;
 		}
 		
 		if (timer <= 0)
@@ -142,6 +141,10 @@ class InputManager extends FlxObject
 		}
 	}
 	
+	/**
+	 * Callback function for player interactions with gameobjects
+	 * @author Jakob
+	 */
 	private function interact(obj1:FlxObject, obj2:FlxObject)
 	{
 		cast(obj2, Button).trigger(cast(obj1, Player));

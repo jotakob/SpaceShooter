@@ -4,8 +4,8 @@ import flixel.FlxSprite;
 import flixel.system.FlxSound;
 
 /**
- * ...
- * @author ho
+ * Basic class for all characters
+ * @author Rutger
  */
 class Actor extends FlxObject
 {

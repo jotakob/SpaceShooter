@@ -53,7 +53,6 @@ class PlayState extends FlxState
 		/** @author Jakob */
 		Reg.levels.set("Demo", new Level_Demo(false, null, this));
 		Reg.levels.set("Demo2", new Level_Demo2(false, null, this));
-		Reg.levels.set("MCTest", new Level_MCTest(false, null, this));
 		
 		/** @author Rutger */
 		camera = new FlxCamera(0, 0, 0, 0, 3);
@@ -74,6 +73,16 @@ class PlayState extends FlxState
 			tempPlayer = (new Player(0, 0, i, FlxG.gamepads.getActiveGamepads()[i]));
 			Players.add(tempPlayer);
 		}
+		
+		//Adding keyboard player as a backup/for demo purposes
+		/** @author Jakob */
+		if (Players.members.length == 0)
+		{
+			tempPlayer = (new Player(0, 0, 0, null));
+			tempPlayer.inputmanager = new KeyboardInputManager(tempPlayer);
+			Players.add(tempPlayer);
+		}
+		
 		
 		//placing the players at a rendom location within the spawnpoint rectangle
 		/** @author Jakob */
@@ -241,7 +250,7 @@ class PlayState extends FlxState
 			}
 			
 			//Game Ending for the demonstration only!!
-			if ((tmpPlayer.playerNumber == 0) && (tmpPlayer._gamePad.checkStatus(XboxButtonID.START, FlxGamepad.PRESSED)))
+			if (Reg.inventory["pickup"] >= 3)
 				FlxG.camera.fade(0xff000000, 2, false, endGame);
 		}
 		if (xPlayers > 0)

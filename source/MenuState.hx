@@ -15,7 +15,8 @@ using flixel.util.FlxSpriteUtil;
 import openfl.Assets;
 
 /**
- * A FlxState which can be used for the game's menu.
+ * A FlxState which is used for the game's menu and the starting animation
+ * @author Rutger
  */
 class MenuState extends FlxState
 {
@@ -29,8 +30,10 @@ class MenuState extends FlxState
 	private var pressed = false;
 	private var _btnPlay:FlxButton;
 	private var cursor:Cursor;
+	
 	/**
 	 * Function that is called up when to state is created to set it up. 
+	 * @author Rutger
 	 */
 	override public function create():Void
 	{
@@ -63,10 +66,15 @@ class MenuState extends FlxState
 		super.create();
 	}
 	
+	/**
+	 * Loading all animations from the .csv file into the Registry
+	 * @author Jakob
+	 */
 	private function loadAnimations()
 	{
 		for (row in Assets.getText(AssetPaths.characterAnimations__csv).split("\r\n"))
 		{
+			//Splitting each row into strings, then setting the first as title and removing it from the array
 			var animation:Array<String> = row.split(",");
 			animation.reverse();
 			var title:String = animation.pop();
@@ -75,6 +83,10 @@ class MenuState extends FlxState
 		}
 	}
 	
+	/**
+	 * Loading all Sound and Music Files into memory before the game starts
+	 * @author Robert-Jan
+	 */
 	private function loadMusic() 
 	{
 		Reg.music[0] = new FlxSound();
@@ -165,6 +177,7 @@ class MenuState extends FlxState
 	 */
 	override public function update():Void
 	{
+		//Scrolling the background
 		background.x = background.x - 1;
 		background2.x = background2.x -1;
 		if (background.x < -background.width)
@@ -172,6 +185,7 @@ class MenuState extends FlxState
 		if (background2.x < -background2.width)
 			background2.x = background2.width;
 		
+		// Spaceship hovering
 		if (spaceship.scale.x > 0.004)
 		{
 			spaceship.y = spaceship.y + hover;
@@ -185,6 +199,7 @@ class MenuState extends FlxState
 				goingUP = true;
 		}
 		
+		//Spaceship crashing after button is pressed
 		if (pressed)
 		{
 			if (spaceship.scale.x > 0.004)
@@ -201,7 +216,8 @@ class MenuState extends FlxState
 				explosion.animation.play("explosion");
 			}
 		}
-			
+		
+		// A button starts game
 		for (i in 0...FlxG.gamepads.getActiveGamepads().length)
 		{
 			if (FlxG.gamepads.getActiveGamepads()[i].pressed(XboxButtonID.A) && pressed == false)
@@ -213,6 +229,7 @@ class MenuState extends FlxState
 		super.update();
 	}	
 	
+	// Starting the crash animation and calling the next state.
 	private function clickPlay():Void
 	{
 		FlxG.camera.shake(0.005, 7);

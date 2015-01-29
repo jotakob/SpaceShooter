@@ -5,8 +5,8 @@ using flixel.util.FlxSpriteUtil;
 
 import openfl.Assets;
 /**
- * ...
- * @author fgnbmghfsfghghjgffdsas
+ * The endscreen
+ * @author Rutger
  */
 class EndState extends FlxState
 {

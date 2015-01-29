@@ -4,13 +4,15 @@ import flixel.effects.particles.FlxEmitter;
 import flixel.effects.particles.FlxParticle;
 
 /**
- * ...
- * @author fgnbmghfsfghghjgffdsas
+ * The bullets of the ParticleWeapon
+ * @author Rutger
+ * @author Luuk
  */
 class ParticleBullet extends FlxParticle
 {
 	public var damage:Int;
 	public var randomNumber:Int;
+	
 	public function new(Damage:Int) 
 	{
 		super();

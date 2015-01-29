@@ -11,8 +11,8 @@ import flixel.group.FlxTypedGroup;
 using 	flixel.util.FlxSpriteUtil;
 
 /**
- * ...
- * @author fgnbmghfsfghghjgffdsas
+ * The ingame interface
+ * @author Rutger
  */
 class HUD extends FlxGroup
 {

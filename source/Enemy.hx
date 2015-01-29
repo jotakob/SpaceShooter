@@ -6,8 +6,8 @@ import flixel.FlxObject;
 import flixel.util.FlxAngle;
 import flixel.FlxG;
 /**
- * ...
- * @author ho
+ * Class for all enemies
+ * @author Rutger
  */
 class Enemy extends Actor
 {

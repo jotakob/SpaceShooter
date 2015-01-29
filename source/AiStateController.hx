@@ -16,7 +16,7 @@ import openfl.utils.Object;
 
 /**
  * ...
- * @author ho
+ * @author Rutger
  */
 class AiStateController
 {

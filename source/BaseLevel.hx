@@ -42,6 +42,7 @@ class BaseLevel extends FlxGroup
 	public var paths:Array<Dynamic>;	// Array of PathData
 	public var shapes:Array<Dynamic>;	//Array of ShapeData
 	
+	//Custom groups to store the different object types
 	public var triggers:FlxTypedGroup<Trigger> = new FlxTypedGroup<Trigger>();
 	public var buttons:FlxTypedGroup<Button> = new FlxTypedGroup<Button>();
 	public var collisionBoxes:FlxTypedGroup<GameObject> = new FlxTypedGroup<GameObject>();
@@ -171,6 +172,7 @@ class BaseLevel extends FlxGroup
 				trace("Error: callback needs to return either the object passed in or a new object to set up links correctly.");
 		}
 		
+		//Added code starts here
 		var newobj:Dynamic;
 		switch (properties["type"])
 		{
@@ -241,6 +243,7 @@ class BaseLevel extends FlxGroup
 	/**
 	 * Converts the Properties Array into a Map that can be used to look up the values by key.
 	 * @param	args An array of properties	fromatted like { name:'foo', value:'foo'}
+	 * @author  Jakob
 	*/
 	private function generateProperties( args:Array<Dynamic> ):Map<String,Dynamic>
 	{

@@ -6,8 +6,8 @@ import flixel.FlxObject;
 import flixel.util.FlxAngle;
 import flixel.FlxG;
 /**
- * ...
- * @author ho
+ * Currently not used
+ * @author Rutger
  */
 class TempEnemy extends Actor
 {

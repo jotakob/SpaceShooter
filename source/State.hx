@@ -15,8 +15,8 @@ import flixel.group.FlxGroup;
 import openfl.utils.Object;
 
 /**
- * ...
- * @author fgnbmghfsfghghjgffdsas
+ * Enemy AI base class
+ * @author Rutger
  */
 
 class State 

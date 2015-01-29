@@ -9,7 +9,7 @@ import flixel.util.FlxPoint;
 import haxe.Timer;
 /**
  * ...
- * @author fgnbmghfsfghghjgffdsas
+ * @author Rutger
  */
 class Bullet extends FlxSprite
 {
@@ -43,6 +43,10 @@ class Bullet extends FlxSprite
 		}
 	}
 	
+	/**
+	 * Customized kill function to let explosive bullets explode
+	 * @author Jasmijn
+	 */
 	public override function kill ()
 	{
 		if (this.explosive)
@@ -62,6 +66,9 @@ class Bullet extends FlxSprite
 		super.kill();
 	}
 	
+	/**
+	 * Callback function for explosion overlap checking
+	 */
 	private function explodeEnemies (obj1:FlxObject, obj2:FlxObject)
 	{
 		trace("overlapping");

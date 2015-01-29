@@ -4,8 +4,8 @@ import flixel.util.FlxPoint;
 import flixel.util.FlxVelocity;
 import flixel.FlxSprite;
 /**
- * ...
- * @author fgnbmghfsfghghjgffdsas
+ * AI that chases the player when he gets close
+ * @author Rutger
  */
 class ChaseBehaviour extends State
 {

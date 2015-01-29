@@ -1,7 +1,7 @@
 package ;
 import haxe.Timer;
 /**
- * ...
+ * Basic enemy AI
  * @author Luuk
  */
 class BasicEnemy extends State

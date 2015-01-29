@@ -1,7 +1,7 @@
 package ;
 
 /**
- * ...
+ * The basic weapon class
  * @author Luuk
  */
 class Weapon

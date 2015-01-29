@@ -13,7 +13,7 @@ import haxe.io.Input;
 
 /**
  * ...
- * @author ho
+ * @author Rutger
  */
 class Player extends Actor
 {
@@ -87,6 +87,8 @@ class Player extends Actor
 				
 			}
 			
+			//Preventing the player from moving offscreen
+			//Skipped for the frst few frames after loading a level to allow the camera to adjust first
 			if (!(skipFrames > 0))
 			{
 				if (this.x < FlxG.camera.scroll.x)

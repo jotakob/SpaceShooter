@@ -11,8 +11,9 @@ import flixel.input.gamepad.FlxGamepad;
 import flixel.input.gamepad.XboxButtonID;
 
 /**
- * ...
- * @author ho
+ * Screen to be used for character selection in the future.
+ * Currently not used.
+ * @author Rutger
 */
 class NewGameState extends FlxState
 {

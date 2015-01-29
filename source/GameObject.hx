@@ -54,8 +54,8 @@ class GameObject extends FlxObject
 	}
 	
 	/**
-	 * called whenever an object is activated.
-	 * this function is overridden in most child classes to execute specific actions
+	 * Called whenever an object is activated.
+	 * This function is overridden in most child classes to execute specific actions
 	 */
 	private function activate()
 	{
@@ -65,7 +65,7 @@ class GameObject extends FlxObject
 	}
 	
 	/**
-	 * undoing the actions done in activate(), used for repeatable tiggers
+	 * Undoing the actions done in activate(), used for repeatable tiggers
 	 */
 	private function deactivate()
 	{
@@ -79,8 +79,8 @@ class GameObject extends FlxObject
 	
 	
 	/**
-	 * this is used for the timeout of repeatable objects, as well as the check to tigger them in the first place.
-	 * repeatable objects check their triggered-property every frame, and if the trigger is deactivated activates accordingly
+	 * This is used for the timeout of repeatable objects, as well as the check to tigger them in the first place.
+	 * Repeatable objects check their triggered-property every frame, and if the trigger is deactivated activates accordingly
 	 */
 	public override function update()
 	{

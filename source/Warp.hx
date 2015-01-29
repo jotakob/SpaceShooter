@@ -18,7 +18,7 @@ class Warp extends GameObject
 	 */
 	public override function activate()
 	{
-		if (cast(Reg.currentState, PlayState).Enemies.members.length < 4)
+		if (cast(Reg.currentState, PlayState).Enemies.members.length < 10)
 			FlxG.camera.fade( 0xFF000000, 2, false, nextLevel);
 	}
 	

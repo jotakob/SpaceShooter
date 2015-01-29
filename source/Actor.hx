@@ -5,7 +5,8 @@ import flixel.system.FlxSound;
 
 /**
  * ...
- * @author ho
+ * @author Rutger Scholma
+ * The base class of all characters in our game
  */
 class Actor extends FlxObject
 {
@@ -19,7 +20,11 @@ class Actor extends FlxObject
 	public var myStateManager:AiStateController;
 	public var moving = false;
 	
-
+	
+	/**
+	 * 
+	 * Constructor class
+	 */
 	public function new(X:Float=0, Y:Float=0) 
 	{
 		super(X, Y);
@@ -27,6 +32,7 @@ class Actor extends FlxObject
 		myStateManager = new AiStateController(this);
 		myMovementController = new MovementController(x, y, this);
 	}
+	
 	public override function update():Void
 	{
 		myAnimationController.update();
@@ -37,6 +43,10 @@ class Actor extends FlxObject
 		
 		super.update();
 	}
+	/**
+	 * 
+	 * @param	damage  The integer that determins how much damage the actor receives
+	 */
 	public function receiveDamage(damage:Int)
 	{
 		this.myAnimationController.DamageColoring(30);
@@ -44,6 +54,9 @@ class Actor extends FlxObject
 		hp -= damage;
 	}
 	
+	/**
+	 * the functionality that kills an actor and remove it from the game
+	 */
 	function die():Void 
 	{
 		this.set_alive(false);

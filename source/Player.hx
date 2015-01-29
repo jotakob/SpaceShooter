@@ -12,8 +12,8 @@ import haxe.io.Input;
 
 
 /**
- * ...
- * @author ho
+ * The base for a player character. Derived from actor
+ * @author Rutger Scholma & 
  */
 class Player extends Actor
 {
@@ -26,7 +26,17 @@ class Player extends Actor
 	
 	public var skipFrames:Int = 2;
 	
-	//private var Input:InputManager;
+	/**
+	 * 
+	 * @param	X	Stanard Flixel parameter
+	 * @param	Y	Stanard Flixel parameter
+	 * @param	PlayerNumber	What playernumber this character has
+	 * @param	GamePad		A reference to it's gamepad
+	 * 
+	 * the constructor of the player class sets the basic variable for the player like hp and speed
+	 * furthermore it sets the animationcontroller parameter and adds an appropriate weapon absed on the playernumber
+	 * It also sets all standard components like the movement controller and input manager.
+	 */
 	public function new(X:Float=0, Y:Float=0,?PlayerNumber:Int,?GamePad:FlxGamepad) 
 	{
 		super(X, Y);
@@ -112,17 +122,23 @@ class Player extends Actor
 			}
 		}
 	}
-	
+	/**
+	 * override functionality of the actor's die function which adds a tombstone on players death
+	 */
 	public override function die()
 	{
-		var tomb:FlxSprite = new FlxSprite();
-		tomb.loadGraphic(AssetPaths.gravestone__png);
+		var tomb:FlxSprite = new FlxSprite().loadGraphic(AssetPaths.gravestone__png);
 		tomb.x = this.x;
 		tomb.y = this.y;
 		Reg.currentState.add(tomb);
 		super.die();
 	}
-	
+	/**
+	 * 
+	 * @param	newWeapon	the weapon to be added
+	 * 
+	 * adds a weapon to the weapon list of the player and sets the added weapon as it's active weapon.
+	 */
 	public function addWeapon(newWeapon:Weapon)
 	{
 		weapons.push(newWeapon);

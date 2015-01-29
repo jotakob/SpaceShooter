@@ -16,7 +16,7 @@ import openfl.utils.Object;
 
 /**
  * ...
- * @author ho
+ * @author Rutger Scholma
  */
 class AiStateController
 {
@@ -26,6 +26,10 @@ class AiStateController
 
     private var owner:Actor;
 
+	/**
+	 * 
+	 * @param	owner	Reference to the owner of the class
+	 */
     public function new(owner:Actor):Void
     {
         if (owner != null)
@@ -35,13 +39,25 @@ class AiStateController
         else
             trace("no character attached");
     }
-
+	
+	/**
+	 * the functionality that calls the execute on the current A.I state this Actor has.
+	 */
     public function Execute():Void
     {
         if (currentState != null)
             currentState.Execute(owner);
     }
-
+	
+	/**
+	 * 
+	 * @param	newState	The state this character should switch to
+	 * 
+	 * First check wheter or not no state has been passed
+	 * then checks if there is already a state in place and if there is calls the exit functionality for this state
+	 * and saves it to the previous state variable incase this needs to be checked.
+	 * Finnaly calls the enter functionality and then switches the state.
+	 */
     public function ChangeState(newState:State):Void
     {
 	if (newState == null)

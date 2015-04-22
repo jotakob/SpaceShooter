@@ -13,7 +13,6 @@ import flixel.util.FlxMath;
 import flixel.util.FlxPoint.FlxCallbackPoint;
 import flixel.util.FlxSpriteUtil;
 import flixel.input.gamepad.FlxGamepad;
-import flixel.input.gamepad.XboxButtonID;
 import flixel.group.FlxGroup;
 import openfl.utils.Object;
 import flixel.FlxCamera;

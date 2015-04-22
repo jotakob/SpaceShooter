@@ -10,7 +10,6 @@ import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 import flixel.util.FlxSpriteUtil;
 import flixel.input.gamepad.FlxGamepad;
-import flixel.input.gamepad.XboxButtonID;
 import flixel.group.FlxGroup;
 import openfl.utils.Object;
 

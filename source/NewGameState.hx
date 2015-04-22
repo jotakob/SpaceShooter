@@ -8,7 +8,6 @@ import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 import flixel.util.FlxSpriteUtil;
 import flixel.input.gamepad.FlxGamepad;
-import flixel.input.gamepad.XboxButtonID;
 
 /**
  * Screen to be used for character selection in the future.

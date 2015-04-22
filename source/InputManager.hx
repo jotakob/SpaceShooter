@@ -12,6 +12,11 @@ import haxe.Timer;
  */
 class InputManager extends FlxObject
 {
+	//Set Weird Controller Mapping HERE
+	private var weirdmapping:Bool = true;
+	//IT'S IMPORTANT
+	
+	
 	private var player:Player;
 	
 	private var deadZone:Float = 0.3;
@@ -20,6 +25,8 @@ class InputManager extends FlxObject
 	var lastLeftAngle:Float = 0;
 	public var lastRightAngle:Float = 0;
 	var timer:Int = 100;
+	
+	private var fixedXboxButtonIDs:Map<String,Int> = new Map<String,Int>();
 	
 	var _LaxisX:Float;
 	var _LaxisY:Float;
@@ -42,8 +49,48 @@ class InputManager extends FlxObject
 		{
 			trace("player is null");
 		}
-		
-		
+		if (weirdmapping)
+		{
+			fixedXboxButtonIDs.set("A", 0);
+			fixedXboxButtonIDs.set("B", 1);
+			fixedXboxButtonIDs.set("X", 2);
+			fixedXboxButtonIDs.set("Y", 3);
+			fixedXboxButtonIDs.set("DPAD_UP", XboxButtonID.DPAD_UP);
+			fixedXboxButtonIDs.set("DPAD_DOWN", XboxButtonID.DPAD_DOWN);
+			fixedXboxButtonIDs.set("DPAD_LEFT", XboxButtonID.DPAD_LEFT);
+			fixedXboxButtonIDs.set("DPAD_RIGHT", XboxButtonID.DPAD_RIGHT);
+			fixedXboxButtonIDs.set("START", 7);
+			fixedXboxButtonIDs.set("BACK", 6);
+			fixedXboxButtonIDs.set("LB", 4);
+			fixedXboxButtonIDs.set("RB", 5);
+			fixedXboxButtonIDs.set("LEFT_ANALOGUE_X", 0);
+			fixedXboxButtonIDs.set("LEFT_ANALOGUE_Y", 1);
+			fixedXboxButtonIDs.set("RIGHT_ANALOGUE_X", 3);
+			fixedXboxButtonIDs.set("RIGHT_ANALOGUE_Y", 4);
+			fixedXboxButtonIDs.set("LEFT_TRIGGER", 2);
+			fixedXboxButtonIDs.set("RIGHT_TRIGGER", 5);
+		}
+		else
+		{
+			fixedXboxButtonIDs.set("A", XboxButtonID.A);
+			fixedXboxButtonIDs.set("B", XboxButtonID.B);
+			fixedXboxButtonIDs.set("X", XboxButtonID.X);
+			fixedXboxButtonIDs.set("Y", XboxButtonID.Y);
+			fixedXboxButtonIDs.set("DPAD_UP", XboxButtonID.DPAD_UP);
+			fixedXboxButtonIDs.set("DPAD_DOWN", XboxButtonID.DPAD_DOWN);
+			fixedXboxButtonIDs.set("DPAD_LEFT", XboxButtonID.DPAD_LEFT);
+			fixedXboxButtonIDs.set("DPAD_RIGHT", XboxButtonID.DPAD_RIGHT);
+			fixedXboxButtonIDs.set("START", XboxButtonID.START);
+			fixedXboxButtonIDs.set("BACK", XboxButtonID.BACK);
+			fixedXboxButtonIDs.set("LB", XboxButtonID.LB);
+			fixedXboxButtonIDs.set("RB", XboxButtonID.RB);
+			fixedXboxButtonIDs.set("LEFT_ANALOGUE_X", XboxButtonID.LEFT_ANALOGUE_X);
+			fixedXboxButtonIDs.set("LEFT_ANALOGUE_Y", XboxButtonID.LEFT_ANALOGUE_Y);
+			fixedXboxButtonIDs.set("RIGHT_ANALOGUE_X", XboxButtonID.RIGHT_ANALOGUE_X);
+			fixedXboxButtonIDs.set("RIGHT_ANALOGUE_Y", XboxButtonID.RIGHT_ANALOGUE_Y);
+			fixedXboxButtonIDs.set("LEFT_TRIGGER", XboxButtonID.LEFT_TRIGGER);
+			fixedXboxButtonIDs.set("RIGHT_TRIGGER", XboxButtonID.RIGHT_TRIGGER);
+		}
 		
 	}
 	
@@ -56,19 +103,13 @@ class InputManager extends FlxObject
 	public function ManagePlayerInput():Void
 	{
 		
-		_LaxisX = player._gamePad.getXAxis(XboxButtonID.LEFT_ANALOGUE_X);
-		_LaxisY = player._gamePad.getYAxis(XboxButtonID.LEFT_ANALOGUE_Y);
+		_LaxisX = player._gamePad.getXAxis(fixedXboxButtonIDs["LEFT_ANALOGUE_X"]);
+		_LaxisY = player._gamePad.getYAxis(fixedXboxButtonIDs["LEFT_ANALOGUE_Y"]);
 		
-		_RTrigger = player._gamePad.getAxis(XboxButtonID.RIGHT_TRIGGER);
-		
-		// Broken for certain openfl versions, see fix below
-		// Does not fix A-button not working though
-		_RaxisX = player._gamePad.getXAxis(XboxButtonID.RIGHT_ANALOGUE_X);
-		_RaxisY = player._gamePad.getYAxis(XboxButtonID.RIGHT_ANALOGUE_Y);
-		
-		//_RaxisX = player._gamePad.getXAxis(3);
-		//_RaxisY = player._gamePad.getYAxis(4);
-		
+		_RTrigger = player._gamePad.getAxis(fixedXboxButtonIDs["RIGHT_TRIGGER"]);
+
+		_RaxisX = player._gamePad.getXAxis(fixedXboxButtonIDs["RIGHT_ANALOGUE_X"]);
+		_RaxisY = player._gamePad.getYAxis(fixedXboxButtonIDs["RIGHT_ANALOGUE_Y"]);
 		
 		if (Math.sqrt(Math.pow(_LaxisX, 2) + Math.pow(_LaxisY, 2)) < deadZone)
 		{
@@ -135,7 +176,7 @@ class InputManager extends FlxObject
 		}
 		
 		//Buttons
-		if (player._gamePad.pressed(XboxButtonID.A))
+		if (player._gamePad.pressed(fixedXboxButtonIDs["A"]))
 		{
 			FlxG.overlap(player, Reg.currentLevel.buttons, interact);
 		}

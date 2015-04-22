@@ -6,13 +6,11 @@ import flixel.FlxObject;
 import flixel.util.FlxAngle;
 import flixel.FlxG;
 import flixel.input.gamepad.FlxGamepad;
-import flixel.input.gamepad.XboxButtonID;
 import flixel.group.FlxGroup;
 import haxe.io.Input;
 
 
 /**
-<<<<<<< HEAD
  * The base for a player character. Derived from actor
  * @author Rutger
  */

@@ -220,7 +220,7 @@ class MenuState extends FlxState
 		// A button starts game
 		for (i in 0...FlxG.gamepads.getActiveGamepads().length)
 		{
-			if (FlxG.gamepads.getActiveGamepads()[i].pressed(XboxButtonID.A) && pressed == false)
+			if ((FlxG.gamepads.getActiveGamepads()[i].pressed(XboxButtonID.A) || FlxG.gamepads.getActiveGamepads()[i].pressed(0)) && pressed == false) //added fix for broken controller mapping
 			{
 				Reg.sounds[3].play();
 				clickPlay();

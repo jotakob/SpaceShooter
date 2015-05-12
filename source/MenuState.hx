@@ -37,6 +37,7 @@ class MenuState extends FlxState
 	 */
 	override public function create():Void
 	{
+		Reg.gamepadManager = new GamepadManager();
 		background.loadGraphic(AssetPaths.spaceBackground__png);
 		background2.loadGraphic(AssetPaths.spaceBackground__png);
 		background2.x = background2.width;
@@ -218,9 +219,9 @@ class MenuState extends FlxState
 		}
 		
 		// A button starts game
-		for (i in 0...FlxG.gamepads.getActiveGamepads().length)
+		for (i in 0...Reg.gamepadManager.getActiveGamepads().length)
 		{
-			if ((FlxG.gamepads.getActiveGamepads()[i].pressed(XboxButtonID.A) || FlxG.gamepads.getActiveGamepads()[i].pressed(0)) && pressed == false) //added fix for broken controller mapping
+			if ((Reg.gamepadManager.getActiveGamepads()[i].pressed(XboxButtonID.A) || Reg.gamepadManager.getActiveGamepads()[i].pressed(0)) && pressed == false) //added fix for broken controller mapping
 			{
 				Reg.sounds[3].play();
 				clickPlay();

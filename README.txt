@@ -15,8 +15,7 @@ runs on any PC with OpenFL installed, flixel is not required.
 In order to compile the game using FlashDevelop follow the following steps:
 
 1. Install flixel using "haxelib install flixel"
-2. Replace "C:\HaxeToolkit\haxe\lib\flixel\3,3,6\flixel\input\gamepad\FlxGamepadManager.hx" with the one provided in our "/lib" folder (we commented out a small part in the getActiveGamepads function
-3. Change the target from flahs to neko
+3. Change the target from flash to neko
 4. Start the game!
 
 

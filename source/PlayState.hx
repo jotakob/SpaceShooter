@@ -61,15 +61,18 @@ class PlayState extends FlxState
 		changeLevel("Demo", 0);
 		
 		var tempPlayer:Player;
-		for (i in 0...FlxG.gamepads.getActiveGamepads().length)
+		
+		//FlxG.inputs.add(gamepadManager);
+		
+		for (i in 0...Reg.gamepadManager.getActiveGamepads().length)
 		{
-			if (_gamePads.indexOf(FlxG.gamepads.getActiveGamepads()[i]) >= 0)
+			if (_gamePads.indexOf(Reg.gamepadManager.getActiveGamepads()[i]) >= 0)
 			{
 				trace("break");
 				break;
 			}
-			_gamePads.push(FlxG.gamepads.getActiveGamepads()[i]);
-			tempPlayer = (new Player(0, 0, i, FlxG.gamepads.getActiveGamepads()[i]));
+			_gamePads.push(Reg.gamepadManager.getActiveGamepads()[i]);
+			tempPlayer = (new Player(0, 0, i, Reg.gamepadManager.getActiveGamepads()[i]));
 			Players.add(tempPlayer);
 		}
 		

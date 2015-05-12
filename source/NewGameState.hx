@@ -20,14 +20,14 @@ class NewGameState extends FlxState
 	
 	override public function create():Void
 	{
-		for (i in 0...FlxG.gamepads.getActiveGamepads().length)
+		for (i in 0...Reg.gamepadManager.getActiveGamepads().length)
 		{
-			if (_gamePads.indexOf(FlxG.gamepads.getActiveGamepads()[i]) >= 0)
+			if (_gamePads.indexOf(Reg.gamepadManager.getActiveGamepads()[i]) >= 0)
 			{
 				break;
 			}
-			_gamePads.push(FlxG.gamepads.getActiveGamepads()[i]);
-			add(new Player(240, 160, i, FlxG.gamepads.getActiveGamepads()[i]));
+			_gamePads.push(Reg.gamepadManager.getActiveGamepads()[i]);
+			add(new Player(240, 160, i, Reg.gamepadManager.getActiveGamepads()[i]));
 			trace("added");
 		}
 		

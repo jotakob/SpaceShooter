@@ -14,6 +14,8 @@ class Reg
 {
 	//public static var saves:Array<FlxSave> = [];
 	
+	public static var gamepadManager:GamepadManager;
+	
 	public static var levels:Map<String, BaseLevel> = new Map<String, BaseLevel>();
 	
 	public static var bullets:Array<FlxGroup> = [];

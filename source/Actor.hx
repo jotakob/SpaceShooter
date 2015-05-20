@@ -4,7 +4,6 @@ import flixel.FlxSprite;
 import flixel.system.FlxSound;
 
 /**
-<<<<<<< HEAD
  * Basic class for all characters
  * @author Rutger
  */
